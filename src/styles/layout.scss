@@ -1,0 +1,54 @@
+.app {
+  height: 100vh;
+  width: 100vw;
+}
+
+main {
+  height: calc(
+    100% - 6em + 2px
+  ); // 100% - nav height = 1em font size + 2em padding + 2px border bottom (::after)
+
+  overflow: hidden;
+  padding: 1em 1.5em 2em;
+  width: calc(100% - 3em);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: auto calc(
+      var(--menu-btn-height) * 3 + var(--control-btn-group-height)
+    );
+}
+
+.sidebar {
+  display: grid;
+  grid-column-start: 1;
+  grid-row-start: 2;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: calc(var(--menu-btn-height) * 3) var(
+      --control-btn-group-height
+    );
+}
+
+@media (min-width: 540px) {
+  .sidebar {
+    grid-template-columns: var(--menu-btn-width) auto;
+  }
+}
+
+@media (min-width: 768px) and (min-aspect-ratio: 3/5) {
+  .grid {
+    grid-template-columns: auto var(--coord-input-width);
+    grid-template-rows: auto;
+  }
+
+  .sidebar {
+    grid-column-start: 2;
+    grid-row-start: 1;
+    grid-template-columns: auto;
+    grid-template-rows:
+      calc(var(--menu-btn-height) * 3) auto
+      var(--control-btn-group-height);
+  }
+}

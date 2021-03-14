@@ -1,0 +1,52 @@
+.output {
+  align-items: stretch;
+  display: flex;
+  flex-direction: column;
+  grid-column-start: 1;
+  grid-row-start: 1;
+  height: calc(100% - 1.5em);
+  justify-content: center;
+  overflow-y: auto;
+  width: 100%;
+}
+
+.output.active,
+.output.error,
+.output.success {
+  &::before {
+    display: none;
+  }
+}
+
+.output::before {
+  align-self: center;
+  content: '🥁';
+  font-size: 18em;
+  line-height: 1;
+  opacity: 0.15;
+  transition: opacity 0.3s ease-in;
+}
+
+.output.focus::before {
+  opacity: 1;
+}
+
+canvas {
+  display: none;
+}
+
+.active canvas,
+.success canvas {
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+
+@media (min-width: 768px) and (min-aspect-ratio: 3/5) {
+  .output {
+    grid-column-start: 1;
+    grid-row-start: 1;
+    height: 100%;
+    width: calc(100% - 2em);
+  }
+}

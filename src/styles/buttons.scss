@@ -1,0 +1,102 @@
+button {
+  border: unset;
+}
+
+.btn-emoji {
+  border: unset;
+  border-radius: 50%;
+  scale: 0.95;
+  transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.btn-emoji::before {
+  font-size: 4em;
+  height: 100%;
+  line-height: 1;
+  width: 100%;
+}
+
+@media (min-width: 540px) {
+  .btn-emoji::before {
+    font-size: 6em;
+  }
+}
+
+.btn-emoji:hover,
+.btn-emoji:focus {
+  scale: 1;
+}
+
+// Play button
+.firestarter {
+  background: radial-gradient(var(--color-firestarter-06) 20%, transparent 60%);
+}
+
+.firestarter::before {
+  content: '\1F47E';
+}
+
+.firestarter:hover,
+.firestarter:focus {
+  background: radial-gradient(var(--color-firestarter-08) 20%, transparent 60%);
+  cursor: url('data:image/svg+xml;utf8,<svg  xmlns="http://www.w3.org/2000/svg" width="30" height="30" style="font-size: 30px;"><text y="25" >⚡️</text></svg>'),
+    auto;
+}
+
+.firestarter.error {
+  background: radial-gradient(rgba(238, 9, 123, 0.8) 20%, transparent 60%);
+}
+
+.firestarter.error:hover,
+.firestarter.error:focus {
+  background: radial-gradient(rgba(238, 9, 123, 1) 20%, transparent 60%);
+}
+
+.firestarter.active {
+  background: radial-gradient(var(--color-sponge-08) 20%, transparent 60%);
+}
+
+// Refresh button
+.shower {
+  background: radial-gradient(rgba(34, 229, 227, 0.4) 20%, transparent 60%);
+}
+
+.shower::before {
+  content: '\1F6BF';
+}
+
+.shower:hover,
+.shower:focus {
+  background: radial-gradient(rgba(34, 229, 227, 0.5) 20%, transparent 60%);
+}
+
+// Stop button
+.sponge {
+  background: radial-gradient(var(--color-sponge-08) 20%, transparent 60%);
+}
+
+.sponge::before {
+  content: '🧽';
+}
+
+@media (min-width: 540px) {
+  .sponge::before {
+    font-size: 5.25em;
+  }
+}
+
+.sponge:hover,
+.sponge:focus {
+  background: radial-gradient(var(--color-sponge) 20%, transparent 60%);
+}
+
+@media (min-width: 768px) and (min-aspect-ratio: 3/5) {
+  .btn-group {
+    justify-content: space-evenly;
+  }
+
+  .btn-emoji {
+    height: auto;
+    width: 100%;
+  }
+}

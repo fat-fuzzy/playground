@@ -1,0 +1,24 @@
+.geometry-controls {
+  display: flex;
+  flex-direction: column;
+  grid-column-start: 2;
+  grid-row-end: 3;
+  grid-row-start: 1;
+  height: auto;
+  justify-content: flex-start;
+  margin-left: 0.25em;
+  overflow-y: auto;
+  width: auto;
+}
+
+@media (min-width: 768px) and (min-aspect-ratio: 3/5) {
+  .geometry-controls {
+    display: flex;
+    flex-direction: column;
+    grid-column-start: 1;
+    grid-row-start: 2;
+    margin-left: 0;
+    overflow-x: scroll;
+    width: 100%;
+  }
+}
