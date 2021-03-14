@@ -1,0 +1,19 @@
+{
+  "name": "@fat-fuzzy/playground",
+  "version": "0.0.1",
+  "description": "Fuzzy Playground - A Svelte component library for interactive canvas animations",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fat-fuzzy/playground.git"
+  },
+  "author": "Patricia Boh <lapatiboh@gmail.com> (https://www.lds.is/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/fat-fuzzy/playground/issues"
+  },
+  "homepage": "https://github.com/fat-fuzzy/playground#readme"
+}
