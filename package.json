@@ -5,8 +5,7 @@
   "main": "dist/build/playground.min.js",
   "scripts": {
     "build": "rollup -c",
-    "prepublishOnly": "npm run build",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "prepublishOnly": "npm run build"
   },
   "repository": {
     "type": "git",

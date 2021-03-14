@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <meta name="theme-color" content="#333333" />
+    <link rel="stylesheet" href="global.css" />
+    <link rel="manifest" href="manifest.json" crossorigin="use-credentials" />
+    <link rel="icon" type="image/png" href="favicon.png" />
+  </head>
+  <body>
+    <script type="module" src="./playground.esm.js"></script>
+    <script type="module">
+      import App from './playground.esm.js'
+      const app = new App({
+        target: document.body
+      })
+    </script>
+  </body>
+</html>
