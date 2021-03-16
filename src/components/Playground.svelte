@@ -66,6 +66,7 @@
       if (!emoji.character) {
         emoji.character = '💩 undefined'
       }
+      emoji.class = 'emoji'
       emoji.y += 0.7 * emoji.ratio
       if (emoji.y > 100) emoji.y = -20
       return emoji
@@ -162,7 +163,7 @@
     resetPlayground()
   }
 
-  function handleLoadAnimation(event) {
+  function loadAnimation(event) {
     resetPlayground()
     currentAnimationId.set(event.detail.animationId)
     animation = $animations.find((animation) => animation.id === animationId)
@@ -170,8 +171,8 @@
   }
 
   function updateGeometry(event) {
-    const {color, translation, rotation, scale} = event.detail.value
-    geometryState = {...geometryState, color, translation, rotation, scale}
+    const { color, translation, rotation, scale } = event.detail.value
+    geometryState = { ...geometryState, color, translation, rotation, scale }
     if (animation.position && animation.webGlProps) {
       animation.update(translation, rotation, scale)
     } else {
@@ -180,7 +181,30 @@
   }
 </script>
 
-<section
+{#each emojis as emoji}
+  <span
+    data-cy="emoji-{emoji.character}"
+    class={emoji.class}
+    style="left: {emoji.x}%; top: {emoji.y}%; transform: scale({emoji.ratio})"
+  >
+    {emoji.character}
+  </span>
+{/each}
+
+<nav class="sidebar">
+  <AnimationsMenu on:input={loadAnimation} />
+  <GeometryControls
+    on:input={updateGeometry}
+    defaultState={geometryStateDefault}
+    {geometryState}
+    {canvasWidth}
+    {canvasHeight}
+    {animation}
+  />
+  <Controls {play} {stop} {refresh} />
+</nav>
+
+<main
   data-cy="output"
   class={`output ${playgroundState}`}
   bind:offsetWidth={canvasWidth}
@@ -198,30 +222,16 @@
     <track kind="captions" srclang="en" />
     <!-- TODO: fix caption src -->
   </audio>
-</section>
+</main>
 
-<aside class="sidebar">
-  <AnimationsMenu on:loadAnimation={handleLoadAnimation} />
-  <GeometryControls
-    on:change={updateGeometry}
-    defaultState={geometryStateDefault}
-    {geometryState}
-    {canvasWidth}
-    {canvasHeight}
-    {animation}
-  />
-  <Controls {play} {stop} {refresh} />
-</aside>
-{#each emojis as emoji}
-  <span
-    data-cy="emoji-{emoji.character}"
-    class="emoji"
-    style="left: {emoji.x}%; top: {emoji.y}%; transform: scale({emoji.ratio})"
-  >
-    {emoji.character}
-  </span>
-{/each}
-
-<style lang="scss">
-  @import '../styles/playground.scss';
+<style>
+  .active canvas,
+  .success canvas {
+    display: block;
+    height: 100%;
+    width: 100%;
+  }
+  .hidden {
+    display: none;
+  }
 </style>

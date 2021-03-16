@@ -1,8 +1,8 @@
 <script>
-  import {onMount} from 'svelte'
+  import { onMount } from 'svelte'
 
   import * as constants from '../types/constants.js'
-  import {uiState} from '../stores.js'
+  import { uiState } from '../stores.js'
   import EmojiButton from './EmojiButton.svelte'
 
   // UI feedback
@@ -16,13 +16,13 @@
   export let stop = () => {}
   export let refresh = () => {}
 
-  function handlePlayButtonFocus() {
+  function playFocus() {
     if (playgroundState === constants.uiState.DEFAULT) {
       uiState.set(constants.uiState.FOCUS)
     }
   }
 
-  function handlePlayButtonBlur() {
+  function playBlur() {
     if (playgroundState === constants.uiState.FOCUS) {
       uiState.set(constants.uiState.DEFAULT)
     }
@@ -41,8 +41,8 @@
     buttonClass="firestarter"
     buttonLabel="Play"
     handleClick={play}
-    handleFocus={handlePlayButtonFocus}
-    handleBlur={handlePlayButtonBlur}
+    handleFocus={playFocus}
+    handleBlur={playBlur}
   />
   <EmojiButton
     dataCy="btn-reset"

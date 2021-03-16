@@ -1,0 +1,11 @@
+{
+  "baseUrl": "http://localhost:8000/",
+  "video": false,
+  "testFiles": "**/*.feature",
+  "ignoreTestFiles": "*.js",
+  "retries": {
+    "runMode": 2
+  },
+  "viewportWidth":  375,
+  "viewportHeight":  	667
+}

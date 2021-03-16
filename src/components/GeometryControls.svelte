@@ -1,11 +1,11 @@
 <script context="module">
   import * as constants from '../types/constants.js'
-  import {uiState} from '../stores.js'
-  import InputRange from './InputRange.svelte'
+  import { uiState } from '../stores.js'
   import Position from './Position.svelte'
   import Scale from './Scale.svelte'
+  import Rotation from './Rotation.svelte'
 
-  import {createEventDispatcher} from 'svelte'
+  import { createEventDispatcher } from 'svelte'
 </script>
 
 <script>
@@ -30,32 +30,32 @@
   // translation
   let maxX = canvasWidth
   let maxY = canvasHeight
-  let xCoord = canvasWidth / 2
-  let yCoord = canvasHeight / 2
-  let translation = [xCoord, yCoord]
+  let coordX = canvasWidth / 2
+  let coordY = canvasHeight / 2
+  let translation = [coordX, coordY]
   let showPosition = false
 
   // rotation
   let angle = 0
-  let xRadCoord = Math.cos(utils.degToRad(angle)) // radial coordinate x = cos(O)
-  let yRadCoord = Math.sin(utils.degToRad(angle)) // radial coordinate y = sin(O)
-  let rotation = [xRadCoord, yRadCoord]
+  let radCoordX = Math.cos(utils.degToRad(angle)) // radial coordinate x = cos(O)
+  let radCoordY = Math.sin(utils.degToRad(angle)) // radial coordinate y = sin(O)
+  let rotation = [radCoordX, radCoordY]
   let showRotation = false
 
   // scale
-  let xScale = 1
-  let yScale = 1
-  let scale = [xScale, yScale]
+  let scaleX = 1
+  let scaleY = 1
+  let scale = [scaleX, scaleY]
   let showScale = false
 
   $: showPosition = animation.position
   $: showRotation = animation.rotation
   $: showScale = animation.scale
-  $: translation = [xCoord, yCoord]
-  $: xRadCoord = Math.cos(utils.degToRad(angle)) // radial coordinate x = cos(O)
-  $: yRadCoord = Math.sin(utils.degToRad(angle)) // radial coordinate y = sin(O)
-  $: rotation = [xRadCoord, yRadCoord]
-  $: scale = [xScale, yScale]
+  $: translation = [coordX, coordY]
+  $: radCoordX = Math.cos(utils.degToRad(angle)) // radial coordinate x = cos(O)
+  $: radCoordY = Math.sin(utils.degToRad(angle)) // radial coordinate y = sin(O)
+  $: rotation = [radCoordX, radCoordY]
+  $: scale = [scaleX, scaleY]
   $: maxX = canvasWidth - width
   $: maxY = canvasHeight - height
   $: geometryState = {
@@ -78,18 +78,18 @@
   }
 
   function resetPosition() {
-    xCoord = maxX / 2
-    yCoord = maxY / 2
+    coordX = maxX / 2
+    coordY = maxY / 2
     angle = 0
   }
 
   function resetScale() {
-    xScale = 1
-    yScale = 1
+    scaleX = 1
+    scaleY = 1
   }
 
   function handleChange() {
-    dispatch('change', {
+    dispatch('input', {
       value: geometryState,
     })
   }
@@ -102,43 +102,50 @@
   }
 </script>
 
-<ul class="geometry-controls">
+<form>
   {#if showPosition}
-    <li data-cy="position">
-      <Position
-        bind:xCoord
-        bind:yCoord
-        bind:maxX
-        bind:maxY
-        on:input={handleChange}
-      />
-    </li>
+    <Position
+      bind:coordX
+      bind:coordY
+      bind:maxX
+      bind:maxY
+      on:input={handleChange}
+    />
   {/if}
   {#if showScale}
-    <li>
-      <Scale
-        bind:xScale
-        bind:yScale
-        maxX="5"
-        maxY="5"
-        minX="-5"
-        minY="-5"
-        on:input={handleChange}
-      />
-    </li>
+    <Scale
+      bind:scaleX
+      bind:scaleY
+      maxX="5"
+      maxY="5"
+      minX="-5"
+      minY="-5"
+      on:input={handleChange}
+    />
   {/if}
   {#if showRotation}
-    <li>
-      <InputRange
-        bind:value={angle}
-        label="angle"
-        max={360}
-        on:input={handleChange}
-      />
-    </li>
+    <Rotation bind:angle max={360} on:input={handleChange} />
   {/if}
-</ul>
+</form>
 
-<style lang="scss">
-  @import '../styles/geometry-controls.scss';
+<style>
+  form {
+    display: flex;
+    flex-direction: column;
+    grid-column-start: 2;
+    grid-row-end: 3;
+    grid-row-start: 1;
+    height: auto;
+    justify-content: flex-start;
+    overflow-y: auto;
+    width: 100%;
+  }
+
+  @media (min-width: 768px) and (min-aspect-ratio: 3/5) {
+    form {
+      grid-column-start: 1;
+      grid-row-start: 2;
+      margin-left: 0;
+    }
+  }
 </style>

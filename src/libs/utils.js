@@ -59,6 +59,7 @@ export function multiply(characters) {
     .fill(0)
     .map((_, i) => {
       return {
+        class: 'hidden',
         character: characters[i % characters.length],
         x: Math.random() * 100,
         y: -10 - Math.random() * 100,

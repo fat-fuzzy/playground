@@ -1,5 +1,4 @@
 import path from 'path'
-import sveltePreprocess from 'svelte-preprocess'
 import svelte from 'rollup-plugin-svelte'
 import { terser } from 'rollup-plugin-terser'
 import resolve from '@rollup/plugin-node-resolve'
@@ -46,6 +45,7 @@ export default {
       browser: true,
       dedupe: ['svelte']
     }),
+    dev && livereload('dist'),
     !dev && terser({
       module: true
     })
