@@ -13,44 +13,39 @@
   // @ts-check
   export let geometryStateDefault
   export let geometryState = geometryStateDefault
-  export let canvasWidth = 300
-  export let canvasHeight = 150
-  export let animation
+  export let canvasWidth
+  export let canvasHeight
 
+  function round(n, decimals) {
+    return Number(Math.round(n + 'e' + decimals) + 'e-' + decimals)
+  }
   const dispatch = createEventDispatcher()
   /**
    * Geometry controls
    */
-
-  // Color & Dimensions
-  let color = [Math.random(), Math.random(), Math.random(), 1]
-  const width = 100 // of geometry
-  const height = 30 // of geometry
-
-  // translation
+  // Position
   let maxX = canvasWidth
   let maxY = canvasHeight
   let coordX = canvasWidth / 2
   let coordY = canvasHeight / 2
   let translation = [coordX, coordY]
-  let showPosition = false
+
+  // Color & Dimensions
+  let color = [Math.random(), Math.random(), Math.random(), 1]
+  const width = round((canvasWidth * 0.3) / 5, 2) // of geometry
+  const height = round(canvasHeight / 5, 2) // of geometry
 
   // rotation
   let angle = 0
   let radCoordX = Math.cos(utils.degToRad(angle)) // radial coordinate x = cos(O)
   let radCoordY = Math.sin(utils.degToRad(angle)) // radial coordinate y = sin(O)
   let rotation = [radCoordX, radCoordY]
-  let showRotation = false
 
   // scale
   let scaleX = 1
   let scaleY = 1
   let scale = [scaleX, scaleY]
-  let showScale = false
 
-  $: showPosition = animation.position
-  $: showRotation = animation.rotation
-  $: showScale = animation.scale
   $: translation = [coordX, coordY]
   $: radCoordX = Math.cos(utils.degToRad(angle)) // radial coordinate x = cos(O)
   $: radCoordY = Math.sin(utils.degToRad(angle)) // radial coordinate y = sin(O)
@@ -103,29 +98,23 @@
 </script>
 
 <form>
-  {#if showPosition}
-    <Position
-      bind:coordX
-      bind:coordY
-      bind:maxX
-      bind:maxY
-      on:input={handleChange}
-    />
-  {/if}
-  {#if showScale}
-    <Scale
-      bind:scaleX
-      bind:scaleY
-      maxX="5"
-      maxY="5"
-      minX="-5"
-      minY="-5"
-      on:input={handleChange}
-    />
-  {/if}
-  {#if showRotation}
-    <Rotation bind:angle max={360} on:input={handleChange} />
-  {/if}
+  <Position
+    bind:coordX
+    bind:coordY
+    bind:maxX
+    bind:maxY
+    on:input={handleChange}
+  />
+  <Scale
+    bind:scaleX
+    bind:scaleY
+    maxX="5"
+    maxY="5"
+    minX="-5"
+    minY="-5"
+    on:input={handleChange}
+  />
+  <Rotation bind:angle max={360} on:input={handleChange} />
 </form>
 
 <style>

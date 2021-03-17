@@ -22,7 +22,6 @@
 
   // Audio
   let drumroll
-  let playbackRate = 2
 
   // WebGL Geometry
   const width = 100 // of geometry
@@ -39,7 +38,6 @@
 
   // animations
   let animationStartTime
-  const animationDuration = 4179 / playbackRate
 
   // UI feedback
   let playgroundState
@@ -89,7 +87,7 @@
       celebrate()
     } else {
       // if duration not met yet
-      if (animation.position) {
+      if (animation.interactive) {
         animation.run(
           canvas,
           geometryState.translation,
@@ -109,13 +107,17 @@
     }
   }
 
-  function animate(duration) {
+  function animate() {
     uiState.set(constants.uiState.ACTIVE)
     if (animation.audio) {
       drumroll.play()
     }
     animationFrame = requestAnimationFrame(function (timestamp) {
       animationStartTime = timestamp || new Date().getTime()
+      let { duration, playbackRate } = animation
+      if (playbackRate) {
+        runLoop(timestamp, duration / playbackRate)
+      }
       runLoop(timestamp, duration)
     })
   }
@@ -127,7 +129,7 @@
     loopEmojis()
   }
 
-  function resetPlayground() {
+  function stop() {
     uiState.set(constants.uiState.DEFAULT)
     resetAudio()
     cancelAnimationFrame(animationFrame)
@@ -142,38 +144,29 @@
   }
 
   function play() {
-    resetPlayground()
     try {
-      if (animation.loop) {
-        animate(animationDuration)
-      } else {
-        animate()
-      }
+      animation = $animations.find((animation) => animation.id === animationId)
+      animate()
     } catch (error) {
       handleError(error)
     }
   }
 
   function refresh() {
-    resetPlayground()
+    stop()
     location.reload() // TODO - reload gl code only ?
   }
 
-  function stop() {
-    resetPlayground()
-  }
-
   function loadAnimation(event) {
-    resetPlayground()
+    stop()
     currentAnimationId.set(event.detail.animationId)
-    animation = $animations.find((animation) => animation.id === animationId)
     play()
   }
 
   function updateGeometry(event) {
     const { color, translation, rotation, scale } = event.detail.value
     geometryState = { ...geometryState, color, translation, rotation, scale }
-    if (animation.position && animation.webGlProps) {
+    if (animation.interactive && animation.webGlProps) {
       animation.update(translation, rotation, scale)
     } else {
       play()
@@ -181,26 +174,18 @@
   }
 </script>
 
-{#each emojis as emoji}
-  <span
-    data-cy="emoji-{emoji.character}"
-    class={emoji.class}
-    style="left: {emoji.x}%; top: {emoji.y}%; transform: scale({emoji.ratio})"
-  >
-    {emoji.character}
-  </span>
-{/each}
-
 <nav class="sidebar">
   <AnimationsMenu on:input={loadAnimation} />
-  <GeometryControls
-    on:input={updateGeometry}
-    defaultState={geometryStateDefault}
-    {geometryState}
-    {canvasWidth}
-    {canvasHeight}
-    {animation}
-  />
+  {#if animation.interactive}
+    <GeometryControls
+      on:input={updateGeometry}
+      defaultState={geometryStateDefault}
+      {geometryState}
+      {canvasWidth}
+      {canvasHeight}
+      {animation}
+    />
+  {/if}
   <Controls {play} {stop} {refresh} />
 </nav>
 
@@ -214,14 +199,24 @@
   <Feedback {stacktrace} />
   <audio
     data-cy="drumroll"
-    duration={animationDuration}
     bind:this={drumroll}
-    bind:playbackRate
+    duration={animation.duration}
+    playbackRate={animation.playbackRate}
   >
     <source src="drumroll.ogg" type="audio/ogg" />
     <track kind="captions" srclang="en" />
     <!-- TODO: fix caption src -->
   </audio>
+
+  {#each emojis as emoji}
+    <span
+      data-cy="emoji-{emoji.character}"
+      class={emoji.class}
+      style="left: {emoji.x}%; top: {emoji.y}%; transform: scale({emoji.ratio})"
+    >
+      {emoji.character}
+    </span>
+  {/each}
 </main>
 
 <style>

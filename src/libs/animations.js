@@ -8,7 +8,7 @@ export const animations = [
   {
     id: 'random-rect',
     name: 'Random rectangles',
-    loop: true,
+    duration: 2000,
     vert,
     frag,
     init(canvas) {
@@ -27,8 +27,9 @@ export const animations = [
   {
     id: 'random-rect-audio',
     name: '... with drums',
-    loop: true,
     audio: true,
+    duration: 4179,
+    playbackRate: 2,
     vert,
     frag,
     init(canvas) {
@@ -47,10 +48,7 @@ export const animations = [
   {
     id: '2D-geometry',
     name: '2D geometry',
-    ui: ['position', 'angle', 'scale'],
-    position: true,
-    rotation: true,
-    scale: true,
+    interactive: true,
     webGlProps: null,
     vert: vert2d,
     frag,
