@@ -1,7 +1,7 @@
 <script>
-  import {onMount} from 'svelte'
+  import { onMount } from 'svelte'
 
-  import {uiState, currentCursor} from '../stores.js'
+  import { uiState, currentCursor } from '../stores.js'
 
   // Inputs
   let emojiButton
@@ -44,7 +44,9 @@
   class={`btn-emoji ${buttonClass} ${playgroundState}`}
   style={`cursor: ${customCursor}`}
   aria-label={buttonLabel}
-/>
+>
+  {buttonLabel}
+</button>
 
 <style lang="scss">
   @import '../styles/buttons.scss';

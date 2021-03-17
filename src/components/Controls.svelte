@@ -22,11 +22,11 @@
     }
   }
 
-  function playBlur() {
-    if (playgroundState === constants.uiState.FOCUS) {
-      uiState.set(constants.uiState.DEFAULT)
-    }
-  }
+  // function playBlur() {
+  //   if (playgroundState === constants.uiState.FOCUS) {
+  //     uiState.set(constants.uiState.DEFAULT)
+  //   }
+  // }
 
   onMount(() => {
     return () => {
@@ -35,6 +35,7 @@
   })
 </script>
 
+<!-- handleBlur={playBlur} -->
 <div class="btn-group ui-controls">
   <EmojiButton
     dataCy="btn-play"
@@ -42,18 +43,17 @@
     buttonLabel="Play"
     handleClick={play}
     handleFocus={playFocus}
-    handleBlur={playBlur}
   />
   <EmojiButton
-    dataCy="btn-reset"
+    dataCy="btn-stop"
     buttonClass="sponge"
-    buttonLabel="Reset playground"
+    buttonLabel="Stop"
     handleClick={stop}
   />
   <EmojiButton
     dataCy="btn-refresh"
     buttonClass="shower"
-    buttonLabel="Refresh page"
+    buttonLabel="Refresh"
     handleClick={refresh}
   />
 </div>
