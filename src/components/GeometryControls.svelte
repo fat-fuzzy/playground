@@ -11,29 +11,25 @@
 <script>
   import * as utils from '../libs/utils.js'
   // @ts-check
-  export let geometryStateDefault
-  export let geometryState = geometryStateDefault
   export let canvasWidth
   export let canvasHeight
+  export let geometry
 
-  function round(n, decimals) {
-    return Number(Math.round(n + 'e' + decimals) + 'e-' + decimals)
-  }
   const dispatch = createEventDispatcher()
   /**
    * Geometry controls
    */
+  // Color & Dimensions
+  let color = [Math.random(), Math.random(), Math.random(), 1]
+  const width = utils.round((canvasWidth * 0.3) / 5, 2)
+  const height = utils.round(canvasHeight / 5, 2)
+
   // Position
   let maxX = canvasWidth
   let maxY = canvasHeight
   let coordX = canvasWidth / 2
   let coordY = canvasHeight / 2
   let translation = [coordX, coordY]
-
-  // Color & Dimensions
-  let color = [Math.random(), Math.random(), Math.random(), 1]
-  const width = round((canvasWidth * 0.3) / 5, 2) // of geometry
-  const height = round(canvasHeight / 5, 2) // of geometry
 
   // rotation
   let angle = 0
@@ -47,17 +43,19 @@
   let scale = [scaleX, scaleY]
 
   $: translation = [coordX, coordY]
-  $: radCoordX = Math.cos(utils.degToRad(angle)) // radial coordinate x = cos(O)
-  $: radCoordY = Math.sin(utils.degToRad(angle)) // radial coordinate y = sin(O)
+  $: radCoordX = Math.cos(utils.degToRad(angle))
+  $: radCoordY = Math.sin(utils.degToRad(angle))
   $: rotation = [radCoordX, radCoordY]
   $: scale = [scaleX, scaleY]
   $: maxX = canvasWidth - width
   $: maxY = canvasHeight - height
-  $: geometryState = {
+  $: geometry = {
     color,
     translation,
     rotation,
     scale,
+    width,
+    height,
   }
 
   let playgroundState
@@ -85,7 +83,7 @@
 
   function handleChange() {
     dispatch('input', {
-      value: geometryState,
+      value: geometry,
     })
   }
 

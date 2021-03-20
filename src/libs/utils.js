@@ -72,3 +72,7 @@ export function multiply(characters) {
 export function degToRad(degrees) {
   return degrees * (Math.PI / 180)
 }
+
+export function round(n, decimals) {
+  return Number(Math.round(n + 'e' + decimals) + 'e-' + decimals)
+}

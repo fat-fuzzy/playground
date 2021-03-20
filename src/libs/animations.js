@@ -53,7 +53,8 @@ export const animations = [
     vert: vert2d,
     frag,
     color: null,
-    run(canvas, translation, rotation, scale, color) {
+    run(canvas, geometry) {
+      const {color, translation, rotation, scale } = geometry
       this.color = color
       this.webGlProps = draw.initScene(canvas, this.vert, this.frag)
       const drawOptions = {
@@ -65,7 +66,8 @@ export const animations = [
       }
       draw.translationSceneViaWebGL(drawOptions)
     },
-    update(translation, rotation, scale) {
+    update(geometry) {
+      const {translation, rotation, scale} = geometry
       const drawOptions = {
         webGlProps: this.webGlProps,
         translation,

@@ -23,18 +23,16 @@
   // Audio
   let drumroll
 
-  // WebGL Geometry
-  const width = 100 // of geometry
-  const height = 30 // of geometry
-
-  const geometryStateDefault = {
+  const defaultGeometry = {
     color: [Math.random(), Math.random(), Math.random(), 1],
     translation: [canvasWidth / 2, canvasHeight / 2],
     rotation: [0, 0],
     scale: [1, 1],
+    width: utils.round((canvasWidth * 0.3) / 5, 2), // of geometry
+    height: utils.round(canvasHeight / 5, 2), // of geometry
   }
   // TODO : fix - gepometry state is not reactive
-  let geometryState = geometryStateDefault
+  let geometry = defaultGeometry
 
   // animations
   let animationStartTime
@@ -88,15 +86,7 @@
     } else {
       // if duration not met yet
       if (animation.interactive) {
-        animation.run(
-          canvas,
-          geometryState.translation,
-          geometryState.rotation,
-          geometryState.scale,
-          geometryState.color,
-          width,
-          height,
-        )
+        animation.run(canvas, geometry)
       } else {
         animation.run(canvas)
       }
@@ -144,6 +134,7 @@
   }
 
   function play() {
+    stop()
     try {
       animation = $animations.find((animation) => animation.id === animationId)
       animate()
@@ -164,10 +155,9 @@
   }
 
   function updateGeometry(event) {
-    const { color, translation, rotation, scale } = event.detail.value
-    geometryState = { ...geometryState, color, translation, rotation, scale }
+    geometry = { ...geometry, ...event.detail.value }
     if (animation.interactive && animation.webGlProps) {
-      animation.update(translation, rotation, scale)
+      animation.update(geometry)
     } else {
       play()
     }
@@ -179,8 +169,7 @@
   {#if animation.interactive}
     <GeometryControls
       on:input={updateGeometry}
-      defaultState={geometryStateDefault}
-      {geometryState}
+      geometry={defaultGeometry}
       {canvasWidth}
       {canvasHeight}
       {animation}
