@@ -7,7 +7,7 @@
     currentAnimationId,
   } from '../stores.js'
   import Feedback from './Feedback.svelte'
-  import GeometryControls from './GeometryControls.svelte'
+  import Geometry from './Geometry.svelte'
   import AnimationsMenu from './AnimationsMenu.svelte'
   import Controls from './Controls.svelte'
 </script>
@@ -120,11 +120,11 @@
   }
 
   function stop() {
-    uiState.set(constants.uiState.DEFAULT)
-    resetAudio()
     cancelAnimationFrame(animationFrame)
     animation.clear()
     clearEmojis()
+    uiState.set(constants.uiState.DEFAULT)
+    resetAudio()
   }
 
   function handleError(error) {
@@ -164,10 +164,11 @@
   }
 </script>
 
-<nav class="sidebar">
+<div class="sidebar">
   <AnimationsMenu on:input={loadAnimation} />
+  <Controls {play} {stop} {refresh} />
   {#if animation.interactive}
-    <GeometryControls
+    <Geometry
       on:input={updateGeometry}
       geometry={defaultGeometry}
       {canvasWidth}
@@ -175,8 +176,7 @@
       {animation}
     />
   {/if}
-  <Controls {play} {stop} {refresh} />
-</nav>
+</div>
 
 <main
   data-cy="output"
@@ -209,8 +209,12 @@
 </main>
 
 <style>
-  .active canvas,
-  .success canvas {
+  main {
+    height: 100%;
+    max-height: 100%;
+    width: 100%;
+  }
+  canvas {
     display: block;
     height: 100%;
     width: 100%;

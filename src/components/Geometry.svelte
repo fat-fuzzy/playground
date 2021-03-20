@@ -21,14 +21,14 @@
    */
   // Color & Dimensions
   let color = [Math.random(), Math.random(), Math.random(), 1]
-  const width = utils.round((canvasWidth * 0.3) / 5, 2)
-  const height = utils.round(canvasHeight / 5, 2)
+  const width = 100
+  const height = 150
 
   // Position
   let maxX = canvasWidth
   let maxY = canvasHeight
-  let coordX = canvasWidth / 2
-  let coordY = canvasHeight / 2
+  let coordX = maxX / 2
+  let coordY = maxY / 2
   let translation = [coordX, coordY]
 
   // rotation
@@ -58,10 +58,9 @@
     height,
   }
 
-  let playgroundState
   uiState.subscribe((value) => {
     playgroundState = value
-    if (playgroundState === constants.uiState.DEFAULT) {
+    if (value === constants.uiState.DEFAULT) {
       resetGeometry()
     }
   })
