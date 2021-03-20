@@ -33,17 +33,23 @@
   // UI feedback
   let playgroundState
   let emojiFrame
-  let emojis
+  let emojis = []
   let stacktrace = ''
   let animationId = $currentAnimationId
   let animation = $animations.find((animation) => animation.id === animationId)
 
+  let showSidebar = false
+
+  $: sidebarClass = showSidebar ? 'sidebar' : 'hidden'
+
   uiState.subscribe((value) => {
     playgroundState = value
   })
+
   emojiFeedback.subscribe((value) => {
     emojis = utils.multiply(Object.values(value))
   })
+
   currentAnimationId.subscribe((value) => {
     animationId = value
   })
@@ -143,6 +149,9 @@
     stop()
     location.reload() // TODO - reload gl code only ?
   }
+  function toggleHandles() {
+    showSidebar = !showSidebar
+  }
 
   function loadAnimation(event) {
     stop()
@@ -168,7 +177,7 @@
     <canvas bind:this={canvas} data-cy="canvas" />
     <Feedback {stacktrace} />
   </div>
-  <Controls {play} {stop} {refresh} />
+  <Controls {play} {stop} {refresh} {toggleHandles} />
   <audio
     data-cy="drumroll"
     bind:this={drumroll}

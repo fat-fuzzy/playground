@@ -15,6 +15,7 @@
   export let play = () => {}
   export let stop = () => {}
   export let refresh = () => {}
+  export let toggleHandles = () => {}
 
   function playFocus() {
     if (playgroundState === constants.uiState.DEFAULT) {
@@ -55,6 +56,12 @@
     buttonClass="shower"
     buttonLabel="Refresh"
     handleClick={refresh}
+  />
+  <EmojiButton
+    dataCy="btn-handles"
+    buttonClass="joystick"
+    buttonLabel="Handles"
+    handleClick={toggleHandles}
   />
 </div>
 
