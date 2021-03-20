@@ -1,5 +1,4 @@
 <script context="module">
-  import { onMount } from 'svelte'
   import * as constants from '../types/constants.js'
   import { getGeometryDefaults } from '../libs/animations.js'
   import {
@@ -36,11 +35,12 @@
   let emojis = []
   let stacktrace = ''
   let animationId = $currentAnimationId
-  let animation = $animations.find((animation) => animation.id === animationId)
+  let animation
 
   let showSidebar = false
 
   $: sidebarClass = showSidebar ? 'sidebar' : 'hidden'
+  $: animation = $animations.find((animation) => animation.id === animationId)
 
   uiState.subscribe((value) => {
     playgroundState = value
@@ -101,6 +101,9 @@
     if (animation.audio) {
       drumroll.play()
     }
+    if (animation.interactive) {
+      toggleSidebar(true)
+    }
     animationFrame = requestAnimationFrame(function (timestamp) {
       animationStartTime = timestamp || new Date().getTime()
       let { duration, playbackRate } = animation
@@ -112,18 +115,22 @@
   }
 
   function celebrate() {
-    cancelAnimationFrame(animationFrame)
-    clearEmojis()
     uiState.set(constants.uiState.SUCCESS)
     loopEmojis()
   }
 
-  function stop() {
+  function clearCanvas() {
     cancelAnimationFrame(animationFrame)
     animation.clear()
-    clearEmojis()
+  }
+
+  function stop() {
     uiState.set(constants.uiState.DEFAULT)
+    clearCanvas()
+    clearEmojis()
     resetAudio()
+    toggleSidebar(false)
+    geometry = getGeometryDefaults(canvasWidth, canvasHeight)
   }
 
   function handleError(error) {
@@ -149,8 +156,9 @@
     stop()
     location.reload() // TODO - reload gl code only ?
   }
-  function toggleHandles() {
-    showSidebar = !showSidebar
+
+  function toggleSidebar(value = null) {
+    showSidebar = value === null ? !showSidebar : value
   }
 
   function loadAnimation(event) {
@@ -177,7 +185,7 @@
     <canvas bind:this={canvas} data-cy="canvas" />
     <Feedback {stacktrace} />
   </div>
-  <Controls {play} {stop} {refresh} {toggleHandles} />
+  <Controls {play} {stop} {refresh} {toggleSidebar} />
   <audio
     data-cy="drumroll"
     bind:this={drumroll}

@@ -42,6 +42,7 @@
   let scale
 
   let playgroundState
+
   function init() {
     // Shape
     color = [Math.random(), Math.random(), Math.random(), 1]
