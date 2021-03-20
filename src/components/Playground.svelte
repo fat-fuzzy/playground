@@ -1,5 +1,7 @@
 <script context="module">
+  import { onMount } from 'svelte'
   import * as constants from '../types/constants.js'
+  import { getGeometryDefaults } from '../libs/animations.js'
   import {
     uiState,
     emojiFeedback,
@@ -22,17 +24,8 @@
 
   // Audio
   let drumroll
-
-  const defaultGeometry = {
-    color: [Math.random(), Math.random(), Math.random(), 1],
-    translation: [canvasWidth / 2, canvasHeight / 2],
-    rotation: [0, 0],
-    scale: [1, 1],
-    width: utils.round((canvasWidth * 0.3) / 5, 2), // of geometry
-    height: utils.round(canvasHeight / 5, 2), // of geometry
-  }
   // TODO : fix - gepometry state is not reactive
-  let geometry = defaultGeometry
+  let geometry = getGeometryDefaults(canvasWidth, canvasHeight)
 
   // animations
   let animationStartTime
@@ -134,10 +127,13 @@
   }
 
   function play() {
-    stop()
     try {
       animation = $animations.find((animation) => animation.id === animationId)
-      animate()
+      if (animation.interactive && animation.webGlProps) {
+        animation.update(geometry)
+      } else {
+        animate()
+      }
     } catch (error) {
       handleError(error)
     }
@@ -155,37 +151,24 @@
   }
 
   function updateGeometry(event) {
-    geometry = { ...geometry, ...event.detail.value }
-    if (animation.interactive && animation.webGlProps) {
-      animation.update(geometry)
-    } else {
-      play()
-    }
+    geometry = event.detail.value
   }
 </script>
 
-<div class="sidebar">
+<header>
   <AnimationsMenu on:input={loadAnimation} />
+</header>
+<main>
+  <div
+    data-cy="output"
+    class={`output ${playgroundState}`}
+    bind:offsetWidth={canvasWidth}
+    bind:offsetHeight={canvasHeight}
+  >
+    <canvas bind:this={canvas} data-cy="canvas" />
+    <Feedback {stacktrace} />
+  </div>
   <Controls {play} {stop} {refresh} />
-  {#if animation.interactive}
-    <Geometry
-      on:input={updateGeometry}
-      geometry={defaultGeometry}
-      {canvasWidth}
-      {canvasHeight}
-      {animation}
-    />
-  {/if}
-</div>
-
-<main
-  data-cy="output"
-  class={`output ${playgroundState}`}
-  bind:offsetWidth={canvasWidth}
-  bind:offsetHeight={canvasHeight}
->
-  <canvas bind:this={canvas} data-cy="canvas" />
-  <Feedback {stacktrace} />
   <audio
     data-cy="drumroll"
     bind:this={drumroll}
@@ -207,19 +190,46 @@
     </span>
   {/each}
 </main>
+<aside class={sidebarClass}>
+  {#if animation.interactive}
+    <Geometry
+      on:update={updateGeometry}
+      {canvasWidth}
+      {canvasHeight}
+      {animation}
+    />
+  {/if}
+</aside>
 
 <style>
   main {
+    position: relative;
     height: 100%;
     max-height: 100%;
     width: 100%;
   }
+  .hidden {
+    display: none;
+  }
+
+  .emoji {
+    position: relative;
+  }
+
+  .output {
+    position: relative;
+    width: 100%;
+    padding-top: calc(100% - 160px); /* will change */
+  }
   canvas {
-    display: block;
+    position: absolute;
+    top: 0;
     height: 100%;
     width: 100%;
   }
-  .hidden {
-    display: none;
+  .sidebar {
+    position: absolute;
+    bottom: 0;
+    right: 0;
   }
 </style>

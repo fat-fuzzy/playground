@@ -1,11 +1,10 @@
 <script context="module">
+  import { onMount, createEventDispatcher } from 'svelte'
   import * as constants from '../types/constants.js'
   import { uiState } from '../stores.js'
   import Position from './Position.svelte'
   import Scale from './Scale.svelte'
   import Rotation from './Rotation.svelte'
-
-  import { createEventDispatcher } from 'svelte'
 </script>
 
 <script>
@@ -16,32 +15,69 @@
   export let geometry
 
   const dispatch = createEventDispatcher()
-  /**
-   * Geometry controls
-   */
-  // Color & Dimensions
-  let color = [Math.random(), Math.random(), Math.random(), 1]
-  const width = 100
-  const height = 150
+
+  // input attributes
+  let maxX
+  let maxY
+  let angle
+
+  // Shape
+  let color
+  let width
+  let height
 
   // Position
-  let maxX = canvasWidth
-  let maxY = canvasHeight
-  let coordX = maxX / 2
-  let coordY = maxY / 2
-  let translation = [coordX, coordY]
+  let coordX
+  let coordY
+  let translation
 
-  // rotation
-  let angle = 0
-  let radCoordX = Math.cos(utils.degToRad(angle)) // radial coordinate x = cos(O)
-  let radCoordY = Math.sin(utils.degToRad(angle)) // radial coordinate y = sin(O)
-  let rotation = [radCoordX, radCoordY]
+  // Rotation
+  let radCoordX
+  let radCoordY
+  let rotation
 
-  // scale
-  let scaleX = 1
-  let scaleY = 1
-  let scale = [scaleX, scaleY]
+  // Scale
+  let scaleX
+  let scaleY
+  let scale
 
+  let playgroundState
+  function init() {
+    // Shape
+    color = [Math.random(), Math.random(), Math.random(), 1]
+    width = utils.round((canvasWidth * 0.3) / 5, 2) // of geometry
+    height = utils.round(canvasHeight / 5, 2) // of geometry
+
+    // Position
+    coordX = canvasWidth / 2
+    coordY = canvasHeight / 2
+    translation = [coordX, coordY]
+
+    // Rotation
+    radCoordX = radCoordY = 0
+    rotation = [radCoordX, radCoordY]
+
+    // Scale
+    scaleX = scaleY = 1
+    scale = [scaleX, scaleY]
+
+    // input attributes
+    maxX = canvasWidth - width
+    maxY = canvasHeight - height
+    angle = 0
+  }
+
+  function sub() {
+    uiState.subscribe((value) => {
+      if (playgroundState !== value) {
+        if (value === constants.uiState.DEFAULT) {
+          init()
+          update()
+        }
+        playgroundState = value
+      }
+    })
+  }
   $: translation = [coordX, coordY]
   $: radCoordX = Math.cos(utils.degToRad(angle))
   $: radCoordY = Math.sin(utils.degToRad(angle))
@@ -58,50 +94,19 @@
     height,
   }
 
-  uiState.subscribe((value) => {
-    playgroundState = value
-    if (value === constants.uiState.DEFAULT) {
-      resetGeometry()
-    }
-  })
-
-  function resetColor() {
-    color = [Math.random(), Math.random(), Math.random(), 1]
-  }
-
-  function resetPosition() {
-    coordX = maxX / 2
-    coordY = maxY / 2
-    angle = 0
-  }
-
-  function resetScale() {
-    scaleX = 1
-    scaleY = 1
-  }
-
-  function handleChange() {
-    dispatch('input', {
+  const update = () =>
+    dispatch('update', {
       value: geometry,
     })
-  }
 
-  function resetGeometry() {
-    resetColor()
-    resetPosition()
-    resetScale()
-    handleChange()
-  }
+  onMount(() => {
+    init()
+    sub()
+  })
 </script>
 
 <form>
-  <Position
-    bind:coordX
-    bind:coordY
-    bind:maxX
-    bind:maxY
-    on:input={handleChange}
-  />
+  <Position bind:coordX bind:coordY bind:maxX bind:maxY on:input={update} />
   <Scale
     bind:scaleX
     bind:scaleY
@@ -109,9 +114,9 @@
     maxY="5"
     minX="-5"
     minY="-5"
-    on:input={handleChange}
+    on:input={update}
   />
-  <Rotation bind:angle max={360} on:input={handleChange} />
+  <Rotation bind:angle max={360} on:input={update} />
 </form>
 
 <style>

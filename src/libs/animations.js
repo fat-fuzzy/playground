@@ -1,4 +1,5 @@
 import * as draw from '../libs/draw.js'
+import * as utils from '../libs/utils.js'
 
 import {frag} from '../gl/fragment-shader-2d'
 import {vert} from '../gl/vertex-shader-2d'
@@ -82,3 +83,14 @@ export const animations = [
     },
   },
 ]
+
+export function getGeometryDefaults(canvasWidth, canvasHeight) {
+  return {
+    color: [Math.random(), Math.random(), Math.random(), 1],
+    translation: [canvasWidth / 2, canvasHeight / 2],
+    rotation: [0, 0],
+    scale: [1, 1],
+    width: utils.round((canvasWidth * 0.3) / 5, 2), // of geometry
+    height: utils.round(canvasHeight / 5, 2), // of geometry
+  }
+}
