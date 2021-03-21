@@ -91,15 +91,20 @@
       celebrate()
     } else {
       // if duration not met yet
-      if (animation.interactive) {
-        animation.run(canvas, geometry)
-      } else {
-        animation.run(canvas)
+
+      try {
+        if (animation.interactive) {
+          animation.run(canvas, geometry)
+        } else {
+          animation.run(canvas)
+        }
+        animationFrame = requestAnimationFrame(function (t) {
+          // call requestAnimationFrame again with parameters
+          runLoop(t, duration)
+        })
+      } catch (error) {
+        handleError(error)
       }
-      animationFrame = requestAnimationFrame(function (t) {
-        // call requestAnimationFrame again with parameters
-        runLoop(t, duration)
-      })
     }
   }
 
@@ -150,14 +155,10 @@
   }
 
   function play() {
-    try {
-      if (animation.interactive && animation.webGlProps) {
-        animation.update(geometry)
-      } else {
-        animate()
-      }
-    } catch (error) {
-      handleError(error)
+    if (animation.interactive && animation.webGlProps) {
+      animation.update(geometry)
+    } else {
+      animate()
     }
   }
 

@@ -43,5 +43,5 @@
 </button>
 
 <style lang="scss">
-  @import '../styles/buttons.scss';
+  // @import '../styles/buttons.scss';
 </style>

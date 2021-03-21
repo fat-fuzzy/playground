@@ -34,5 +34,5 @@
 </nav>
 
 <style lang="scss">
-  @import '../styles/animations-menu.scss';
+  // @import '../styles/animations-menu.scss';
 </style>
