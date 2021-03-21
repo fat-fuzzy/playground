@@ -232,14 +232,14 @@
     display: none;
   }
 
-  .emoji {
+  /* .emoji {
     position: relative;
-  }
+  } */
 
   .output {
     position: relative;
     width: 100%;
-    padding-top: calc(100% - 160px); /* will change */
+    padding-top: 100%;
   }
   canvas {
     position: absolute;
@@ -251,5 +251,23 @@
     position: absolute;
     bottom: 0;
     right: 0;
+  }
+  @media (min-aspect-ratio: 1/1.35) {
+    .output {
+      width: calc(100% - 100px);
+      padding-top: calc(100% - 100px);
+    }
+  }
+  @media (min-aspect-ratio: 1/1.21) {
+    .output {
+      width: calc(100% - 200px);
+      padding-top: calc(100% - 200px);
+    }
+  }
+  @media (min-aspect-ratio: 9/6) {
+    .output {
+      width: 62.5%;
+      padding-top: 62.5%;
+    }
   }
 </style>

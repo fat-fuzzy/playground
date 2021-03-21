@@ -121,7 +121,6 @@
 <style>
   form {
     display: flex;
-    flex-direction: column;
     grid-column-start: 2;
     grid-row-end: 3;
     grid-row-start: 1;
@@ -131,8 +130,9 @@
     width: 100%;
   }
 
-  @media (min-width: 768px) and (min-aspect-ratio: 3/5) {
+  @media (min-aspect-ratio: 1/1) {
     form {
+      flex-direction: column;
       grid-column-start: 1;
       grid-row-start: 2;
       margin-left: 0;

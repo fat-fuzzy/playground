@@ -65,6 +65,12 @@
   />
 </div>
 
-<style lang="scss">
-  @import '../styles/controls.scss';
+<style>
+  @media (min-aspect-ratio: 1/1) {
+    .ui-controls {
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
+  }
 </style>
