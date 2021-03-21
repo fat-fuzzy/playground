@@ -228,7 +228,7 @@
   {/if}
 </aside>
 
-<style>
+<style lang="scss">
   main {
     position: relative;
     height: 100%;

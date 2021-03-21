@@ -65,7 +65,7 @@
   />
 </div>
 
-<style>
+<style lang="scss">
   @media (min-aspect-ratio: 1/1) {
     .ui-controls {
       position: absolute;

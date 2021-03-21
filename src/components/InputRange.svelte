@@ -31,7 +31,7 @@
   />
 </label>
 
-<style>
+<style lang="scss">
   input {
     display: block;
     width: 100%;

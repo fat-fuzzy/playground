@@ -43,7 +43,7 @@
   />
 </fieldset>
 
-<style>
+<style lang="scss">
   fieldset {
     display: flex;
     flex-direction: column;

@@ -118,7 +118,7 @@
   <Rotation bind:angle max={360} on:input={update} />
 </form>
 
-<style>
+<style lang="scss">
   form {
     display: flex;
     grid-column-start: 2;

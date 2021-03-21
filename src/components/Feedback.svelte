@@ -26,7 +26,7 @@
   <pre class="stacktrace" data-cy="stacktrace">{stacktrace}</pre>
 </div>
 
-<style>
+<style lang="scss">
   .hidden {
     display: none;
   }
