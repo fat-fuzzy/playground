@@ -4,7 +4,8 @@
 
   const dispatch = createEventDispatcher()
 
-  export let angle
+  export let angle = 0
+  export let max = 0
   const label = 'Rotation'
 
   function update(value) {

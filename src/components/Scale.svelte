@@ -5,12 +5,12 @@
 
   const dispatch = createEventDispatcher()
   // @ts-check
-  export let scaleX
-  export let scaleY
-  export let minX
-  export let maxX
-  export let minY
-  export let maxY
+  export let scaleX = 0
+  export let scaleY = 0
+  export let minX = 0
+  export let maxX = 0
+  export let minY = 0
+  export let maxY = 0
 
   const step = '0.01'
   const label = 'Scale'

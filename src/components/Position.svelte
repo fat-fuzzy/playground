@@ -4,10 +4,10 @@
 
   const dispatch = createEventDispatcher()
 
-  export let coordX
-  export let coordY
-  export let maxX
-  export let maxY
+  export let coordX = 0
+  export let coordY = 0
+  export let maxX = 0
+  export let maxY = 0
   const label = 'Position'
 
   function update(value) {
