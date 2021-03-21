@@ -10,25 +10,21 @@
   export let maxY = 0
   const label = 'Position'
 
-  function update(value) {
+  function updateX() {
     dispatch('input', {
-      value,
+      value: coordX,
+    })
+  }
+
+  function updateY() {
+    dispatch('input', {
+      value: coordY,
     })
   }
 </script>
 
 <fieldset data-cy="position">
   <legend>{label}</legend>
-  <InputRange
-    bind:value={coordX}
-    label="x"
-    max={maxX}
-    on:input={() => update(coordX)}
-  />
-  <InputRange
-    bind:value={coordY}
-    label="y"
-    max={maxY}
-    on:input={() => update(coordY)}
-  />
+  <InputRange bind:value={coordX} label="x" max={maxX} on:input={updateX} />
+  <InputRange bind:value={coordY} label="y" max={maxY} on:input={updateY} />
 </fieldset>

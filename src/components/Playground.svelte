@@ -93,9 +93,10 @@
       // if duration not met yet
       try {
         if (animation.interactive) {
-          animation.run(canvas, geometry)
           if (animation.webGlProps) {
             animation.update(geometry)
+          } else {
+            animation.run(canvas, geometry)
           }
         } else {
           animation.run(canvas)

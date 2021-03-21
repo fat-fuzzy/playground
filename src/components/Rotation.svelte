@@ -8,9 +8,9 @@
   export let max = 0
   const label = 'Rotation'
 
-  function update(value) {
+  function update() {
     dispatch('input', {
-      value,
+      value: angle,
     })
   }
 </script>
@@ -19,7 +19,7 @@
   <legend>{label}</legend>
   <!--https://css-tricks.com/accessible-svgs/-->
   <!-- <svg id="InteractiveSVG" role="group" /> -->
-  <InputRange bind:value={angle} {max} on:input={() => update(angle)} />
+  <InputRange bind:value={angle} {max} on:input={update} />
 </fieldset>
 
 <!-- <style lang="scss">
