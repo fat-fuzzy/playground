@@ -15,7 +15,7 @@
   export let play = () => {}
   export let stop = () => {}
   export let refresh = () => {}
-  export let toggleHandles = () => {}
+  export let toggleSidebar = () => {}
 
   function playFocus() {
     if (playgroundState === constants.uiState.DEFAULT) {
@@ -42,26 +42,26 @@
     dataCy="btn-play"
     buttonClass="firestarter"
     buttonLabel="Play"
-    handleClick={play}
+    handleClick={() => play()}
     handleFocus={playFocus}
   />
   <EmojiButton
     dataCy="btn-stop"
     buttonClass="sponge"
     buttonLabel="Stop"
-    handleClick={stop}
+    handleClick={() => stop()}
   />
   <EmojiButton
     dataCy="btn-refresh"
     buttonClass="shower"
     buttonLabel="Refresh"
-    handleClick={refresh}
+    handleClick={() => refresh()}
   />
   <EmojiButton
     dataCy="btn-handles"
     buttonClass="joystick"
     buttonLabel="Handles"
-    handleClick={toggleHandles}
+    handleClick={() => toggleSidebar()}
   />
 </div>
 
