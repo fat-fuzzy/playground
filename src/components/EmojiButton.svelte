@@ -1,7 +1,7 @@
 <script>
   import { onMount } from 'svelte'
 
-  import { uiState, currentCursor } from '../stores.js'
+  import { uiState } from '../stores.js'
 
   // Inputs
   let emojiButton
@@ -21,11 +21,6 @@
     playgroundState = value
   })
 
-  const emojiFeedbackUnsub = currentCursor.subscribe((value) => {
-    if (value && value !== customCursor) {
-      customCursor = value
-    }
-  })
   onMount(() => {
     return () => {
       uiStateUnsub()
@@ -42,7 +37,6 @@
   on:click={handleClick}
   bind:this={emojiButton}
   class={`btn-emoji ${buttonClass} ${playgroundState}`}
-  style={`cursor: ${customCursor}`}
   aria-label={buttonLabel}
 >
   {buttonLabel}

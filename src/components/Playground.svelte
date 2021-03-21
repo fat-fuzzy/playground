@@ -6,6 +6,7 @@
     emojiFeedback,
     animations,
     currentAnimationId,
+    currentCursor,
   } from '../stores.js'
   import Feedback from './Feedback.svelte'
   import Geometry from './Geometry.svelte'
@@ -36,6 +37,7 @@
   let stacktrace = ''
   let animationId = $currentAnimationId
   let animation
+  let customCursor
 
   let showSidebar = false
 
@@ -50,10 +52,15 @@
     emojis = utils.multiply(Object.values(value))
   })
 
+  currentCursor.subscribe((value) => {
+    if (value && value !== customCursor) {
+      customCursor = value
+    }
+  })
+
   currentAnimationId.subscribe((value) => {
     animationId = value
   })
-
   function loopEmojis() {
     emojiFrame = requestAnimationFrame(loopEmojis)
 
@@ -178,7 +185,7 @@
 <header>
   <AnimationsMenu on:input={loadAnimation} />
 </header>
-<main>
+<main style={`cursor: ${customCursor}`}>
   <div
     data-cy="output"
     class={`output ${playgroundState}`}
