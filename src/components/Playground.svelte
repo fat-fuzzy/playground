@@ -91,10 +91,12 @@
       celebrate()
     } else {
       // if duration not met yet
-
       try {
         if (animation.interactive) {
           animation.run(canvas, geometry)
+          if (animation.webGlProps) {
+            animation.update(geometry)
+          }
         } else {
           animation.run(canvas)
         }
@@ -108,7 +110,7 @@
     }
   }
 
-  function animate() {
+  function play() {
     uiState.set(constants.uiState.ACTIVE)
     if (animation.audio) {
       drumroll.play()
@@ -152,14 +154,6 @@
     uiState.set(constants.uiState.ERROR)
     stacktrace = `${error}\n${stacktrace}`
     loopEmojis()
-  }
-
-  function play() {
-    if (animation.interactive && animation.webGlProps) {
-      animation.update(geometry)
-    } else {
-      animate()
-    }
   }
 
   function refresh() {
@@ -220,12 +214,7 @@
 </main>
 <aside class={sidebarClass}>
   {#if animation.interactive}
-    <Geometry
-      on:update={updateGeometry}
-      {canvasWidth}
-      {canvasHeight}
-      {animation}
-    />
+    <Geometry on:update={updateGeometry} {canvasWidth} {canvasHeight} />
   {/if}
 </aside>
 
