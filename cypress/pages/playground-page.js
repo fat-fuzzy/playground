@@ -34,14 +34,14 @@ export function findAnimationsMenu() {
 
 export function findPosition() {
   cy.get(POSITION).then(() => {
-    const outputWidth = 667 // TODO : fix value: should match canvas width (test on resize ?)
-    const outputHeight = 375 // TODO : fix value: should match canvas width (test on resize ?)
-    cy.viewport(outputWidth, outputHeight)
+    // max values for iphone 6/7 viewport for now (375 x 677px)
+    const maxX =  352.5 // TODO : fix value: should match canvas width (test on resize ?)
+    const maxY =  172 // TODO : fix value: should match canvas width (test on resize ?)
     cy.get(COORD_X).then(($coord) => {
-      expect($coord).to.have.attr('max', outputHeight)
+      expect($coord).to.have.attr('max', maxX)
     })
     cy.get(COORD_Y).then(($coord) => {
-      expect($coord).to.have.attr('max', outputWidth)
+      expect($coord).to.have.attr('max', maxY)
     })
   })
 }
