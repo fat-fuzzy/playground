@@ -7,19 +7,9 @@
   export let angle
   const label = 'Rotation'
 
-  // const handleXRadChange = () => {
-  //   dispatch('updateXRad', {
-  //     value: xRad,
-  //   })
-  // }
-  // const handleYRadChange = () => {
-  //   dispatch('updateYRad', {
-  //     value: yRad,
-  //   })
-  // }
-  function handleChange() {
+  function update(value) {
     dispatch('input', {
-      value: angle,
+      value,
     })
   }
 </script>
@@ -28,7 +18,7 @@
   <legend>{label}</legend>
   <!--https://css-tricks.com/accessible-svgs/-->
   <!-- <svg id="InteractiveSVG" role="group" /> -->
-  <InputRange bind:value={angle} max={360} on:input={handleChange} />
+  <InputRange bind:value={angle} max={360} on:input={() => update(angle)} />
 </fieldset>
 
 <!-- <style lang="scss">

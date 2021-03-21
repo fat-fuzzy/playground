@@ -15,14 +15,9 @@
   const step = '0.01'
   const label = 'Scale'
 
-  function handleChangeX() {
+  function update(value) {
     dispatch('input', {
-      value: scaleX,
-    })
-  }
-  function handleChangeY() {
-    dispatch('input', {
-      value: scaleY,
+      value,
     })
   }
 </script>
@@ -35,7 +30,7 @@
     min={minX}
     max={maxX}
     {step}
-    on:input={handleChangeX}
+    on:input={() => update(scaleX)}
   />
 
   <InputRange
@@ -44,7 +39,7 @@
     min={minY}
     max={maxY}
     {step}
-    on:input={handleChangeY}
+    on:input={() => update(scaleY)}
   />
 </fieldset>
 

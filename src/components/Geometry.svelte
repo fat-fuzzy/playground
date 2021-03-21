@@ -1,6 +1,7 @@
 <script context="module">
   import { onMount, createEventDispatcher } from 'svelte'
   import * as constants from '../types/constants.js'
+  import { getGeometryDefaults } from '../libs/animations.js'
   import { uiState } from '../stores.js'
   import Position from './Position.svelte'
   import Scale from './Scale.svelte'
@@ -16,51 +17,48 @@
 
   const dispatch = createEventDispatcher()
 
+  let { color, translation, rotation, scale } = getGeometryDefaults(
+    canvasWidth,
+    canvasHeight,
+  )
   // input attributes
   let maxX
   let maxY
   let angle
 
   // Shape
-  let color
   let width
   let height
 
   // Position
   let coordX
   let coordY
-  let translation
 
   // Rotation
   let radCoordX
   let radCoordY
-  let rotation
 
   // Scale
   let scaleX
   let scaleY
-  let scale
 
   let playgroundState
 
   function init() {
+    geometry = getGeometryDefaults(canvasWidth, canvasHeight)
     // Shape
-    color = [Math.random(), Math.random(), Math.random(), 1]
-    width = utils.round((canvasWidth * 0.3) / 5, 2) // of geometry
-    height = utils.round(canvasHeight / 5, 2) // of geometry
+    color = geometry.color
+    width = geometry.width
+    height = geometry.height
 
     // Position
-    coordX = canvasWidth / 2
-    coordY = canvasHeight / 2
-    translation = [coordX, coordY]
+    ;[coordX, coordY] = geometry.translation
 
     // Rotation
-    radCoordX = radCoordY = 0
-    rotation = [radCoordX, radCoordY]
+    ;[radCoordX, radCoordY] = geometry.rotation
 
     // Scale
-    scaleX = scaleY = 1
-    scale = [scaleX, scaleY]
+    ;[scaleX, scaleY] = geometry.scale
 
     // input attributes
     maxX = canvasWidth - width

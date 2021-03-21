@@ -10,14 +10,9 @@
   export let maxY
   const label = 'Position'
 
-  function handleChangeX() {
+  function update(value) {
     dispatch('input', {
-      value: coordX,
-    })
-  }
-  function handleChangeY() {
-    dispatch('input', {
-      value: coordY,
+      value,
     })
   }
 </script>
@@ -28,12 +23,12 @@
     bind:value={coordX}
     label="x"
     max={maxX}
-    on:input={handleChangeX}
+    on:input={() => update(coordX)}
   />
   <InputRange
     bind:value={coordY}
     label="y"
     max={maxY}
-    on:input={handleChangeY}
+    on:input={() => update(coordY)}
   />
 </fieldset>

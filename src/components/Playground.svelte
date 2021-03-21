@@ -120,17 +120,20 @@
   }
 
   function clearCanvas() {
+    if (animation.interactive && animation.webGlProps) {
+      geometry = getGeometryDefaults(canvasWidth, canvasHeight)
+      animation.update(geometry)
+    }
     cancelAnimationFrame(animationFrame)
     animation.clear()
   }
 
   function stop() {
-    uiState.set(constants.uiState.DEFAULT)
+    toggleSidebar(false)
     clearCanvas()
     clearEmojis()
     resetAudio()
-    toggleSidebar(false)
-    geometry = getGeometryDefaults(canvasWidth, canvasHeight)
+    uiState.set(constants.uiState.DEFAULT)
   }
 
   function handleError(error) {
@@ -141,7 +144,6 @@
 
   function play() {
     try {
-      animation = $animations.find((animation) => animation.id === animationId)
       if (animation.interactive && animation.webGlProps) {
         animation.update(geometry)
       } else {
@@ -164,6 +166,7 @@
   function loadAnimation(event) {
     stop()
     currentAnimationId.set(event.detail.animationId)
+    animation = $animations.find((animation) => animation.id === animationId)
     play()
   }
 
