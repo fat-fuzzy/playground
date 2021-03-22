@@ -1,45 +1,57 @@
 <script>
   import InputRange from './InputRange.svelte'
 
-  import {createEventDispatcher} from 'svelte'
+  import { createEventDispatcher } from 'svelte'
 
   const dispatch = createEventDispatcher()
   // @ts-check
-  export let xScale
-  export let yScale
-  export let minX
-  export let maxX
-  export let minY
-  export let maxY
+  export let scaleX = 0
+  export let scaleY = 0
+  export let minX = 0
+  export let maxX = 0
+  export let minY = 0
+  export let maxY = 0
 
   const step = '0.01'
+  const label = 'Scale'
 
-  const handleXChange = () => {
+  function updateX() {
     dispatch('input', {
-      value: xScale,
+      value: scaleX,
     })
   }
-  const handleYChange = () => {
+
+  function updateY() {
     dispatch('input', {
-      value: yScale,
+      value: scaleY,
     })
   }
 </script>
 
-<InputRange
-  bind:value={xScale}
-  label="scale x"
-  min={minX}
-  max={maxX}
-  {step}
-  on:input={handleXChange}
-/>
+<fieldset data-cy="scale">
+  <legend>{label}</legend>
+  <InputRange
+    bind:value={scaleX}
+    label="x"
+    min={minX}
+    max={maxX}
+    {step}
+    on:input={updateX}
+  />
 
-<InputRange
-  bind:value={yScale}
-  label="scale y"
-  min={minY}
-  max={maxY}
-  {step}
-  on:input={handleYChange}
-/>
+  <InputRange
+    bind:value={scaleY}
+    label="y"
+    min={minY}
+    max={maxY}
+    {step}
+    on:input={updateY}
+  />
+</fieldset>
+
+<style lang="scss">
+  fieldset {
+    display: flex;
+    flex-direction: column;
+  }
+</style>

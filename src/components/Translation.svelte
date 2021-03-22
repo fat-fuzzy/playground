@@ -1,5 +1,5 @@
 <script>
-  import {onMount} from 'svelte'
+  import { onMount } from 'svelte'
   import * as draw from '../libs/draw.js'
 
   let maxX
@@ -47,7 +47,7 @@
 
 <canvas bind:this={canvas} {width} {height} />
 
-<style>
+<style lang="scss">
   canvas {
     background-color: black;
     margin-top: 1em;

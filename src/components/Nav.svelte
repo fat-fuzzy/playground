@@ -18,6 +18,6 @@
 </nav>
 
 <style lang="scss">
-  @import '../styles/variables.scss';
-  @import '../styles/nav.scss';
+  // @import '../styles/variables.scss';
+  // @import '../styles/nav.scss';
 </style>

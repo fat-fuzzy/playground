@@ -59,6 +59,7 @@ export function multiply(characters) {
     .fill(0)
     .map((_, i) => {
       return {
+        class: 'hidden',
         character: characters[i % characters.length],
         x: Math.random() * 100,
         y: -10 - Math.random() * 100,
@@ -70,4 +71,8 @@ export function multiply(characters) {
 
 export function degToRad(degrees) {
   return degrees * (Math.PI / 180)
+}
+
+export function round(n, decimals) {
+  return Number(Math.round(n + 'e' + decimals) + 'e-' + decimals)
 }
