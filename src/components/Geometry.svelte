@@ -1,8 +1,6 @@
 <script context="module">
   import { onMount, createEventDispatcher } from 'svelte'
-  import * as constants from '../types/constants.js'
   import { getGeometryDefaults } from '../libs/animations.js'
-  import { uiState } from '../stores.js'
   import Position from './Position.svelte'
   import Scale from './Scale.svelte'
   import Rotation from './Rotation.svelte'
@@ -10,40 +8,40 @@
 
 <script>
   import * as utils from '../libs/utils.js'
-  // @ts-check
+
   export let canvasWidth
   export let canvasHeight
-  export let geometry
 
   const dispatch = createEventDispatcher()
 
-  let { color, translation, rotation, scale } = getGeometryDefaults(
-    canvasWidth,
-    canvasHeight,
-  )
+  let geometry
+  let color
+  let width
+  let height
+
   // input attributes
   let maxX
   let maxY
   let angle
 
-  // Shape
-  let width
-  let height
-
   // Position
   let coordX
   let coordY
+  let translation
 
   // Rotation
   let radCoordX
   let radCoordY
+  let rotation
 
   // Scale
   let scaleX
   let scaleY
+  let scale
 
   function init() {
     geometry = getGeometryDefaults(canvasWidth, canvasHeight)
+
     // Shape
     color = geometry.color
     width = geometry.width

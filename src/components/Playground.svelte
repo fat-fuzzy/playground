@@ -213,12 +213,7 @@
 </main>
 <aside class={sidebarClass}>
   {#if animation.interactive}
-    <Geometry
-      on:update={updateGeometry}
-      {geometry}
-      {canvasWidth}
-      {canvasHeight}
-    />
+    <Geometry on:update={updateGeometry} {canvasWidth} {canvasHeight} />
   {/if}
 </aside>
 
