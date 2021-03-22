@@ -13,9 +13,9 @@ const BTN_WITH_DRUMS = '[data-cy="random-rect-audio"]'
 const BTN_2D_GEO = '[data-cy="2D-geometry"]'
 const CONFETTI = '[data-cy="emoji-🥳"]'
 const POOP = '[data-cy="emoji-💩"]'
-const ANIMATION_RANDOM_RECTS = 'Random rectangles'
-const ANIMATION_WITH_DRUMS = '... with drums'
-const ANIMATION_2D_GEO = '2D geometry'
+const ANIMATION_RANDOM_RECTS = '🎰 Random'
+const ANIMATION_WITH_DRUMS = '🥁 Audio'
+const ANIMATION_2D_GEO = '📐 2D'
 
 // Animation controls
 const POSITION = '[data-cy="position"]'
@@ -35,8 +35,8 @@ export function findAnimationsMenu() {
 export function findPosition() {
   cy.get(POSITION).then(() => {
     // max values for iphone 6/7 viewport for now (375 x 677px)
-    const maxX =  337.46 // TODO : fix value: should match canvas width (test on resize ?)
-    const maxY =  287.2 // TODO : fix value: should match canvas width (test on resize ?)
+    const maxX = 337.46 // TODO : fix value: should match canvas width (test on resize ?)
+    const maxY = 179.5 // TODO : fix value: should match canvas width (test on resize ?)
     cy.get(COORD_X).then(($coord) => {
       expect($coord).to.have.attr('max', maxX)
     })
