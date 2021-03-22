@@ -13,9 +13,9 @@ const BTN_WITH_DRUMS = '[data-cy="random-rect-audio"]'
 const BTN_2D_GEO = '[data-cy="2D-geometry"]'
 const CONFETTI = '[data-cy="emoji-🥳"]'
 const POOP = '[data-cy="emoji-💩"]'
-const ANIMATION_RANDOM_RECTS = 'Random rectangles'
-const ANIMATION_WITH_DRUMS = '... with drums'
-const ANIMATION_2D_GEO = '2D geometry'
+const ANIMATION_RANDOM_RECTS = '🎰 Random'
+const ANIMATION_WITH_DRUMS = '🥁 Audio'
+const ANIMATION_2D_GEO = '📐 2D'
 
 // Animation controls
 const POSITION = '[data-cy="position"]'
