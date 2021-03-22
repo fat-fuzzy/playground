@@ -42,8 +42,6 @@
   let scaleX
   let scaleY
 
-  let playgroundState
-
   function init() {
     geometry = getGeometryDefaults(canvasWidth, canvasHeight)
     // Shape
@@ -66,24 +64,13 @@
     angle = 0
   }
 
-  function sub() {
-    uiState.subscribe((value) => {
-      if (playgroundState !== value) {
-        if (value === constants.uiState.DEFAULT) {
-          init()
-          update()
-        }
-        playgroundState = value
-      }
-    })
-  }
-  $: translation = [coordX, coordY]
+  $: maxX = canvasWidth - width
+  $: maxY = canvasHeight - canvasHeight
   $: radCoordX = Math.cos(utils.degToRad(angle))
   $: radCoordY = Math.sin(utils.degToRad(angle))
+  $: translation = [coordX, coordY]
   $: rotation = [radCoordX, radCoordY]
   $: scale = [scaleX, scaleY]
-  $: maxX = canvasWidth - width
-  $: maxY = canvasHeight - height
   $: geometry = {
     color,
     translation,
@@ -100,7 +87,6 @@
 
   onMount(() => {
     init()
-    sub()
   })
 </script>
 

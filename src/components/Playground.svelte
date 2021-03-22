@@ -120,8 +120,8 @@
     }
     if (animation.interactive) {
       toggleSidebar(true)
+      geometry = getGeometryDefaults(canvasWidth, canvasHeight)
     }
-
     animationFrame = requestAnimationFrame(function (timestamp) {
       animationStartTime = timestamp || new Date().getTime()
       let { duration, playbackRate } = animation
@@ -172,7 +172,7 @@
   }
 
   function updateGeometry(event) {
-    geometry = event.detail.value
+    geometry = { ...geometry, ...event.detail.value }
   }
 </script>
 
@@ -213,7 +213,12 @@
 </main>
 <aside class={sidebarClass}>
   {#if animation.interactive}
-    <Geometry on:update={updateGeometry} {canvasWidth} {canvasHeight} />
+    <Geometry
+      on:update={updateGeometry}
+      {geometry}
+      {canvasWidth}
+      {canvasHeight}
+    />
   {/if}
 </aside>
 
