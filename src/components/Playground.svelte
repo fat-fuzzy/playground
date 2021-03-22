@@ -1,5 +1,4 @@
 <script context="module">
-  import * as constants from '../types/constants.js'
   import { getGeometryDefaults } from '../libs/animations.js'
   import {
     uiState,
@@ -15,6 +14,7 @@
 </script>
 
 <script>
+  import * as constants from '../types/constants.js'
   import * as utils from '../libs/utils.js'
   // Canvas
   let canvas
@@ -43,6 +43,8 @@
 
   $: sidebarClass = showSidebar ? 'sidebar' : 'hidden'
   $: animation = $animations.find((animation) => animation.id === animationId)
+  $: canvasStyle =
+    playgroundState === constants.uiState.ACTIVE ? 'canvas' : 'hidden'
 
   uiState.subscribe((value) => {
     playgroundState = value
@@ -62,9 +64,8 @@
     animationId = value
   })
 
-  function celebrate() {
-    uiState.set(constants.uiState.SUCCESS)
-    emojiFrame = requestAnimationFrame(celebrate)
+  function feedbackLoop() {
+    emojiFrame = requestAnimationFrame(feedbackLoop)
 
     emojis = emojis.map((emoji) => {
       if (!emoji.character) {
@@ -90,7 +91,8 @@
   function runLoop(timestamp, duration) {
     const runtime = timestamp - animationStartTime
     if (duration && runtime >= duration) {
-      celebrate()
+      uiState.set(constants.uiState.SUCCESS)
+      feedbackLoop()
     } else {
       // if duration not met yet
       try {
@@ -152,7 +154,7 @@
   function handleError(error) {
     uiState.set(constants.uiState.ERROR)
     stacktrace = `${error}\n${stacktrace}`
-    celebrate()
+    feedbackLoop()
   }
 
   function refresh() {
@@ -186,7 +188,7 @@
     bind:offsetWidth={canvasWidth}
     bind:offsetHeight={canvasHeight}
   >
-    <canvas bind:this={canvas} data-cy="canvas" />
+    <canvas class={canvasStyle} bind:this={canvas} data-cy="canvas" />
     <Feedback {stacktrace} />
   </div>
   <Controls {play} {stop} {refresh} {toggleSidebar} />
@@ -220,9 +222,8 @@
 <style lang="scss">
   main {
     position: relative;
-    height: 100%;
-    max-height: 100%;
-    width: 100%;
+    height: 100vh;
+    width: 100vw;
   }
   .hidden {
     display: none;
@@ -236,8 +237,9 @@
     position: relative;
     width: 100%;
     padding-top: 100%;
+    overflow-y: scroll;
   }
-  canvas {
+  .canvas {
     position: absolute;
     top: 0;
     height: 100%;
@@ -248,22 +250,25 @@
     bottom: 0;
     right: 0;
   }
+  .hidden {
+    display: none;
+  }
+
   @media (min-aspect-ratio: 1/1.35) {
     .output {
-      width: calc(100% - 100px);
-      padding-top: calc(100% - 100px);
+      padding-top: 0;
+      width: calc(100vh - 100px);
+      height: calc(100vh - 100px);
     }
   }
   @media (min-aspect-ratio: 1/1.21) {
     .output {
-      width: calc(100% - 200px);
-      padding-top: calc(100% - 200px);
+      width: calc(100vh - 200px);
+      height: calc(100vh - 200px);
     }
-  }
-  @media (min-aspect-ratio: 9/6) {
     .output {
-      width: 62.5%;
-      padding-top: 62.5%;
+      width: calc(100vh - 200px);
+      height: calc(100vh - 200px);
     }
   }
 </style>
