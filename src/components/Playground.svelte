@@ -61,8 +61,10 @@
   currentAnimationId.subscribe((value) => {
     animationId = value
   })
-  function loopEmojis() {
-    emojiFrame = requestAnimationFrame(loopEmojis)
+
+  function celebrate() {
+    uiState.set(constants.uiState.SUCCESS)
+    emojiFrame = requestAnimationFrame(celebrate)
 
     emojis = emojis.map((emoji) => {
       if (!emoji.character) {
@@ -119,6 +121,7 @@
     if (animation.interactive) {
       toggleSidebar(true)
     }
+
     animationFrame = requestAnimationFrame(function (timestamp) {
       animationStartTime = timestamp || new Date().getTime()
       let { duration, playbackRate } = animation
@@ -127,11 +130,6 @@
       }
       runLoop(timestamp, duration)
     })
-  }
-
-  function celebrate() {
-    uiState.set(constants.uiState.SUCCESS)
-    loopEmojis()
   }
 
   function clearCanvas() {
@@ -154,7 +152,7 @@
   function handleError(error) {
     uiState.set(constants.uiState.ERROR)
     stacktrace = `${error}\n${stacktrace}`
-    loopEmojis()
+    celebrate()
   }
 
   function refresh() {
