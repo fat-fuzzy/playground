@@ -39,9 +39,9 @@
   let animation
   let customCursor
 
-  let showSidebar = false
+  let showContextMenu = false
 
-  $: sidebarClass = showSidebar ? 'sidebar' : 'hidden'
+  $: contextMenuStyle = showContextMenu ? 'contextMenu' : 'hidden'
   $: animation = $animations.find((animation) => animation.id === animationId)
   $: canvasStyle =
     playgroundState === constants.uiState.ACTIVE ? 'canvas' : 'hidden'
@@ -116,13 +116,13 @@
   }
 
   function play() {
+    stop()
     uiState.set(constants.uiState.ACTIVE)
     if (animation.audio) {
       drumroll.play()
     }
     if (animation.interactive) {
-      toggleSidebar(true)
-      geometry = getGeometryDefaults(canvasWidth, canvasHeight)
+      toggleContextMenu(true)
     }
     animationFrame = requestAnimationFrame(function (timestamp) {
       animationStartTime = timestamp || new Date().getTime()
@@ -144,7 +144,7 @@
   }
 
   function stop() {
-    toggleSidebar(false)
+    toggleContextMenu(false)
     clearCanvas()
     clearEmojis()
     resetAudio()
@@ -157,13 +157,8 @@
     feedbackLoop()
   }
 
-  function refresh() {
-    stop()
-    location.reload() // TODO - reload gl code only ?
-  }
-
-  function toggleSidebar(value = null) {
-    showSidebar = value === null ? !showSidebar : value
+  function toggleContextMenu(value = null) {
+    showContextMenu = value === null ? !showContextMenu : value
   }
 
   function loadAnimation(event) {
@@ -191,7 +186,17 @@
     <canvas class={canvasStyle} bind:this={canvas} data-cy="canvas" />
     <Feedback {stacktrace} />
   </div>
-  <Controls {play} {stop} {refresh} {toggleSidebar} />
+  <Controls
+    {play}
+    {stop}
+    {toggleContextMenu}
+    bind:showHandles={animation.interactive}
+  />
+  <aside class={contextMenuStyle}>
+    {#if animation.interactive}
+      <Geometry on:update={updateGeometry} {canvasWidth} {canvasHeight} />
+    {/if}
+  </aside>
   <audio
     data-cy="drumroll"
     bind:this={drumroll}
@@ -213,11 +218,6 @@
     </span>
   {/each}
 </main>
-<aside class={sidebarClass}>
-  {#if animation.interactive}
-    <Geometry on:update={updateGeometry} {canvasWidth} {canvasHeight} />
-  {/if}
-</aside>
 
 <style lang="scss">
   main {
@@ -236,20 +236,20 @@
 
   .output {
     position: relative;
-    width: 100%;
+    width: calc(100% - 1em);
     padding-top: 100%;
     overflow-y: scroll;
+    margin: 0.5em 0;
+  }
+  .output.error {
+    padding-top: 0;
+    max-height: calc(100% - 320px);
   }
   .canvas {
     position: absolute;
     top: 0;
     height: 100%;
     width: 100%;
-  }
-  .sidebar {
-    position: absolute;
-    bottom: 0;
-    right: 0;
   }
   .hidden {
     display: none;
@@ -264,8 +264,18 @@
   }
   @media (min-aspect-ratio: 1/1.21) {
     .output {
+<<<<<<< HEAD
       width: calc(100% - 300px);
       padding-top: calc(100% - 300px);
+=======
+      width: calc(100vh - 200px);
+      height: calc(100vh - 200px);
+    }
+    .contextMenu {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+>>>>>>> da621c8... 💄 Button styles
     }
   }
 </style>

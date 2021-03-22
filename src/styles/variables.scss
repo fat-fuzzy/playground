@@ -1,20 +1,24 @@
 :root {
+  // Ok
+  --color-play: rgba(118, 51, 250, 0.6);
+  --color-play-focus: rgb(231, 219, 255);
+  --color-play-active: rgb(205, 180, 255);
+  --color-handles: rgb(2, 122, 250);
+  --color-handles-focus: rgb(217, 234, 252);
+  --color-danger: rgba(238, 9, 123, 0.6);
+  --color-danger-focus: rgb(255, 235, 245);
+
+
+  // Nok
   --color-white: rgba(256, 256, 256, 1);
   --color-black: rgba(0, 0, 0, 1);
   // --color-dark: rgba(37, 26, 26, 1);
   --color-dark: rgba(0, 0, 0, 1);
   --color-dark-06: rgba(37, 26, 26, 0.6);
-  --color-danger: rgba(238, 9, 123, 1);
-  --color-danger-08: rgba(238, 9, 123, 0.8);
   --color-text-light-danger: rgba(252, 222, 252, 1);
   --color-text-light-shower: rgba(222, 252, 252, 1);
   --color-text-light: rgba(242, 222, 252, 1);
-  --color-firestarter-06: rgba(180, 150, 238, 0.6);
-  --color-firestarter-08: rgba(180, 150, 238, 0.8);
-  --color-coordinates-hover: rgba(200, 150, 238, 0.8);
-  --color-coordinates: rgba(34, 229, 227, 0.6);
-  --color-sponge: rgba(238, 204, 9, 1);
-  --color-sponge-08: rgba(238, 204, 9, 0.8);
+
   --screen-md: 768px;
   --screen-lg: 1280px;
   --coord-input-width: 240px;
