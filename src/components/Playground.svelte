@@ -258,24 +258,19 @@
   @media (min-aspect-ratio: 1/1.35) {
     .output {
       padding-top: 0;
-      width: calc(100vh - 100px);
-      height: calc(100vh - 100px);
+      width: calc(100% - 100px);
+      height: calc(100% - 100px);
     }
   }
   @media (min-aspect-ratio: 1/1.21) {
     .output {
-<<<<<<< HEAD
       width: calc(100% - 300px);
       padding-top: calc(100% - 300px);
-=======
-      width: calc(100vh - 200px);
-      height: calc(100vh - 200px);
     }
     .contextMenu {
       position: absolute;
       bottom: 0;
       right: 0;
->>>>>>> da621c8... 💄 Button styles
     }
   }
 </style>
