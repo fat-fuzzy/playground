@@ -263,12 +263,8 @@
   }
   @media (min-aspect-ratio: 1/1.21) {
     .output {
-      width: calc(100vh - 200px);
-      height: calc(100vh - 200px);
-    }
-    .output {
-      width: calc(100vh - 200px);
-      height: calc(100vh - 200px);
+      width: calc(100% - 300px);
+      padding-top: calc(100% - 300px);
     }
   }
 </style>
