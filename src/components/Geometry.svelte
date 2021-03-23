@@ -114,7 +114,7 @@
     width: 100%;
   }
 
-  @media (min-aspect-ratio: 1/1) {
+  @media (min-width: 758px) and (min-aspect-ratio: 1/1) {
     form {
       flex-direction: column;
       grid-column-start: 1;

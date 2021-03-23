@@ -221,8 +221,9 @@
 
 <style lang="scss">
   main {
+    position: relative;
     height: calc(
-      100% - 84px
+      100% - 84px - 0.5em
     ); // 100% - header height, TODO : fix header, set height in vars
     width: 100%;
   }
@@ -239,7 +240,7 @@
     width: calc(100% - 1em);
     padding-top: 100%;
     overflow-y: scroll;
-    margin: 0.5em 0;
+    margin: 0.5em auto;
   }
   .output.error {
     padding-top: 0;
@@ -254,23 +255,29 @@
   .hidden {
     display: none;
   }
+  .contextMenu {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+  }
 
-  @media (min-aspect-ratio: 1/1.35) {
+  @media (min-width: 758px) and (min-aspect-ratio: 1/1.35) {
     .output {
       padding-top: 0;
       width: calc(100% - 100px);
       height: calc(100% - 100px);
+      margin: 0.5em;
     }
   }
-  @media (min-aspect-ratio: 1/1.21) {
+  @media (min-width: 758px) and (min-aspect-ratio: 1/1.21) {
     .output {
       width: calc(100% - 300px);
       padding-top: calc(100% - 300px);
     }
     .contextMenu {
       position: absolute;
-      bottom: 0;
       right: 0;
+      width: auto;
     }
   }
 </style>
