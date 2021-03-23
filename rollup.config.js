@@ -1,53 +1,84 @@
-import path from 'path'
-import sveltePreprocess from 'svelte-preprocess'
-import svelte from 'rollup-plugin-svelte'
-import { terser } from 'rollup-plugin-terser'
-import resolve from '@rollup/plugin-node-resolve'
-import replace from '@rollup/plugin-replace'
-import url from '@rollup/plugin-url'
+import svelte from 'rollup-plugin-svelte';
+import sveltePreprocess from 'svelte-preprocess';
+import commonjs from '@rollup/plugin-commonjs';
+import resolve from '@rollup/plugin-node-resolve';
+import livereload from 'rollup-plugin-livereload';
+import { terser } from 'rollup-plugin-terser';
+import css from 'rollup-plugin-css-only';
 import pkg from './package.json'
 
-const mode = process.env.NODE_ENV
-const dev = mode === 'development'
+const production = !process.env.ROLLUP_WATCH;
 
 const name = pkg.name
 	.replace(/^(@\S+\/)?(svelte-)?(\S+)/, '$3')
 	.replace(/^\w/, m => m.toUpperCase())
 	.replace(/-\w/g, m => m[1].toUpperCase());
 
+function serve() {
+  let server;
+
+  function toExit() {
+    if (server) server.kill(0);
+  }
+
+  return {
+    writeBundle() {
+      if (server) return;
+      server = require('child_process').spawn('npm', ['run', 'start', '--', '--dev'], {
+        stdio: ['ignore', 'inherit', 'inherit'],
+        shell: true
+      });
+
+      process.on('SIGTERM', toExit);
+      process.on('exit', toExit);
+    }
+  };
+}
+
 export default {
-	input: 'src/index.js',
-	output: { 
-    name,
+  input: 'src/main.js',
+  output: {
     sourcemap: true,
-    file: pkg.main, 
-    format: 'es' 
+    format: 'es',
+    name: 'app',
+    file: 'public/build/bundle.js'
   },
-	plugins: [
-    replace({
-      preventAssignment: true,
-      values:{
-        'process.browser': true,
-        'process.env.NODE_ENV': JSON.stringify(mode)
-      },
-    }),
-		svelte({
+  plugins: [
+    svelte({
+      preprocess: sveltePreprocess(),
       compilerOptions: {
-        dev,
-        hydratable: true,
-      },
-      emitCss: false
+        // enable run-time checks when not in production
+        dev: !production
+      }
     }),
-    url({
-      sourceDir: path.resolve(__dirname, 'src/node_modules/images'),
-      publicPath: '/public/'
-    }),
-		resolve({
+    // we'll extract any component CSS out into
+    // a separate file - better for performance
+    css({ output: 'bundle.css' }),
+
+    // If you have external dependencies installed from
+    // npm, you'll most likely need these plugins. In
+    // some cases you'll need additional configuration -
+    // consult the documentation for details:
+    // https://github.com/rollup/plugins/tree/master/packages/commonjs
+    resolve({
       browser: true,
       dedupe: ['svelte']
     }),
-    !dev && terser({
-      module: true
-    })
-	]
+    commonjs(),
+
+    // In dev mode, call `npm run start` once
+    // the bundle has been generated
+    !production && serve(),
+
+    // Watch the `public` directory and refresh the
+    // browser on changes when not in production
+    !production && livereload('public'),
+
+    // If we're building for production (npm run build
+    // instead of npm run dev), minify
+    production && terser()
+  ],
+  watch: {
+    clearScreen: false
+  }
 };

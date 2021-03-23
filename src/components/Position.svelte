@@ -1,28 +1,30 @@
 <script>
+  import { createEventDispatcher } from 'svelte'
   import InputRange from './InputRange.svelte'
-
-  import {createEventDispatcher} from 'svelte'
 
   const dispatch = createEventDispatcher()
 
-  // @ts-check
-  export let xCoord
-  export let yCoord
-  export let maxX
-  export let maxY
+  export let coordX = 0
+  export let coordY = 0
+  export let maxX = 0
+  export let maxY = 0
+  const label = 'Position'
 
-  const handleXChange = () => {
+  function updateX() {
     dispatch('input', {
-      value: xCoord,
+      value: coordX,
     })
   }
-  const handleYChange = () => {
+
+  function updateY() {
     dispatch('input', {
-      value: yCoord,
+      value: coordY,
     })
   }
 </script>
 
-<InputRange bind:value={xCoord} label="x" max={maxX} on:input={handleXChange} />
-
-<InputRange bind:value={yCoord} label="y" max={maxY} on:input={handleYChange} />
+<fieldset data-cy="position">
+  <legend>{label}</legend>
+  <InputRange bind:value={coordX} label="x" max={maxX} on:input={updateX} />
+  <InputRange bind:value={coordY} label="y" max={maxY} on:input={updateY} />
+</fieldset>

@@ -103,6 +103,7 @@ function renderTranslationRectangle(
  * @param {WebGLRenderingContext} gl
  */
 function renderTranslationGeometry(gl, colorUniformLocation, color) {
+  // TODO here: extract values from coordinates (width + height)
   /* prettier-ignore */
   const coords = [
     // left column

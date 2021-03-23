@@ -3,6 +3,9 @@
 /node_modules/
 yarn-error.log
 /cypress/screenshots/
+/public/build/
+
+.DS_Store
 
 # Logs
 logs
@@ -120,9 +123,7 @@ Temporary Items
 src/static
 
 
-## Cyrpess
+## Cypress
 /cypress/videos/
 
 # Playground
-
-/dist

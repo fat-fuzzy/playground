@@ -1,31 +1,27 @@
 <script>
-  // import {createEventDispatcher} from 'svelte'
+  import { createEventDispatcher } from 'svelte'
+  import InputRange from './InputRange.svelte'
 
-  // const dispatch = createEventDispatcher()
+  const dispatch = createEventDispatcher()
 
-  // // @ts-check
-  // export let xRad = 0
-  // export let yRad = 0
-  // export let maxX
-  // export let maxY
+  export let angle = 0
+  export let max = 0
+  const label = 'Rotation'
 
-  // const handleXRadChange = () => {
-  //   dispatch('updateXRad', {
-  //     value: xRad,
-  //   })
-  // }
-  // const handleYRadChange = () => {
-  //   dispatch('updateYRad', {
-  //     value: yRad,
-  //   })
-  // }
+  function update() {
+    dispatch('input', {
+      value: angle,
+    })
+  }
 </script>
 
-<div class="rotation" data-cy="rotation">
+<fieldset class="rotation" data-cy="rotation">
+  <legend>{label}</legend>
   <!--https://css-tricks.com/accessible-svgs/-->
-  <svg id="InteractiveSVG" role="group" />
-</div>
+  <!-- <svg id="InteractiveSVG" role="group" /> -->
+  <InputRange bind:value={angle} {max} on:input={update} />
+</fieldset>
 
-<style lang="scss">
+<!-- <style lang="scss">
   @import '../styles/rotation.scss';
-</style>
+</style> -->

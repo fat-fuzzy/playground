@@ -1,5 +1,5 @@
 <script>
-  import {createEventDispatcher} from 'svelte'
+  import { createEventDispatcher } from 'svelte'
 
   const dispatch = createEventDispatcher()
 
@@ -32,5 +32,8 @@
 </label>
 
 <style lang="scss">
-  @import '../styles/input-range.scss';
+  input {
+    display: block;
+    width: 100%;
+  }
 </style>

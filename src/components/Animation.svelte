@@ -136,8 +136,8 @@
   }
 
   function updateGeometry(event) {
-    const {color, translation, rotation, scale} = event.detail.value
-    geometryState = {...geometryState, color, translation, rotation, scale}
+    const { color, translation, rotation, scale } = event.detail.value
+    geometryState = { ...geometryState, color, translation, rotation, scale }
     if (animation.position && animation.webGlProps) {
       animation.update(translation, rotation, scale)
     } else {
@@ -162,5 +162,5 @@
   <Controls {play} {stop} {refresh} />
 </aside> -->
 <style lang="scss">
-  @import '../styles/playground.scss';
+  // @import '../styles/playground.scss';
 </style>
