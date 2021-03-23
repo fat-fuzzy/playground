@@ -221,9 +221,10 @@
 
 <style lang="scss">
   main {
-    position: relative;
-    height: 100vh;
-    width: 100vw;
+    height: calc(
+      100% - 84px
+    ); // 100% - header height, TODO : fix header, set height in vars
+    width: 100%;
   }
   .hidden {
     display: none;
