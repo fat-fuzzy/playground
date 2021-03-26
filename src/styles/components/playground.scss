@@ -1,0 +1,59 @@
+@import '../config/main.scss';
+
+.playground {
+	@include cover();
+	@include layout-app();
+  position: relative;
+}
+
+main {
+	@include layout-main();
+}
+
+.sidebar {
+  @include layout-sidebar();
+}
+
+.output {
+  @include layout-output();
+  overflow-y: auto;
+}
+
+.output.active,
+.output.error,
+.output.success {
+  &::before {
+    display: none;
+  }
+}
+
+.output::before {
+  align-self: center;
+  content: '🥁';
+  font-size: 18em;
+  line-height: 1;
+  opacity: 0.15;
+  transition: opacity 0.3s ease-in;
+}
+
+.output.focus::before {
+  opacity: 1;
+}
+
+canvas {
+  display: none;
+}
+
+.active canvas,
+.success canvas {
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+
+.emoji {
+  font-size: 5vw;
+  opacity: 0.6;
+  position: absolute;
+  z-index: -1;
+}

@@ -103,23 +103,25 @@
 </form>
 
 <style lang="scss">
-  form {
-    display: flex;
-    grid-column-start: 2;
-    grid-row-end: 3;
-    grid-row-start: 1;
-    height: auto;
-    justify-content: flex-start;
-    overflow-y: auto;
-    width: 100%;
-  }
+  // @import '../styles/components/geometry.scss';
 
-  @media (min-width: 758px) and (min-aspect-ratio: 1/1) {
-    form {
-      flex-direction: column;
-      grid-column-start: 1;
-      grid-row-start: 2;
-      margin-left: 0;
-    }
-  }
+  // form {
+  //   display: flex;
+  //   grid-column-start: 2;
+  //   grid-row-end: 3;
+  //   grid-row-start: 1;
+  //   height: auto;
+  //   justify-content: flex-start;
+  //   overflow-y: auto;
+  //   width: 100%;
+  // }
+
+  // @media (min-width: 758px) and (min-aspect-ratio: 1/1) {
+  //   form {
+  //     flex-direction: column;
+  //     grid-column-start: 1;
+  //     grid-row-start: 2;
+  //     margin-left: 0;
+  //   }
+  // }
 </style>

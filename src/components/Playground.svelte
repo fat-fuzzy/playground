@@ -9,7 +9,7 @@
   } from '../stores.js'
   import Feedback from './Feedback.svelte'
   import Geometry from './Geometry.svelte'
-  import AnimationsMenu from './AnimationsMenu.svelte'
+  import Menu from './Menu.svelte'
   import Controls from './Controls.svelte'
 </script>
 
@@ -41,10 +41,11 @@
 
   let showContextMenu = false
 
-  $: contextMenuStyle = showContextMenu ? 'contextMenu' : 'hidden'
   $: animation = $animations.find((animation) => animation.id === animationId)
-  $: canvasStyle =
+  $: sidebarClass = showContextMenu ? 'sidebar' : 'hidden'
+  $: canvasClass =
     playgroundState === constants.uiState.ACTIVE ? 'canvas' : 'hidden'
+  $: outputClass = `output ${playgroundState}`
 
   uiState.subscribe((value) => {
     playgroundState = value
@@ -122,7 +123,7 @@
       drumroll.play()
     }
     if (animation.interactive) {
-      toggleContextMenu(true)
+      toggleSidebar(true)
     }
     animationFrame = requestAnimationFrame(function (timestamp) {
       animationStartTime = timestamp || new Date().getTime()
@@ -144,7 +145,7 @@
   }
 
   function stop() {
-    toggleContextMenu(false)
+    toggleSidebar(false)
     clearCanvas()
     clearEmojis()
     resetAudio()
@@ -157,7 +158,7 @@
     feedbackLoop()
   }
 
-  function toggleContextMenu(value = null) {
+  function toggleSidebar(value = null) {
     showContextMenu = value === null ? !showContextMenu : value
   }
 
@@ -173,111 +174,50 @@
   }
 </script>
 
-<header>
-  <AnimationsMenu on:input={loadAnimation} />
-</header>
+<Menu on:input={loadAnimation} />
 <main style={`cursor: ${customCursor}`}>
   <div
     data-cy="output"
-    class={`output ${playgroundState}`}
+    class={outputClass}
     bind:offsetWidth={canvasWidth}
     bind:offsetHeight={canvasHeight}
   >
-    <canvas class={canvasStyle} bind:this={canvas} data-cy="canvas" />
+    <canvas data-cy="canvas" class={canvasClass} bind:this={canvas} />
     <Feedback {stacktrace} />
+  </div>
+  <div class={sidebarClass}>
+    {#if animation.interactive}
+      <Geometry on:update={updateGeometry} {canvasWidth} {canvasHeight} />
+    {/if}
   </div>
   <Controls
     {play}
     {stop}
-    {toggleContextMenu}
+    {toggleSidebar}
     bind:showHandles={animation.interactive}
   />
-  <aside class={contextMenuStyle}>
-    {#if animation.interactive}
-      <Geometry on:update={updateGeometry} {canvasWidth} {canvasHeight} />
-    {/if}
-  </aside>
   <audio
     data-cy="drumroll"
-    bind:this={drumroll}
     duration={animation.duration}
     playbackRate={animation.playbackRate}
+    bind:this={drumroll}
   >
     <source src="drumroll.ogg" type="audio/ogg" />
     <track kind="captions" srclang="en" />
     <!-- TODO: fix caption src -->
   </audio>
-
-  {#each emojis as emoji}
-    <span
-      data-cy="emoji-{emoji.character}"
-      class={emoji.class}
-      style="left: {emoji.x}%; top: {emoji.y}%; transform: scale({emoji.ratio})"
-    >
-      {emoji.character}
-    </span>
-  {/each}
 </main>
 
+{#each emojis as emoji}
+  <span
+    data-cy="emoji-{emoji.character}"
+    class={emoji.class}
+    style="left: {emoji.x}%; top: {emoji.y}%; transform: scale({emoji.ratio})"
+  >
+    {emoji.character}
+  </span>
+{/each}
+
 <style lang="scss">
-  main {
-    position: relative;
-    height: calc(
-      100% - 84px - 0.5em
-    ); // 100% - header height, TODO : fix header, set height in vars
-    width: 100%;
-  }
-  .hidden {
-    display: none;
-  }
-
-  /* .emoji {
-    position: relative;
-  } */
-
-  .output {
-    position: relative;
-    width: calc(100% - 1em);
-    padding-top: 100%;
-    overflow-y: scroll;
-    margin: 0.5em auto;
-  }
-  .output.error {
-    padding-top: 0;
-    max-height: calc(100% - 320px);
-  }
-  .canvas {
-    position: absolute;
-    top: 0;
-    height: 100%;
-    width: 100%;
-  }
-  .hidden {
-    display: none;
-  }
-  .contextMenu {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-  }
-
-  @media (min-width: 758px) and (min-aspect-ratio: 1/1.35) {
-    .output {
-      padding-top: 0;
-      width: calc(100% - 100px);
-      height: calc(100% - 100px);
-      margin: 0.5em;
-    }
-  }
-  @media (min-width: 758px) and (min-aspect-ratio: 1/1.21) {
-    .output {
-      width: calc(100% - 300px);
-      padding-top: calc(100% - 300px);
-    }
-    .contextMenu {
-      position: absolute;
-      right: 0;
-      width: auto;
-    }
-  }
+  @import '../styles/components/playground.scss';
 </style>

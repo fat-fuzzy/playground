@@ -36,11 +36,12 @@
   on:click={handleClick}
   class={`btn-emoji ${buttonClass} ${playgroundState}`}
   aria-label={buttonLabel}
+  {disabled}
 >
   {buttonLabel}
 </button>
 
 <style lang="scss">
-  @import '../styles/variables.scss';
-  @import '../styles/buttons.scss';
+  // @import '../styles/variables.scss';
+  // @import '../styles/components/buttons.scss';
 </style>

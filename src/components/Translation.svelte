@@ -48,16 +48,16 @@
 <canvas bind:this={canvas} {width} {height} />
 
 <style lang="scss">
-  canvas {
-    background-color: black;
-    margin-top: 1em;
-  }
-  label {
-    display: block;
-    width: 400px;
-  }
-  input {
-    display: block;
-    width: 400px;
-  }
+  // canvas {
+  //   background-color: black;
+  //   margin-top: 1em;
+  // }
+  // label {
+  //   display: block;
+  //   width: 400px;
+  // }
+  // input {
+  //   display: block;
+  //   width: 400px;
+  // }
 </style>

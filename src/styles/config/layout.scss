@@ -1,0 +1,123 @@
+//== LAYOUT
+
+@mixin cover() {
+  position: relative;
+	width: 100%;
+	height: 100%;
+  overflow: hidden;
+}
+
+@mixin layout-app() {
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: getVar(header-height-sm) auto;
+
+  @include min-aspect-ratio(aspect-ratio-break-md-land, xs) {
+    grid-template-columns: auto getVar(sidebar-width-md);
+    grid-template-rows: getVar(header-height-lg) auto getVar(footer-height-lg);
+  }
+
+  @include min-aspect-ratio(aspect-ratio-break-md-port) {
+    grid-template-columns: auto getVar(sidebar-width-md);
+    grid-template-rows: getVar(header-height-md) auto getVar(footer-height-md);
+  }
+
+  @include min-aspect-ratio(aspect-ratio-break-md-land, md) {
+    grid-template-columns: auto getVar(sidebar-width-lg);
+    grid-template-rows: getVar(header-height-lg) auto getVar(footer-height-lg);
+  }
+}
+
+@mixin layout-header() {  // grid item props
+  grid-column-start: 1;
+  grid-row-start: 1;
+  height: getVar(header-height-sm);
+
+  @include min-aspect-ratio(aspect-ratio-break-md-land, xs) {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+
+  @include min-aspect-ratio(aspect-ratio-break-md-land) {
+    height: getVar(header-height-md);
+  }
+}
+
+@mixin layout-main() {
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: auto getVar(sidebar-height-sm) getVar(footer-height-sm);
+
+  // grid item props
+  grid-column-start: 1;
+  grid-row-start: 2;
+  width: 100%;
+  
+  @include min-aspect-ratio(aspect-ratio-break-md-land, xs) {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-row-start: 1;
+    grid-row-end: 3;
+    grid-template-columns: auto getVar(sidebar-width-sm);
+    grid-template-rows: auto getVar(footer-height-sm);
+  }
+
+  @include min-aspect-ratio(aspect-ratio-break-md-land) {
+    grid-row-start: 1;
+  }
+}
+
+@mixin layout-sidebar() {
+  grid-row-start: 2;
+  width: 100%;
+
+  @include min-aspect-ratio(aspect-ratio-break-md-land, xs) {
+    grid-column-start: 2;
+    grid-row-start: 1;
+    grid-row-end: 2;
+    margin-top: getVar(header-height-sm);
+  }
+
+  @include min-aspect-ratio(aspect-ratio-1-1) {
+    flex-direction: column;
+    grid-column-start: 2;
+    grid-row-end: 2;
+  }
+}
+
+@mixin layout-footer() {
+  display: flex;
+  grid-row-start: 3;
+  justify-content: center;
+  width: 100%;
+
+
+  @include min-aspect-ratio(aspect-ratio-break-md-land, xs) {
+    grid-column-start: 1;
+    grid-row-start: 2;
+  }
+
+  @include min-aspect-ratio(aspect-ratio-break-md-land) {
+    grid-column-start: 2;
+  }
+}
+
+@mixin layout-output() {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  grid-column-start: 1;
+  grid-row-start: 1;
+
+  @include min-aspect-ratio(aspect-ratio-break-md-land, xs) {
+    grid-column-start: 1;
+    grid-row-start: 1;
+    grid-row-end: 3;
+  }
+
+  @include min-aspect-ratio(aspect-ratio-break-md-land) {
+    grid-column-start: 1;
+  }
+}

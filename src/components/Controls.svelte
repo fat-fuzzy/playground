@@ -21,36 +21,37 @@
     dataCy="btn-play"
     buttonClass="play"
     buttonLabel="👾 Play"
-    handleClick={() => play()}
+    handleClick={play}
   />
   <EmojiButton
     dataCy="btn-stop"
     buttonClass="stop"
     buttonLabel="🏁 Stop"
-    handleClick={() => stop()}
+    handleClick={stop}
   />
   {#if showHandles}
     <EmojiButton
       dataCy="btn-handles"
       buttonClass="handles"
       buttonLabel="🕹 Handles"
-      handleClick={() => toggleContextMenu()}
+      handleClick={toggleContextMenu}
     />
   {/if}
 </div>
 
 <style lang="scss">
-  .ui-controls {
-    position: absolute;
-    bottom: calc(160.8px + 0.5em);
-    left: 0;
-  }
-  @media (min-width: 758px) and (min-aspect-ratio: 1/1) {
-    .ui-controls {
-      position: absolute;
-      left: unset;
-      top: 0;
-      right: 0;
-    }
-  }
+  // .ui-controls {
+  //   position: absolute;
+  //   bottom: calc(160.8px + 0.5em);
+  //   left: 0;
+  // }
+  // @media (min-width: 758px) and (min-aspect-ratio: 1/1) {
+  //   .ui-controls {
+  //     position: absolute;
+  //     left: unset;
+  //     top: 0;
+  //     right: 0;
+  //   }
+  // }
+  @import '../styles/components/controls.scss';
 </style>

@@ -50,8 +50,8 @@
 </fieldset>
 
 <style lang="scss">
-  fieldset {
-    display: flex;
-    flex-direction: column;
-  }
+  // fieldset {
+  //   display: flex;
+  //   flex-direction: column;
+  // }
 </style>

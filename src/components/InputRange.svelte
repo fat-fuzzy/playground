@@ -32,8 +32,8 @@
 </label>
 
 <style lang="scss">
-  input {
-    display: block;
-    width: 100%;
-  }
+  // input {
+  //   display: block;
+  //   width: 100%;
+  // }
 </style>

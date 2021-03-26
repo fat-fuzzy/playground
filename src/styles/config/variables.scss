@@ -1,12 +1,19 @@
-$prefix: ffp;
+$_cssvars: null;
+$theme-prefix: ffp;
 $theme-colors: (
-  "white": rgba(256, 256, 256, 1),
-  "black": rgba(0, 0, 0, 1),
+  "color-white": rgba(256, 256, 256, 1),
+  "color-black": rgb(0, 0, 0),
+  "color-light": rgba(244, 244, 244, 1),
+  "color-dark": rgba(46, 46, 46, 1),
+  'gray-1': #ccc,
+  'gray-2': #ddd,
+  'gray-3': #999,
+  'gray-4': #666,
   "play": rgba(118, 51, 250, 0.6),
   "play-hover": rgb(231, 219, 255),
   "play-focus": rgb(205, 180, 255),
   "play-active":rgb(205, 180, 255),
-  "handles": rgb(2, 122, 250),
+  "handles": rgb(2, 121, 119),
   "handles-hover": rgb(217, 234, 252),
   "handles-focus": rgb(217, 234, 252),
   "danger": rgba(238, 9, 123, 0.6),
@@ -22,13 +29,16 @@ $theme-layout: (
   aspect-ratio-break-md-land: 1.35/1,
   aspect-ratio-break-lg-port:1/1.2,
   aspect-ratio-break-lg-land: 1.2/1,
-  padding-default: 8px,
-  header-height-sm: 40px,
-  footer-height-sm: 30px,
-  sidebar-height-sm: 120px,
-  header-height-md: 60px,
+  padding-sm: 4px,
+  padding-md: 8px,
+  header-height-sm: 60px,
+  header-height-md: 80px,
+  footer-height-sm: 40px,
   footer-height-md: 40px,
+  sidebar-height-sm: 120px,
   sidebar-height-md: 240px,
+  sidebar-width-sm: 160px,
+  sidebar-width-md: 200px,
   sidebar-width-lg: 500px,
 );
 
@@ -36,5 +46,5 @@ $breakpoints: (
   xs: 576px,
   sm: 768px,
   md: 992px,
-  lg: 1200px
+  lg: 1200px,
 )
