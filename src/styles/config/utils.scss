@@ -1,0 +1,225 @@
+@use "sass:map";
+
+//== CSS VARS
+
+/**
+ * src https://dev.to/felipperegazio/css-custom-properties-vars-with-sass-scss-a-practical-architecture-strategy-1m88
+ * Use this mixin to declare a set of CSS Custom Properties.
+ * The variables in $css_variables will be properly prefixed.
+ * The use of this mixin is encoraged to keep a good scalability.
+ *
+ * Usage:
+ *
+ * @include genCssVars((
+ *  base-font-size: 65.5%,
+ *  font-family: #{"HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif},
+ * 
+ *  primary-color: #33b5e5,
+ *  secondary-color: #ff500a,
+ * ));
+ *
+ * Will result in
+ *
+ * root {
+ *    --prefix-var-name: value;
+ *    --prefix-var-name: value;
+ *    --prefix-var-name: value;
+ * }
+ *
+ */
+  $_cssvars: ();
+ @mixin genCssVars($css_variables, $prefix) {
+  $_cssvars: map-merge( $_cssvars, $css_variables ) !global; // assign to global scope
+  :root {
+    @each $name, $value in $css_variables {
+      --#{$prefix}-#{$name}: #{$value};
+    }
+  }
+}
+
+@mixin theme-main() {
+  @include genCssVars($theme-colors, $prefix);
+  @include genCssVars($theme-layout, $prefix);
+  @include genCssVars($breakpoints, $prefix);
+}
+
+/**
+ * Retrieve a css variable value with prefix
+ *
+ * Usage
+ *
+ * .selector {
+ *   color: getCssVar(primary-color);
+ * }
+ *
+ * Will result in
+ *
+ * .selector {
+ *    color: getCssVar(prefix-primary-color);
+ * }
+ */
+ @function getCssVar($name, $prefix: pm) {
+  @return var(--#{$prefix}-#{$name}, map-get( $_cssvars, $name ));
+}
+
+/**
+ * Retrieve a css variable value with prefix
+ *
+ * Usage
+ *
+ * .selector {
+ *   color: getCssVar(primary-color);
+     &--variant {
+        @include setCssVar(button-height, 56px);
+      }
+ * }
+ *
+ * Will result in
+ *
+ * .selector {
+ *    color: getCssVar(prefix-primary-color);
+ * }
+ * .selector--variant {
+ *   --pm-button-height, 56px
+*  }
+ */
+@mixin setCssVar($name, $value: '', $prefix: pm) {
+  --#{$prefix}-#{$name}: #{$value};
+}
+
+//== LAYOUT
+
+@mixin min-width($breakpoint) {
+  @if map-has-key($breakpoints, $breakpoint) {
+    $breakpoint-value: map-get($breakpoints, $breakpoint);
+    @media (min-width: #{$breakpoint-value}){
+      @content;
+    }
+  } @else {
+    @warn 'Invalid breakpoint: #{$breakpoint}.';
+  }
+}
+
+
+@mixin min-aspect-ratio($aspect-ratio) {
+  @if map-has-key($theme-layout, $aspect-ratio) {
+    $aspect-ratio-value: map-get($theme-layout, $aspect-ratio);
+    @media (min-aspect-ratio: #{$aspect-ratio-value}){
+      @content;
+    }
+  } @else {
+    @warn 'Invalid apect-ratio: #{$aspect-ratio}.';
+  }
+}
+
+/* Extra Small Devices, Phones */
+@mixin max-width($breakpoint) {
+  @if map-has-key($breakpoints, $breakpoint) {
+    $breakpoint-value: map-get($breakpoints, $breakpoint);
+    @media (max-width: #{$breakpoint-value}){
+      @content;
+    }
+  } @else {
+    @warn 'Invalid breakpoint: #{$breakpoint}.';
+  }
+}
+
+/* Extra Small Devices, Phones */
+@mixin min-and-max-width($min, $max) {
+  @if map-has-key($breakpoints, $min) and map-has-key($breakpoints, $max) {
+    $min-value: map-get($breakpoints, $min);
+    $max-value: map-get($breakpoints, $max);
+    @media (min-width: #{$min-value}) and  (max-width: #{$max-value}) {
+      @content;
+    }
+  } @else {
+    @if (map-has-key($breakpoints, $min) == false) {
+      @warn 'Invalid breakpoint min value: #{$min}.';
+    }
+
+    @if (map-has-key($breakpoints, $max) == false) {
+      @warn 'Invalid breakpoint max value: #{$max}.';
+    }
+  }
+}
+
+@mixin layout-app() {
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: getCssVar(header-height-sm) auto getCssVar(sidebar-height-sm) getCssVar(footer-height-sm);
+
+  @include min-aspect-ratio(aspect-ratio-break-md-port) {
+    grid-template-columns: auto getCssVar(sidebar-width-md);
+    grid-template-rows: getCssVar(header-height-md) auto getCssVar(footer-height-md);
+  }
+
+  @include min-aspect-ratio(aspect-ratio-break-md-land) {
+    grid-template-columns: auto getCssVar(sidebar-width-lg);
+    grid-template-rows: getCssVar(header-height-lg) auto getCssVar(footer-height-lg);
+  }
+}
+
+@mixin layout-header() {
+  height: getCssVar(header-height-sm);
+  
+  @include min-aspect-ratio(aspect-ratio-break-md-land) {
+    height: getCssVar(header-height-md);
+  }
+}
+
+@mixin layout-main() {
+  .playground {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    grid-column-start: 1;
+    grid-row-start: 2;
+    justify-content: center;
+    overflow-y: auto;
+    width: 100%;
+  }
+  @include min-aspect-ratio(aspect-ratio-break-md-land) {
+    .playground {
+      grid-row-start: 1;
+      grid-row-end: 3;
+    }
+  }
+}
+
+@mixin layout-sidebar() {
+  display: flex;
+  align-items: stretch;
+  grid-column-start: 1;
+  grid-row-start: 2;
+  justify-content: center;
+  overflow-y: auto;
+  width: 100%;
+
+  @include min-aspect-ratio(aspect-ratio-1-1) {
+    flex-direction: column;
+    grid-column-start: 2;
+    grid-row-end: 3;
+  }
+
+  @include min-aspect-ratio(aspect-ratio-break-md-land) {
+    grid-row-end: 2;
+  }
+}
+
+@mixin layout-footer() {
+  display: flex;
+  align-items: stretch;
+  grid-column-start: 1;
+  grid-row-start: 4;
+  justify-content: center;
+  width: 100%;
+
+  @include min-aspect-ratio(aspect-ratio-1-1) {
+    grid-row-start: 3;
+  }
+
+  @include min-aspect-ratio(aspect-ratio-break-md-land) {
+    grid-column-start: 2;
+    grid-row-start: 3;
+  }
+}

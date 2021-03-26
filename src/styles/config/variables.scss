@@ -1,0 +1,40 @@
+$prefix: ffp;
+$theme-colors: (
+  "white": rgba(256, 256, 256, 1),
+  "black": rgba(0, 0, 0, 1),
+  "play": rgba(118, 51, 250, 0.6),
+  "play-hover": rgb(231, 219, 255),
+  "play-focus": rgb(205, 180, 255),
+  "play-active":rgb(205, 180, 255),
+  "handles": rgb(2, 122, 250),
+  "handles-hover": rgb(217, 234, 252),
+  "handles-focus": rgb(217, 234, 252),
+  "danger": rgba(238, 9, 123, 0.6),
+  "danger-focus":rgb(255, 235, 245),
+);
+
+$theme-layout: (
+  aspect-ratio-1-1: 1 /1,
+  aspect-ratio-1-2: 1/2,
+  aspect-ratio-2-1: 2/1,
+  aspect-ratio-16-9: 16/9,
+  aspect-ratio-break-md-port: 1/1.35,
+  aspect-ratio-break-md-land: 1.35/1,
+  aspect-ratio-break-lg-port:1/1.2,
+  aspect-ratio-break-lg-land: 1.2/1,
+  padding-default: 8px,
+  header-height-sm: 40px,
+  footer-height-sm: 30px,
+  sidebar-height-sm: 120px,
+  header-height-md: 60px,
+  footer-height-md: 40px,
+  sidebar-height-md: 240px,
+  sidebar-width-lg: 500px,
+);
+
+$breakpoints: (
+  xs: 576px,
+  sm: 768px,
+  md: 992px,
+  lg: 1200px
+)
