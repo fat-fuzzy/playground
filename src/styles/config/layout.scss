@@ -12,7 +12,7 @@
   grid-template-columns: minmax(0, 1fr);
   grid-template-rows: getVar(header-height-sm) minmax(0, 1fr);
 
-  @include min-aspect-ratio(aspect-ratio-break-md-land, xs) {
+  @include min-aspect-ratio( aspect-ratio-1dot35-1, xs) {
     grid-template-columns: minmax(0, 1fr) getVar(sidebar-width-sm);
     grid-template-rows: minmax(0, 1fr);
   }
@@ -26,13 +26,18 @@
     grid-template-rows: getVar(header-height-md) minmax(0, 1fr) getVar(footer-height-md);
   }
 
-  @include min-aspect-ratio(aspect-ratio-break-md-land, md) {
+  @include min-aspect-ratio( aspect-ratio-1dot35-1, md) {
     grid-template-columns: minmax(0, 1fr) getVar(sidebar-width-lg);
   }
 
-  @include min-aspect-ratio(aspect-ratio-break-md-land, md) {
+  @include min-aspect-ratio( aspect-ratio-1dot35-1, md) {
     grid-template-columns: minmax(0, 1fr) getVar(sidebar-width-lg);
     grid-template-rows: getVar(header-height-md) minmax(0, 1fr);
+  }
+
+  // TODO fix portrait ipad
+  @include min-aspect-ratio(aspect-ratio-1-1dot35, md) {
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 
@@ -41,13 +46,13 @@
   grid-row-start: 1;
   height: getVar(header-height-sm);
 
-  @include min-aspect-ratio(aspect-ratio-break-md-land, xs) {
+  @include min-aspect-ratio( aspect-ratio-1dot35-1, xs) {
     position: absolute;
     top: 0;
     right: 0;
   }
 
-  @include min-aspect-ratio(aspect-ratio-break-md-land, md) {
+  @include min-aspect-ratio(aspect-ratio-1-1, md) {
     position: unset;
     height: getVar(header-height-md);
   }
@@ -55,14 +60,14 @@
 
 @mixin layout-main() {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: minmax(0, 1fr);
   grid-template-rows: minmax(0, 1fr) getVar(sidebar-height-sm) getVar(footer-height-sm);
   grid-column-start: 1;
   grid-row-start: 2;
   width: 100%;
   height: 100%;
 
-  @include min-aspect-ratio(aspect-ratio-break-md-land, xs) {
+  @include min-aspect-ratio( aspect-ratio-1dot35-1, xs) {
     grid-column-start: 1;
     grid-column-end: 3;
     grid-row-start: 1;
@@ -70,7 +75,7 @@
     grid-template-rows: minmax(0, 1fr) getVar(footer-height-sm);
   }
 
-  @include min-width(md) {
+  @include min-width(sm) {
     grid-template-columns: minmax(0, 1fr) getVar(sidebar-width-md);
   }
 
@@ -82,8 +87,17 @@
     grid-template-rows: minmax(0, 1fr) getVar(footer-height-sm);
   }
 
-  @include min-aspect-ratio(aspect-ratio-break-md-land) {
+  @include min-aspect-ratio(aspect-ratio-1dot35-1) {
     grid-row-start: 1;
+  }
+
+  @include min-width(md) {
+    grid-template-columns: minmax(0, 1fr) getVar(sidebar-width-md);
+  }
+
+  // TODO fix portrait ipad
+  @include min-aspect-ratio(aspect-ratio-1-1dot35, md) {
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 
@@ -93,7 +107,7 @@
   width: 100%;
   overflow: scroll;
 
-  @include min-aspect-ratio(aspect-ratio-break-md-land, xs) {
+  @include min-aspect-ratio( aspect-ratio-1dot35-1, xs) {
     grid-column-start: 2;
     grid-row-start: 1;
     grid-row-end: 3;
@@ -107,7 +121,7 @@
     padding-top: getVar(header-height-sm);
   }
 
-  @include min-aspect-ratio(aspect-ratio-break-md-land) {
+  @include min-aspect-ratio( aspect-ratio-1dot35-1) {
     grid-row-end: 2;
   }
 }
@@ -119,7 +133,7 @@
   justify-content: center;
   width: 100%;
 
-  @include min-aspect-ratio(aspect-ratio-break-md-land, xs) {
+  @include min-aspect-ratio( aspect-ratio-1dot35-1, xs) {
     grid-column-start: 1;
     grid-row-start: 2;
   }
@@ -128,7 +142,7 @@
     grid-row-start: 2;
   }
 
-  @include min-aspect-ratio(aspect-ratio-break-md-land) {
+  @include min-aspect-ratio( aspect-ratio-1dot35-1) {
     grid-column-start: 2;
   }
 }
@@ -143,13 +157,13 @@
   max-width: 100%;
   max-height: 100%;
   
-  @include min-aspect-ratio(aspect-ratio-break-md-land, xs) {
+  @include min-aspect-ratio( aspect-ratio-1dot35-1, xs) {
     grid-column-start: 1;
     grid-row-start: 1;
     grid-row-end: 2;
   }
 
-  @include min-aspect-ratio(aspect-ratio-break-md-land) {
+  @include min-aspect-ratio( aspect-ratio-1dot35-1) {
     grid-column-start: 1;
     height: 100%;
   }

@@ -25,10 +25,12 @@ $theme-layout: (
   aspect-ratio-1-2: 1/2,
   aspect-ratio-2-1: 2/1,
   aspect-ratio-16-9: 16/9,
-  aspect-ratio-break-md-port: 1/1.35,
-  aspect-ratio-break-md-land: 1.35/1,
-  aspect-ratio-break-lg-port:1/1.2,
-  aspect-ratio-break-lg-land: 1.2/1,
+
+  aspect-ratio-1-1dot35: 1/1.35,
+  aspect-ratio-1dot35-1: 1.35/1,
+  
+  aspect-ratio-1-1dot2: 1/1.2,
+  aspect-ratio-1dot2-1: 1.2/1,
   padding-sm: 4px,
   padding-md: 8px,
   header-height-sm: 60px,
