@@ -1,5 +1,5 @@
 @import '../config/main.scss';
 
 .sidebar {
-  @include layout-sidebar;
+  @include layout-sidebar();
 }

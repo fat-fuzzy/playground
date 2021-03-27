@@ -1,5 +1,5 @@
 @import '../config/main.scss';
 
 .nav {
-  @include layout-header;
+  @include layout-header();
 }

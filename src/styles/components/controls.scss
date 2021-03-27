@@ -1,5 +1,5 @@
 @import '../config/main.scss';
 
 .ui-controls {
-  @include layout-footer;
+  @include layout-footer();
 }
