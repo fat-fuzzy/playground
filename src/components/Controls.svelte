@@ -5,7 +5,7 @@
 
   export let play = () => {}
   export let stop = () => {}
-  export let toggleContextMenu = () => {}
+  export let toggleSidebar = () => {}
   export let showHandles
 
   onMount(() => {
@@ -21,20 +21,20 @@
     dataCy="btn-play"
     buttonClass="play"
     buttonLabel="👾 Play"
-    handleClick={play}
+    handleClick={() => play()}
   />
   <EmojiButton
     dataCy="btn-stop"
     buttonClass="stop"
     buttonLabel="🏁 Stop"
-    handleClick={stop}
+    handleClick={() => stop()}
   />
   {#if showHandles}
     <EmojiButton
       dataCy="btn-handles"
       buttonClass="handles"
       buttonLabel="🕹 Handles"
-      handleClick={toggleContextMenu}
+      handleClick={() => toggleSidebar()}
     />
   {/if}
 </div>
