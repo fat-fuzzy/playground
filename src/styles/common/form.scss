@@ -1,0 +1,7 @@
+@import '../config/main.scss';
+
+.form-sidebar {
+  font: menu;
+  @include layout-form();
+}
+
