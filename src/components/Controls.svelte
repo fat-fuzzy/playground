@@ -1,33 +1,12 @@
 <script>
   import { onMount } from 'svelte'
 
-  import * as constants from '../types/constants.js'
-  import { uiState } from '../stores.js'
   import EmojiButton from './EmojiButton.svelte'
-
-  // UI feedback
-  let playgroundState
-
-  const uiStateUnsub = uiState.subscribe((value) => {
-    playgroundState = value
-  })
 
   export let play = () => {}
   export let stop = () => {}
-  export let refresh = () => {}
   export let toggleSidebar = () => {}
-
-  function playFocus() {
-    if (playgroundState === constants.uiState.DEFAULT) {
-      uiState.set(constants.uiState.FOCUS)
-    }
-  }
-
-  // function playBlur() {
-  //   if (playgroundState === constants.uiState.FOCUS) {
-  //     uiState.set(constants.uiState.DEFAULT)
-  //   }
-  // }
+  export let showHandles
 
   onMount(() => {
     return () => {
@@ -37,40 +16,29 @@
 </script>
 
 <!-- handleBlur={playBlur} -->
-<div class="btn-group ui-controls">
+<div class="controls">
   <EmojiButton
     dataCy="btn-play"
-    buttonClass="firestarter"
-    buttonLabel="Play"
+    buttonClass="play"
+    buttonLabel="👾 Play"
     handleClick={() => play()}
-    handleFocus={playFocus}
   />
   <EmojiButton
     dataCy="btn-stop"
-    buttonClass="sponge"
-    buttonLabel="Stop"
+    buttonClass="stop"
+    buttonLabel="🏁 Stop"
     handleClick={() => stop()}
   />
-  <EmojiButton
-    dataCy="btn-refresh"
-    buttonClass="shower"
-    buttonLabel="Refresh"
-    handleClick={() => refresh()}
-  />
-  <EmojiButton
-    dataCy="btn-handles"
-    buttonClass="joystick"
-    buttonLabel="Handles"
-    handleClick={() => toggleSidebar()}
-  />
+  {#if showHandles}
+    <EmojiButton
+      dataCy="btn-handles"
+      buttonClass="handles"
+      buttonLabel="🕹 Handles"
+      handleClick={() => toggleSidebar()}
+    />
+  {/if}
 </div>
 
 <style lang="scss">
-  @media (min-aspect-ratio: 1/1) {
-    .ui-controls {
-      position: absolute;
-      top: 0;
-      right: 0;
-    }
-  }
+  @import '../styles/components/controls.scss';
 </style>

@@ -32,8 +32,5 @@
 </label>
 
 <style lang="scss">
-  input {
-    display: block;
-    width: 100%;
-  }
+  @import '../styles/common/input.scss';
 </style>

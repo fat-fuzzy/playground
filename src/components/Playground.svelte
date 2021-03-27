@@ -9,7 +9,7 @@
   } from '../stores.js'
   import Feedback from './Feedback.svelte'
   import Geometry from './Geometry.svelte'
-  import AnimationsMenu from './AnimationsMenu.svelte'
+  import Menu from './Menu.svelte'
   import Controls from './Controls.svelte'
 </script>
 
@@ -41,10 +41,11 @@
 
   let showSidebar = false
 
-  $: sidebarClass = showSidebar ? 'sidebar' : 'hidden'
   $: animation = $animations.find((animation) => animation.id === animationId)
-  $: canvasStyle =
+  $: sidebarClass = showSidebar ? 'sidebar' : 'hidden'
+  $: canvasClass =
     playgroundState === constants.uiState.ACTIVE ? 'canvas' : 'hidden'
+  $: outputClass = `output ${playgroundState}`
 
   uiState.subscribe((value) => {
     playgroundState = value
@@ -116,13 +117,13 @@
   }
 
   function play() {
+    stop()
     uiState.set(constants.uiState.ACTIVE)
     if (animation.audio) {
       drumroll.play()
     }
     if (animation.interactive) {
       toggleSidebar(true)
-      geometry = getGeometryDefaults(canvasWidth, canvasHeight)
     }
     animationFrame = requestAnimationFrame(function (timestamp) {
       animationStartTime = timestamp || new Date().getTime()
@@ -157,11 +158,6 @@
     feedbackLoop()
   }
 
-  function refresh() {
-    stop()
-    location.reload() // TODO - reload gl code only ?
-  }
-
   function toggleSidebar(value = null) {
     showSidebar = value === null ? !showSidebar : value
   }
@@ -178,94 +174,50 @@
   }
 </script>
 
-<header>
-  <AnimationsMenu on:input={loadAnimation} />
-</header>
+<Menu on:input={loadAnimation} />
 <main style={`cursor: ${customCursor}`}>
   <div
     data-cy="output"
-    class={`output ${playgroundState}`}
+    class={outputClass}
     bind:offsetWidth={canvasWidth}
     bind:offsetHeight={canvasHeight}
   >
-    <canvas class={canvasStyle} bind:this={canvas} data-cy="canvas" />
+    <canvas data-cy="canvas" class={canvasClass} bind:this={canvas} />
     <Feedback {stacktrace} />
   </div>
-  <Controls {play} {stop} {refresh} {toggleSidebar} />
+  <div class={sidebarClass}>
+    {#if animation.interactive}
+      <Geometry on:update={updateGeometry} {canvasWidth} {canvasHeight} />
+    {/if}
+  </div>
+  <Controls
+    {play}
+    {stop}
+    {toggleSidebar}
+    bind:showHandles={animation.interactive}
+  />
   <audio
     data-cy="drumroll"
-    bind:this={drumroll}
     duration={animation.duration}
     playbackRate={animation.playbackRate}
+    bind:this={drumroll}
   >
     <source src="drumroll.ogg" type="audio/ogg" />
     <track kind="captions" srclang="en" />
     <!-- TODO: fix caption src -->
   </audio>
-
-  {#each emojis as emoji}
-    <span
-      data-cy="emoji-{emoji.character}"
-      class={emoji.class}
-      style="left: {emoji.x}%; top: {emoji.y}%; transform: scale({emoji.ratio})"
-    >
-      {emoji.character}
-    </span>
-  {/each}
 </main>
-<aside class={sidebarClass}>
-  {#if animation.interactive}
-    <Geometry on:update={updateGeometry} {canvasWidth} {canvasHeight} />
-  {/if}
-</aside>
+
+{#each emojis as emoji}
+  <span
+    data-cy="emoji-{emoji.character}"
+    class={emoji.class}
+    style="left: {emoji.x}%; top: {emoji.y}%; transform: scale({emoji.ratio})"
+  >
+    {emoji.character}
+  </span>
+{/each}
 
 <style lang="scss">
-  main {
-    height: calc(
-      100% - 84px
-    ); // 100% - header height, TODO : fix header, set height in vars
-    width: 100%;
-  }
-  .hidden {
-    display: none;
-  }
-
-  /* .emoji {
-    position: relative;
-  } */
-
-  .output {
-    position: relative;
-    width: 100%;
-    padding-top: 100%;
-    overflow-y: scroll;
-  }
-  .canvas {
-    position: absolute;
-    top: 0;
-    height: 100%;
-    width: 100%;
-  }
-  .sidebar {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-  }
-  .hidden {
-    display: none;
-  }
-
-  @media (min-aspect-ratio: 1/1.35) {
-    .output {
-      padding-top: 0;
-      width: calc(100vh - 100px);
-      height: calc(100vh - 100px);
-    }
-  }
-  @media (min-aspect-ratio: 1/1.21) {
-    .output {
-      width: calc(100% - 300px);
-      padding-top: calc(100% - 300px);
-    }
-  }
+  @import '../styles/components/playground.scss';
 </style>

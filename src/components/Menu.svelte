@@ -17,7 +17,7 @@
   }
 </script>
 
-<nav data-cy="animations-menu" class="animations-menu">
+<nav data-cy="nav" class="nav">
   <ul>
     {#each menumItems as { name, id, type }}
       <li
@@ -34,5 +34,6 @@
 </nav>
 
 <style lang="scss">
-  // @import '../styles/animations-menu.scss';
+  // this menu will be the app nav. TODO: routes
+  @import '../styles/components/nav.scss';
 </style>
