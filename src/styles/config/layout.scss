@@ -144,19 +144,20 @@
   grid-row-start: 2;
   width: 100%;
   overflow: scroll;
+  padding: getVar(padding-sm) 0;
 
   @include phone-landscape(){
     grid-column-start: 2;
     grid-row-start: 1;
     grid-row-end: 3;
-    margin-top: getVar(header-height-lg);
+    padding-top: getVar(header-height-lg);
   }
 
   @include square() {
     grid-column-start: 2;
     grid-row-start: 1;
     grid-row-end: 3;
-    margin-top: getVar(header-height-lg);
+    padding-top: getVar(header-height-lg);
   }
 
   @include phone-landscape-wide() {
@@ -228,11 +229,11 @@
   margin: 0;
 
   @include phone-landscape() {
-    @include calcWidth(sidebar-width-sm, 0.5, margin-md);
+    @include calcWidth(sidebar-width-sm, 0.5, margin-lg);
     padding: 0 getVar(padding-sm);
   }
   @include phone-landscape-wide() {
-    @include calcWidth(sidebar-width-md, 0.5, margin-md);
+    @include calcWidth(sidebar-width-md, 0.5, margin-lg);
     padding: 0 getVar(padding-sm);
   }
   @include tablet-landscape() {
