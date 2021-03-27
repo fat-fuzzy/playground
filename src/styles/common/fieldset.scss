@@ -1,0 +1,7 @@
+@import '../config/main.scss';
+
+fieldset {
+  border: none;
+
+  @include layout-fieldset();
+}  
