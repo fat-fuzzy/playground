@@ -34,5 +34,6 @@
 </nav>
 
 <style lang="scss">
+  // this menu will be the app nav. TODO: routes
   @import '../styles/components/nav.scss';
 </style>

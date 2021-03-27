@@ -88,7 +88,7 @@
   })
 </script>
 
-<form>
+<form class="form-sidebar">
   <Position bind:coordX bind:coordY bind:maxX bind:maxY on:input={update} />
   <Scale
     bind:scaleX
@@ -103,25 +103,5 @@
 </form>
 
 <style lang="scss">
-  // @import '../styles/components/geometry.scss';
-
-  // form {
-  //   display: flex;
-  //   grid-column-start: 2;
-  //   grid-row-end: 3;
-  //   grid-row-start: 1;
-  //   height: auto;
-  //   justify-content: flex-start;
-  //   overflow-y: auto;
-  //   width: 100%;
-  // }
-
-  // @media (min-width: 758px) and (min-aspect-ratio: 1/1) {
-  //   form {
-  //     flex-direction: column;
-  //     grid-column-start: 1;
-  //     grid-row-start: 2;
-  //     margin-left: 0;
-  //   }
-  // }
+  @import '../styles/components/form.scss';
 </style>
