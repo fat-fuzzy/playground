@@ -103,11 +103,11 @@ $_cssvars: ();
     width: calc(#{$width-value} * #{$multiple} - #{$margin-value});
   } @else {
     @if (map-has-key($theme-layout, $width) == false) {
-      @warn 'Invalid breakpoint min value: #{$min}.';
+      @warn 'Invalid width value: #{$width}.';
     }
 
     @if (map-has-key($theme-layout, $margin) == false) {
-      @warn 'Invalid breakpoint max value: #{$max}.';
+      @warn 'Invalid margin value: #{$margin}.';
     }
   }
 }

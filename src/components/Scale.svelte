@@ -12,7 +12,6 @@
   export let minY = 0
   export let maxY = 0
 
-  const step = '0.01'
   const label = 'Scale'
 
   function updateX() {
@@ -35,7 +34,6 @@
     label="x"
     min={minX}
     max={maxX}
-    {step}
     on:input={updateX}
   />
 
@@ -44,7 +42,6 @@
     label="y"
     min={minY}
     max={maxY}
-    {step}
     on:input={updateY}
   />
 </fieldset>

@@ -8,7 +8,8 @@ import {vert as vert2d} from '../gl/vertex-shader-scale-2d'
 export const animations = [
   {
     id: 'random-rect',
-    name: '🎰 Random',
+    name: 'Random',
+    emoji: '🎰',
     duration: 2000,
     vert,
     frag,
@@ -27,7 +28,8 @@ export const animations = [
   },
   {
     id: 'random-rect-audio',
-    name: '🥁 Audio',
+    name: 'Audio',
+    emoji: '🥁',
     audio: true,
     duration: 4179,
     playbackRate: 2,
@@ -48,7 +50,8 @@ export const animations = [
   },
   {
     id: '2D-geometry',
-    name: '📐 2D',
+    name: '2D',
+    emoji: '📐',
     interactive: true,
     webGlProps: null,
     vert: vert2d,
@@ -89,10 +92,11 @@ export const animations = [
   },
   {
     id: 'test-poop',
-    name: '💩 Not a bug',
+    name: 'A Feature',
+    emoji: '💩',
     type: 'test',
     run() {
-      throw Error('Test 💩')
+      throw Error('Not a Bug 💩')
     },
     clear() {
       // do nothing

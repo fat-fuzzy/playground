@@ -12,7 +12,6 @@ label {
 }
 
 input {
-  margin-bottom: getVar(margin-xs);
-  margin-top: getVar(margin-sm);
+  margin: getVar(margin-xs) 0;
   width: 100%;
 }

@@ -19,7 +19,7 @@
 
 <nav data-cy="nav" class="nav">
   <ul>
-    {#each menumItems as { name, id, type }}
+    {#each menumItems as { name, emoji, id, type }}
       <li
         class="btn-menu {type}"
         on:click={handleClick}
@@ -27,7 +27,7 @@
         data-cy={id}
       >
         <!--TODO: make routes for animations-->
-        {name}
+        {emoji}&nbsp;{name}
       </li>
     {/each}
   </ul>
