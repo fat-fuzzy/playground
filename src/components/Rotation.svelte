@@ -19,9 +19,9 @@
   <legend>{label}</legend>
   <!--https://css-tricks.com/accessible-svgs/-->
   <!-- <svg id="InteractiveSVG" role="group" /> -->
-  <InputRange bind:value={angle} {max} on:input={update} />
+  <InputRange bind:value={angle} label="angle" {max} on:input={update} />
 </fieldset>
 
-<!-- <style lang="scss">
-  @import '../styles/rotation.scss';
-</style> -->
+<style lang="scss">
+  @import '../styles/common/fieldset.scss';
+</style>

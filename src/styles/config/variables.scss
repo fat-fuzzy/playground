@@ -21,23 +21,31 @@ $theme-colors: (
 );
 
 $theme-layout: (
-  aspect-ratio-1-1: 1 /1,
+  aspect-ratio-1-1: 1/1,
   aspect-ratio-1-2: 1/2,
   aspect-ratio-2-1: 2/1,
   aspect-ratio-16-9: 16/9,
 
   aspect-ratio-1-1dot35: 1/1.35,
   aspect-ratio-1dot35-1: 1.35/1,
-  
-  aspect-ratio-1-1dot2: 1/1.2,
-  aspect-ratio-1dot2-1: 1.2/1,
+
+  padding-xs: 2px,
   padding-sm: 4px,
   padding-md: 8px,
+
+  margin-nul: 0,
+  margin-xs: 1px,
+  margin-sm: 4px,
+  margin-md: 8px,
+
   header-height-sm: 60px,
   header-height-md: 80px,
+  header-height-lg: 110px,
+
   footer-height-sm: 40px,
   footer-height-md: 40px,
-  sidebar-height-sm: 120px,
+
+  sidebar-height-sm: 140px,
   sidebar-height-md: 240px,
   sidebar-width-sm: 160px,
   sidebar-width-md: 220px,

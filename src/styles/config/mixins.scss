@@ -88,6 +88,41 @@ $_cssvars: ();
   --#{$prefix}-#{$name}: #{$value};
 }
 
+//== WIDTHS & HEIGHTS
+
+@mixin calcWidth($width, $multiple, $margin:false) {
+  @if $margin == false and map-has-key($theme-layout, $width) {
+    $width-value: map-get($theme-layout, $width);
+
+    width: calc(#{$width-value} * #{$multiple});
+  }
+  @if map-has-key($theme-layout, $width) and map-has-key($theme-layout, $margin) {
+    $width-value: map-get($theme-layout, $width);
+    $margin-value: map-get($theme-layout, $margin);
+    
+    width: calc(#{$width-value} * #{$multiple} - #{$margin-value});
+  } @else {
+    @if (map-has-key($theme-layout, $width) == false) {
+      @warn 'Invalid breakpoint min value: #{$min}.';
+    }
+
+    @if (map-has-key($theme-layout, $margin) == false) {
+      @warn 'Invalid breakpoint max value: #{$max}.';
+    }
+  }
+}
+
+//== FLEX
+@mixin wrap-space-between() {
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+@mixin wrap-space-around() {
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
 //== MEDIA QUERIES
 @mixin min-width($breakpoint) {
   @if map-has-key($breakpoints, $breakpoint) {

@@ -16,7 +16,7 @@
 </script>
 
 <!-- handleBlur={playBlur} -->
-<div class="btn-group ui-controls">
+<div class="controls">
   <EmojiButton
     dataCy="btn-play"
     buttonClass="play"
@@ -40,18 +40,5 @@
 </div>
 
 <style lang="scss">
-  // .ui-controls {
-  //   position: absolute;
-  //   bottom: calc(160.8px + 0.5em);
-  //   left: 0;
-  // }
-  // @media (min-width: 758px) and (min-aspect-ratio: 1/1) {
-  //   .ui-controls {
-  //     position: absolute;
-  //     left: unset;
-  //     top: 0;
-  //     right: 0;
-  //   }
-  // }
   @import '../styles/components/controls.scss';
 </style>

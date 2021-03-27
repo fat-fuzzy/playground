@@ -19,12 +19,6 @@
   }
 }
 
-@mixin phone-landscape() {
-  @include min-aspect-ratio-min-width(aspect-ratio-1dot35-1, xs) {
-    @content;
-  }
-}
-
 @mixin phone-landscape-wide() {
   @include min-aspect-ratio-min-width(aspect-ratio-1dot35-1, sm) {
     @content;
@@ -155,14 +149,14 @@
     grid-column-start: 2;
     grid-row-start: 1;
     grid-row-end: 3;
-    padding-top: getVar(header-height-sm);
+    margin-top: getVar(header-height-lg);
   }
 
   @include square() {
     grid-column-start: 2;
     grid-row-start: 1;
     grid-row-end: 3;
-    padding-top: getVar(header-height-sm);
+    margin-top: getVar(header-height-lg);
   }
 
   @include phone-landscape-wide() {
@@ -171,10 +165,8 @@
 }
 
 @mixin layout-footer() {
-  display: flex;
   grid-column-start: 1;
   grid-row-start: 3;
-  justify-content: center;
   width: 100%;
 
   @include phone-landscape(){
@@ -195,7 +187,6 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-
   grid-column-start: 1;
   grid-row-start: 1;
   max-width: 100%;
@@ -210,5 +201,42 @@
   @include phone-landscape-wide() {
     grid-column-start: 1;
     height: 100%;
+  }
+}
+
+@mixin layout-form() {
+  display: flex;
+  overflow-y: auto;
+  width: auto;
+  max-width: 100%;
+
+  @include phone-landscape() {
+    @include wrap-space-around()
+  }
+
+  @include phone-landscape-wide() {
+    @include wrap-space-around()
+  }
+
+  @include tablet-landscape() {
+    @include wrap-space-around()
+  }
+}
+
+@mixin layout-fieldset() {
+  padding: 0 getVar(padding-md);
+  margin: 0;
+
+  @include phone-landscape() {
+    @include calcWidth(sidebar-width-sm, 0.5, margin-md);
+    padding: 0 getVar(padding-sm);
+  }
+  @include phone-landscape-wide() {
+    @include calcWidth(sidebar-width-md, 0.5, margin-md);
+    padding: 0 getVar(padding-sm);
+  }
+  @include tablet-landscape() {
+    @include calcWidth(sidebar-width-lg, 0.5, margin-sm);
+    padding: 0 getVar(padding-sm);
   }
 }

@@ -32,5 +32,5 @@
 </label>
 
 <style lang="scss">
-  @import '../styles/components/input.scss';
+  @import '../styles/common/input.scss';
 </style>

@@ -8,8 +8,8 @@
   :global {
     @import './styles/config/main.scss';
     .playground {
-      @include cover();
-      @include layout-app();
+      @include cover;
+      @include layout-app;
     }
   }
 </style>

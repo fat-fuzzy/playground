@@ -12,8 +12,8 @@ main {
 }
 
 .output {
+	@include cover();
   @include layout-output();
-  overflow-y: auto;
 }
 
 .output.active,

@@ -103,5 +103,5 @@
 </form>
 
 <style lang="scss">
-  @import '../styles/components/form.scss';
+  @import '../styles/common/form.scss';
 </style>

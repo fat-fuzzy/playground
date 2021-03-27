@@ -2,5 +2,4 @@
 
 .sidebar {
   @include layout-sidebar();
-  border: 1px solid getVar(color-dark)
 }

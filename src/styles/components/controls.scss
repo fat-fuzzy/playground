@@ -1,5 +1,15 @@
 @import '../config/main.scss';
 
-.ui-controls {
+.controls {
   @include layout-footer();
+  display: flex;
+  justify-content: center;
+
+  @include phone-landscape-wide() {
+    justify-content: flex-end;
+  }
+
+  @include tablet-landscape() {
+    justify-content: flex-end;
+  }
 }
