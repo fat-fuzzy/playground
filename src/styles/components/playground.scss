@@ -1,4 +1,5 @@
 @import '../config/main.scss';
+@import 'sidebar.scss';
 
 .playground {
 	@include cover();
@@ -8,10 +9,6 @@
 
 main {
 	@include layout-main();
-}
-
-.sidebar {
-  @include layout-sidebar();
 }
 
 .output {

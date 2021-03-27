@@ -39,10 +39,10 @@
   let animation
   let customCursor
 
-  let showContextMenu = false
+  let showSidebar = false
 
   $: animation = $animations.find((animation) => animation.id === animationId)
-  $: sidebarClass = showContextMenu ? 'sidebar' : 'hidden'
+  $: sidebarClass = showSidebar ? 'sidebar' : 'hidden'
   $: canvasClass =
     playgroundState === constants.uiState.ACTIVE ? 'canvas' : 'hidden'
   $: outputClass = `output ${playgroundState}`
@@ -159,7 +159,7 @@
   }
 
   function toggleSidebar(value = null) {
-    showContextMenu = value === null ? !showContextMenu : value
+    showSidebar = value === null ? !showSidebar : value
   }
 
   function loadAnimation(event) {
