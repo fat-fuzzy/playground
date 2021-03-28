@@ -7,8 +7,6 @@ export const uiState = {
   ERROR: 'error',
 }
 
-// TODO : use typescript for these things
-// export type playgroundState = uiState.DEFAULT | uiState.SUCCESS | uiState.ERROR
 export const size = {
   LG: 'LG',
   SM: 'SM',
@@ -38,7 +36,7 @@ export const emojis = {
     // lint: '🚨', // 🚨 rotating beacon
   },
   refresh: {
-    default: '🧽', // 🧽 sponge
+    default: '🚿', // 🚿 shower
   },
 }
 
