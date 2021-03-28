@@ -1,0 +1,58 @@
+{
+  "devices": [
+    {
+      "device": "galaxy-s5-android-5.0",
+      "width": 360,
+      "height": 640,
+      "layout": "phone"
+    },
+    {
+      "device": "galaxy-s9-android-7.0",
+      "width": 360,
+      "height": 740,
+      "layout": "phone"
+    },
+    {
+      "device": "iPad-Pro-10.5",
+      "width": 834,
+      "height": 1112,
+      "layout": "tablet"
+    },
+    {
+      "device": "iPad-Pro-12.9",
+      "width": 1024,
+      "height": 1366,
+      "layout": "tablet"
+    },
+    {
+      "device": "iPhone-6/7/8-iOS11",
+      "width": 375,
+      "height": 667,
+      "layout": "phone"
+    },
+    {
+      "device": "iPhone-6/7/8-iOS11+",
+      "width": 414,
+      "height": 736,
+      "layout": "phone"
+    },
+    {
+      "device": "iPhone-X/XS-iOS12",
+      "width": 375,
+      "height": 812,
+      "layout": "phone-wide"
+    },
+    {
+      "device": "Kindle-Fire-HDX-Linux",
+      "width": 800,
+      "height": 1280,
+      "layout": "tablet"
+    },
+    {
+      "device":"square",
+      "width": 768,
+      "height": 768,
+      "layout": "square"
+    }
+  ]
+}

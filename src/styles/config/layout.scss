@@ -19,7 +19,7 @@
   }
 }
 
-@mixin phone-landscape-wide() {
+@mixin phone-wide-landscape() {
   @include orientation-min-width(orientation-landscape, sm) {
     @content;
   }
@@ -61,7 +61,7 @@
     grid-template-rows: minmax(0, 1fr);
   }
 
-  @include phone-landscape-wide(){
+  @include phone-wide-landscape(){
     grid-template-columns: minmax(0, 1fr) getVar(sidebar-width-sm);
   }
 
@@ -113,7 +113,7 @@
     grid-template-rows: minmax(0, 1fr) getVar(footer-height-sm);
   }
 
-  @include phone-landscape-wide() {
+  @include phone-wide-landscape() {
     grid-row-start: 1;
     grid-template-columns: minmax(0, 1fr) getVar(sidebar-width-sm);
   }
@@ -150,7 +150,7 @@
     padding-top: getVar(header-height-md);
   }
 
-  @include phone-landscape-wide() {
+  @include phone-wide-landscape() {
     grid-row-end: 2;
   }
 
@@ -194,7 +194,7 @@
     grid-row-end: 2;
   }
 
-  @include phone-landscape-wide() {
+  @include phone-wide-landscape() {
     grid-column-start: 1;
     height: 100%;
   }
@@ -214,7 +214,7 @@
     @include wrap-space-between()
   }
 
-  @include phone-landscape-wide() {
+  @include phone-wide-landscape() {
     @include wrap-space-between()
   }
 
@@ -265,7 +265,7 @@
     @include fill-sidebar(sidebar-width-xs);
   }
 
-  @include phone-landscape-wide() {
+  @include phone-wide-landscape() {
     @include fill-sidebar(sidebar-width-sm);
   }
 

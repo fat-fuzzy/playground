@@ -1,0 +1,52 @@
+{
+  "layout": [
+    {
+      "name": "padding-md",
+      "value": 8
+    },
+    {
+      "name": "header-height-sm",
+      "value": 80
+    },
+    {
+      "name": "header-height-md",
+      "value": 100
+    },
+    {
+      "name": "header-height-lg",
+      "value": 110
+    },
+    {
+      "name": "footer-height-sm",
+      "value": 40
+    },
+    {
+      "name": "footer-height-md",
+      "value": 40
+    },
+    {
+      "name": "sidebar-height-sm",
+      "value": 140
+    },
+    {
+      "name": "sidebar-height-md",
+      "value": 240
+    },
+    {
+      "name": "sidebar-width-xs",
+      "value": 160
+    },
+    {
+      "name": "sidebar-width-sm",
+      "value": 220
+    },
+    {
+      "name": "sidebar-width-md",
+      "value": 300
+    },
+    {
+      "name": "sidebar-width-lg",
+      "value": 400
+    }
+  ]
+}

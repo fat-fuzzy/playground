@@ -1,0 +1,105 @@
+{
+  "layout": [
+     {
+       "name": "phone",
+       "config": [
+          {
+            "orientation": "portrait",
+            "valuesX":[
+              "padding-md"
+            ],
+            "valuesY":[
+              "padding-md",
+              "header-height-sm",
+              "footer-height-sm",
+              "sidebar-height-sm"
+            ]
+          },
+          {
+            "orientation": "landscape",
+            "valuesX":[
+              "padding-md"
+            ],
+            "valuesY":[
+              "padding-md",
+              "header-height-sm",
+              "footer-height-sm",
+              "sidebar-width-sm"
+            ]
+          }
+       ]
+     }, {
+      "name": "phone-wide",
+      "config": [
+        {
+          "orientation": "portrait",
+          "valuesX":[
+            "padding-md"
+          ],
+          "valuesY":[
+            "padding-md",
+            "header-height-sm",
+            "footer-height-sm",
+            "sidebar-height-sm"
+          ]
+        },
+        {
+          "orientation": "landscape",
+          "valuesX":[
+            "padding-md"
+          ],
+          "valuesY":[
+            "padding-md",
+            "header-height-sm",
+            "footer-height-sm",
+            "sidebar-width-md"
+          ]
+        }
+      ]
+    },{
+      "name": "tablet",
+      "config": [
+        {
+          "orientation": "portrait",
+          "valuesX":[
+            "padding-md"
+          ],
+          "valuesY":[
+            "padding-md",
+            "header-height-md",
+            "footer-height-md",
+            "sidebar-height-md"
+          ]
+        },
+        {
+          "orientation": "landscape",
+          "valuesX":[
+            "padding-md"
+          ],
+          "valuesY":[
+            "padding-md",
+            "header-height-lg",
+            "footer-height-md",
+            "sidebar-width-lg"
+          ]
+        }
+      ]
+    },{
+      "name": "square",
+      "config": [
+         {
+           "orientation": "portrait",
+           "valuesX":[
+             "padding-md"
+           ],
+           "valuesY":[
+             "padding-md",
+             "header-height-sm",
+             "footer-height-sm",
+             "sidebar-height-sm"
+           ]
+         }
+      ]
+    }
+  ]
+}

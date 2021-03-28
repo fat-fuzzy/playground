@@ -49,7 +49,7 @@ export const animations = [
     },
   },
   {
-    id: '2D-geometry',
+    id: '2D',
     name: '2D',
     emoji: '📐',
     interactive: true,
@@ -91,7 +91,7 @@ export const animations = [
     },
   },
   {
-    id: 'test-poop',
+    id: 'poop',
     name: 'A Feature',
     emoji: '💩',
     type: 'test',
