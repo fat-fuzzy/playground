@@ -8,43 +8,44 @@
 }
 
 @mixin phone-portrait() {
-  @include max-aspect-ratio-min-width(aspect-ratio-1-1dot35, xs) {
+  @include orientation-min-width(orientation-portrait, xs) {
     @content;
   }
 }
 
 @mixin phone-landscape() {
-  @include min-aspect-ratio-min-width(aspect-ratio-1dot35-1, xs) {
+  @include orientation-min-width(orientation-landscape, xs) {
     @content;
   }
 }
 
 @mixin phone-landscape-wide() {
-  @include min-aspect-ratio-min-width(aspect-ratio-1dot35-1, sm) {
+  @include orientation-min-width(orientation-landscape, sm) {
     @content;
   }
 }
 
 @mixin tablet-portrait() {
- // TODO fix portrait ipad
- @include min-aspect-ratio-min-width(aspect-ratio-1-1dot35, md) {
+ @include orientation-min-width(orientation-portrait, md) {
     @content;
   }
 }
 
 @mixin tablet-landscape() {
-  @include min-aspect-ratio-min-width(aspect-ratio-1dot35-1, md) {
+  @include orientation-min-width(orientation-landscape, md) {
     @content;
   }
 }
 
 @mixin desktop() {
-  // TODO ?
+  @include min-aspect-ratio-min-width(aspect-ratio-1dot35-1, xl) {
+    @content;
+  }
 }
 
 // yeah
 @mixin square() {
-  @include min-aspect-ratio-min-width(aspect-ratio-1-1, md) {
+  @include aspect-ratio-min-width(aspect-ratio-1-1, sm) {
     @content;
   }
 }
@@ -56,39 +57,37 @@
   grid-template-rows: getVar(header-height-sm) minmax(0, 1fr);
 
   @include phone-landscape(){
-    grid-template-columns: minmax(0, 1fr) getVar(sidebar-width-sm);
+    grid-template-columns: minmax(0, 1fr) getVar(sidebar-width-xs);
     grid-template-rows: minmax(0, 1fr);
   }
 
-  @include min-width(sm) {
-    grid-template-columns: minmax(0, 1fr) getVar(sidebar-width-md);
-  }
-
-  @include square() {
-    grid-template-columns: minmax(0, 1fr) getVar(sidebar-width-md);
-    grid-template-rows: getVar(header-height-md) minmax(0, 1fr) getVar(footer-height-md);
+  @include phone-landscape-wide(){
+    grid-template-columns: minmax(0, 1fr) getVar(sidebar-width-sm);
   }
 
   @include tablet-landscape() {
-    grid-template-columns: minmax(0, 1fr) getVar(sidebar-width-lg);
-    grid-template-rows: getVar(header-height-md) minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1fr) getVar(sidebar-width-md);
   }
 
-  // TODO fix portrait ipad
-  @include tablet-portrait() {
+  @include desktop() {
+    grid-template-columns: minmax(0, 1fr) getVar(sidebar-width-lg);
+  }
+
+  @include square() {
     grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: getVar(header-height-md) minmax(0, 1fr) getVar(footer-height-md);
   }
 }
 
 @mixin layout-header() {  // grid item props
   grid-column-start: 1;
   grid-row-start: 1;
+  position: relative;
+  z-index: getVar(z-index-input);
   height: getVar(header-height-sm);
 
-  @include phone-landscape(){
-    position: absolute;
-    top: 0;
-    right: 0;
+  @include phone-landscape(){ // grid item props
+    grid-column-start: 2;
   }
 
   @include square() {
@@ -110,32 +109,30 @@
     grid-column-start: 1;
     grid-column-end: 3;
     grid-row-start: 1;
-    grid-template-columns: minmax(0, 1fr) getVar(sidebar-width-sm);
+    grid-template-columns: minmax(0, 1fr) getVar(sidebar-width-xs);
     grid-template-rows: minmax(0, 1fr) getVar(footer-height-sm);
   }
 
-  @include min-width(sm) {
+  @include phone-landscape-wide() {
+    grid-row-start: 1;
+    grid-template-columns: minmax(0, 1fr) getVar(sidebar-width-sm);
+  }
+
+  @include tablet-landscape() {
+    grid-row-start: 1;
     grid-template-columns: minmax(0, 1fr) getVar(sidebar-width-md);
+  }
+
+  @include desktop() {
+    grid-template-columns: minmax(0, 1fr) getVar(sidebar-width-lg);
   }
 
   @include square() {
     grid-column-start: 1;
     grid-column-end: 3;
     grid-row-end: 4;
-    grid-template-columns: minmax(0, 1fr) getVar(sidebar-width-md);
-    grid-template-rows: minmax(0, 1fr) getVar(footer-height-sm);
-  }
-
-  @include phone-landscape-wide() {
-    grid-row-start: 1;
-  }
-
-  @include min-width(md) {
-    grid-template-columns: minmax(0, 1fr) getVar(sidebar-width-md);
-  }
-
-  @include tablet-portrait() {
     grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: minmax(0, 1fr) getVar(sidebar-height-sm) getVar(footer-height-sm);
   }
 }
 
@@ -150,18 +147,20 @@
     grid-column-start: 2;
     grid-row-start: 1;
     grid-row-end: 3;
-    padding-top: getVar(header-height-lg);
-  }
-
-  @include square() {
-    grid-column-start: 2;
-    grid-row-start: 1;
-    grid-row-end: 3;
-    padding-top: getVar(header-height-lg);
+    padding-top: getVar(header-height-md);
   }
 
   @include phone-landscape-wide() {
     grid-row-end: 2;
+  }
+
+  @include tablet-landscape() {
+    grid-row-end: 3;
+  }
+
+  @include square() {
+    grid-column-start: 1;
+    grid-row-start: 2;
   }
 }
 
@@ -171,16 +170,12 @@
   width: 100%;
 
   @include phone-landscape(){
-    grid-column-start: 1;
+    grid-column-start: 2;
     grid-row-start: 2;
   }
 
   @include square() {
-    grid-row-start: 2;
-  }
-
-  @include phone-landscape-wide() {
-    grid-column-start: 2;
+    grid-row-start: 3;
   }
 }
 
@@ -203,41 +198,78 @@
     grid-column-start: 1;
     height: 100%;
   }
+
+  @include tablet-landscape() {
+    grid-row-end: 3;
+  }
 }
 
 @mixin layout-form() {
   display: flex;
   overflow-y: auto;
-  width: auto;
+  width: 100%;
   max-width: 100%;
 
   @include phone-landscape() {
-    @include wrap-space-around()
+    @include wrap-space-between()
   }
 
   @include phone-landscape-wide() {
-    @include wrap-space-around()
+    @include wrap-space-between()
+  }
+
+  @include tablet-portrait() {
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
   }
 
   @include tablet-landscape() {
-    @include wrap-space-around()
+    width: 100%;
+    @include wrap-space-between()
+  }
+
+  @include square() {
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+}
+
+@mixin fill-sidebar($sidebar-width) {
+  @if map-has-key($theme-layout, $sidebar-width) {
+    $sidebar-width-value: map-get($theme-layout, $sidebar-width);
+
+    @include calcWidth(#{$sidebar-width}, 0.5, margin-lg);
+    padding: 0 getVar(padding-sm);
+    margin: 0 getVar(margin-xs);
+  } @else {
+    @warn 'Invalid breakpoint: #{$sidebar-width}.';
   }
 }
 
 @mixin layout-fieldset() {
   padding: 0 getVar(padding-md);
-  margin: 0;
+  margin: 0 getVar(margin-sm);
+  width: 100%;
+  max-width: 100%;
+
+  &:last-of-type {
+    margin-right: 0
+  }
+  &:first-of-type {
+    margin-left: 0
+  }
 
   @include phone-landscape() {
-    @include calcWidth(sidebar-width-sm, 0.5, margin-lg);
-    padding: 0 getVar(padding-sm);
+    @include fill-sidebar(sidebar-width-xs);
   }
+
   @include phone-landscape-wide() {
-    @include calcWidth(sidebar-width-md, 0.5, margin-lg);
-    padding: 0 getVar(padding-sm);
+    @include fill-sidebar(sidebar-width-sm);
   }
+
   @include tablet-landscape() {
-    @include calcWidth(sidebar-width-lg, 0.5, margin-sm);
-    padding: 0 getVar(padding-sm);
+    @include fill-sidebar(sidebar-width-md);
   }
 }

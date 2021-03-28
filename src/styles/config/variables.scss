@@ -29,6 +29,9 @@ $theme-layout: (
   aspect-ratio-1-1dot35: 1/1.35,
   aspect-ratio-1dot35-1: 1.35/1,
 
+  orientation-portrait: portrait,
+  orientation-landscape: landscape,
+
   padding-xs: 2px,
   padding-sm: 4px,
   padding-md: 8px,
@@ -48,9 +51,13 @@ $theme-layout: (
 
   sidebar-height-sm: 140px,
   sidebar-height-md: 240px,
-  sidebar-width-sm: 160px,
-  sidebar-width-md: 220px,
-  sidebar-width-lg: 300px,
+  sidebar-width-xs: 160px,
+  sidebar-width-sm: 220px,
+  sidebar-width-md: 300px,
+  sidebar-width-lg: 400px,
+  sidebar-width-xl: 600px,
+
+  z-index-input: 2,
 );
 
 $theme-typography: (
