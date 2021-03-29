@@ -5,7 +5,5 @@
   "ignoreTestFiles": "*.js",
   "retries": {
     "runMode": 2
-  },
-  "viewportWidth":  375,
-  "viewportHeight":  	667
+  }
 }

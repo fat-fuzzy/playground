@@ -5,6 +5,9 @@
   const dispatch = createEventDispatcher()
   let menumItems = []
 
+  function getLabel(emoji, name) {
+    return `${emoji} ${name}`
+  }
   animations.subscribe((value) => {
     menumItems = value
   })
@@ -27,7 +30,7 @@
         data-cy={id}
       >
         <!--TODO: make routes for animations-->
-        {emoji}&nbsp;{name}
+        {getLabel(emoji, name)}
       </li>
     {/each}
   </ul>

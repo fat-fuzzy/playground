@@ -5,11 +5,7 @@
   display: flex;
   justify-content: center;
 
-  @include phone-landscape-wide() {
-    justify-content: flex-end;
-  }
-
-  @include tablet-landscape() {
-    justify-content: flex-end;
+  @include phone-landscape() {
+    justify-content: flex-start;
   }
 }

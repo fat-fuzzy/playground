@@ -57,13 +57,13 @@
     ;[scaleX, scaleY] = geometry.scale
 
     // input attributes
-    maxX = canvasWidth - width
-    maxY = canvasHeight - height
+    maxX = canvasWidth
+    maxY = canvasHeight
     angle = 0
   }
 
-  $: maxX = canvasWidth - width
-  $: maxY = canvasHeight - canvasHeight
+  $: maxX = canvasWidth
+  $: maxY = canvasHeight
   $: radCoordX = Math.cos(utils.degToRad(angle))
   $: radCoordY = Math.sin(utils.degToRad(angle))
   $: translation = [coordX, coordY]

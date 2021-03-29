@@ -118,16 +118,11 @@ $_cssvars: ();
   justify-content: space-between;
 }
 
-@mixin wrap-space-around() {
-  flex-wrap: wrap;
-  justify-content: space-between;
-}
-
 //== MEDIA QUERIES
 @mixin min-width($breakpoint) {
   @if map-has-key($breakpoints, $breakpoint) {
     $breakpoint-value: map-get($breakpoints, $breakpoint);
-    @media (min-width: #{$breakpoint-value}) {
+    @media screen and (min-width: #{$breakpoint-value}) {
       @content;
     }
   } @else {
@@ -138,7 +133,7 @@ $_cssvars: ();
 @mixin max-width($breakpoint) {
   @if map-has-key($breakpoints, $breakpoint) {
     $breakpoint-value: map-get($breakpoints, $breakpoint);
-    @media (max-width: #{$breakpoint-value}){
+    @media screen and (max-width: #{$breakpoint-value}){
       @content;
     }
   } @else {
@@ -150,7 +145,7 @@ $_cssvars: ();
   @if map-has-key($breakpoints, $min) and map-has-key($breakpoints, $max) {
     $min-value: map-get($breakpoints, $min);
     $max-value: map-get($breakpoints, $max);
-    @media (min-width: #{$min-value}) and  (max-width: #{$max-value}) {
+    @media screen and (min-width: #{$min-value}) and  (max-width: #{$max-value}) {
       @content;
     }
   } @else {
@@ -167,7 +162,7 @@ $_cssvars: ();
 @mixin min-aspect-ratio($aspect-ratio)  {
   @if map-has-key($theme-layout, $aspect-ratio){
     $aspect-ratio-value: map-get($theme-layout, $aspect-ratio);
-    @media (min-aspect-ratio: #{$aspect-ratio-value}) {
+    @media screen and (min-aspect-ratio: #{$aspect-ratio-value}) {
       @content;
     }
   } @else {
@@ -180,7 +175,7 @@ $_cssvars: ();
 @mixin max-aspect-ratio($aspect-ratio)  {
   @if map-has-key($theme-layout, $aspect-ratio){
     $aspect-ratio-value: map-get($theme-layout, $aspect-ratio);
-    @media (max-aspect-ratio: #{$aspect-ratio-value}) {
+    @media screen and (max-aspect-ratio: #{$aspect-ratio-value}) {
       @content;
     }
   }  @else {
@@ -194,7 +189,7 @@ $_cssvars: ();
   @if map-has-key($theme-layout, $aspect-ratio) and map-has-key($breakpoints, $breakpoint) {
     $breakpoint-value: map-get($breakpoints, $breakpoint);
     $aspect-ratio-value: map-get($theme-layout, $aspect-ratio);
-    @media (min-width: #{$breakpoint-value}) and (min-aspect-ratio: #{$aspect-ratio-value}) {
+    @media screen and (min-width: #{$breakpoint-value}) and (min-aspect-ratio: #{$aspect-ratio-value}) {
       @content;
     }
   } @else {
@@ -212,7 +207,7 @@ $_cssvars: ();
   @if map-has-key($theme-layout, $aspect-ratio) and map-has-key($breakpoints, $breakpoint) {
     $breakpoint-value: map-get($breakpoints, $breakpoint);
     $aspect-ratio-value: map-get($theme-layout, $aspect-ratio);
-    @media (max-width: #{$breakpoint-value}) and (min-aspect-ratio: #{$aspect-ratio-value}) {
+    @media screen and (max-width: #{$breakpoint-value}) and (min-aspect-ratio: #{$aspect-ratio-value}) {
       @content;
     }
   }  @else {
@@ -230,7 +225,7 @@ $_cssvars: ();
   @if map-has-key($theme-layout, $aspect-ratio) and map-has-key($breakpoints, $breakpoint) {
     $breakpoint-value: map-get($breakpoints, $breakpoint);
     $aspect-ratio-value: map-get($theme-layout, $aspect-ratio);
-    @media (min-width: #{$breakpoint-value}) and (max-aspect-ratio: #{$aspect-ratio-value}) {
+    @media screen and (min-width: #{$breakpoint-value}) and (max-aspect-ratio: #{$aspect-ratio-value}) {
       @content;
     }
   } @else {
@@ -248,7 +243,7 @@ $_cssvars: ();
   @if map-has-key($theme-layout, $aspect-ratio) and map-has-key($breakpoints, $breakpoint) {
     $breakpoint-value: map-get($breakpoints, $breakpoint);
     $aspect-ratio-value: map-get($theme-layout, $aspect-ratio);
-    @media (max-width: #{$breakpoint-value}) and (max-aspect-ratio: #{$aspect-ratio-value}) {
+    @media screen and (max-width: #{$breakpoint-value}) and (max-aspect-ratio: #{$aspect-ratio-value}) {
       @content;
     }
   } @else {
@@ -258,6 +253,55 @@ $_cssvars: ();
     }
     @if (map-has-key($theme-layout, $aspect-ratio) == false) {
       @warn 'Invalid apect-ratio: #{$aspect-ratio}.';
+    }
+  }
+}
+
+@mixin aspect-ratio($aspect-ratio)  {
+  @if map-has-key($theme-layout, $aspect-ratio){
+    $aspect-ratio-value: map-get($theme-layout, $aspect-ratio);
+    @media screen and (aspect-ratio: #{$aspect-ratio-value}) {
+      @content;
+    }
+  } @else {
+    @if (map-has-key($theme-layout, $aspect-ratio) == false) {
+      @warn 'Invalid apect-ratio: #{$aspect-ratio}.';
+    }
+  }
+}
+
+@mixin aspect-ratio-min-width($aspect-ratio, $breakpoint)  {
+  @if map-has-key($theme-layout, $aspect-ratio) and map-has-key($breakpoints, $breakpoint) {
+    $breakpoint-value: map-get($breakpoints, $breakpoint);
+    $aspect-ratio-value: map-get($theme-layout, $aspect-ratio);
+    @media screen and (min-width: #{$breakpoint-value}) and (aspect-ratio: #{$aspect-ratio-value}) {
+      @content;
+    }
+  } @else {
+
+    @if (map-has-key($breakpoints, $breakpoint) == false) {
+      @warn 'Invalid breakpoint: #{$breakpoint}.';
+    }
+    @if (map-has-key($theme-layout, $aspect-ratio) == false) {
+      @warn 'Invalid apect-ratio: #{$aspect-ratio}.';
+    }
+  }
+}
+
+@mixin orientation-min-width($orientation, $breakpoint)  {
+  @if map-has-key($theme-layout, $orientation) and map-has-key($breakpoints, $breakpoint) {
+    $breakpoint-value: map-get($breakpoints, $breakpoint);
+    $orientation-value: map-get($theme-layout, $orientation);
+    @media screen and (min-width: #{$breakpoint-value}) and (orientation: #{$orientation-value}) {
+      @content;
+    }
+  } @else {
+
+    @if (map-has-key($breakpoints, $breakpoint) == false) {
+      @warn 'Invalid breakpoint: #{$breakpoint}.';
+    }
+    @if (map-has-key($theme-layout, $orientation) == false) {
+      @warn 'Invalid apect-ratio: #{$orientation}.';
     }
   }
 }

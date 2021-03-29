@@ -1,9 +1,9 @@
-import * as draw from '../libs/draw.js'
-import * as utils from '../libs/utils.js'
+import * as draw from './draw.js'
+import * as utils from './utils.js'
 
-import {frag} from '../gl/fragment-shader-2d'
-import {vert} from '../gl/vertex-shader-2d'
-import {vert as vert2d} from '../gl/vertex-shader-scale-2d'
+import {frag} from './gl/fragment-shader-2d'
+import {vert} from './gl/vertex-shader-2d'
+import {vert as vert2d} from './gl/vertex-shader-scale-2d'
 
 export const animations = [
   {
@@ -49,7 +49,7 @@ export const animations = [
     },
   },
   {
-    id: '2D-geometry',
+    id: '2D',
     name: '2D',
     emoji: '📐',
     interactive: true,
@@ -91,7 +91,7 @@ export const animations = [
     },
   },
   {
-    id: 'test-poop',
+    id: 'poop',
     name: 'A Feature',
     emoji: '💩',
     type: 'test',
