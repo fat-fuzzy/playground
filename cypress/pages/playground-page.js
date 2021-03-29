@@ -35,12 +35,19 @@ export function findAnimationsMenu() {
   cy.get(NAV).find(BTN_A_FEATURE)
 }
 
-export function findBoundaries(maxX, maxY) {
-  cy.get(POSITION_X).then(($position) => {
-    expect($position).to.have.attr('max', maxX)
-  })
-  cy.get(POSITION_Y).then(($position) => {
-    expect($position).to.have.attr('max', maxY)
+export function findBoundaries() {
+  cy.get(OUTPUT).then(($output)=>{
+    expect($output).to.have.length(1)
+
+    const width = $output[0].offsetWidth
+    const height = $output[0].offsetHeight
+
+    cy.get(POSITION_X).then(($position) => {
+      expect($position).to.have.attr('max', width)
+    })
+    cy.get(POSITION_Y).then(($position) => {
+      expect($position).to.have.attr('max', height)
+    })
   })
 }
 
