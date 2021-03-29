@@ -57,13 +57,13 @@
     ;[scaleX, scaleY] = geometry.scale
 
     // input attributes
-    maxX = canvasWidth - width
-    maxY = canvasHeight - height
+    maxX = canvasWidth
+    maxY = canvasHeight
     angle = 0
   }
 
-  $: maxX = canvasWidth - width
-  $: maxY = canvasHeight - canvasHeight
+  $: maxX = canvasWidth
+  $: maxY = canvasHeight
   $: radCoordX = Math.cos(utils.degToRad(angle))
   $: radCoordY = Math.sin(utils.degToRad(angle))
   $: translation = [coordX, coordY]
@@ -88,7 +88,7 @@
   })
 </script>
 
-<form>
+<form class="form-sidebar">
   <Position bind:coordX bind:coordY bind:maxX bind:maxY on:input={update} />
   <Scale
     bind:scaleX
@@ -103,23 +103,5 @@
 </form>
 
 <style lang="scss">
-  form {
-    display: flex;
-    grid-column-start: 2;
-    grid-row-end: 3;
-    grid-row-start: 1;
-    height: auto;
-    justify-content: flex-start;
-    overflow-y: auto;
-    width: 100%;
-  }
-
-  @media (min-aspect-ratio: 1/1) {
-    form {
-      flex-direction: column;
-      grid-column-start: 1;
-      grid-row-start: 2;
-      margin-left: 0;
-    }
-  }
+  @import '../styles/common/form.scss';
 </style>

@@ -28,3 +28,7 @@
   <InputRange bind:value={coordX} label="x" max={maxX} on:input={updateX} />
   <InputRange bind:value={coordY} label="y" max={maxY} on:input={updateY} />
 </fieldset>
+
+<style lang="scss">
+  @import '../styles/common/fieldset.scss';
+</style>

@@ -4,6 +4,7 @@ import commonjs from '@rollup/plugin-commonjs';
 import resolve from '@rollup/plugin-node-resolve';
 import livereload from 'rollup-plugin-livereload';
 import { terser } from 'rollup-plugin-terser';
+import sass from "rollup-plugin-sass";
 import css from 'rollup-plugin-css-only';
 import pkg from './package.json'
 
@@ -41,20 +42,27 @@ export default {
     sourcemap: true,
     format: 'es',
     name: 'app',
-    file: 'public/build/bundle.js'
+    file: 'public/build/playground.js'
   },
   plugins: [
     svelte({
-      preprocess: sveltePreprocess(),
       compilerOptions: {
         // enable run-time checks when not in production
         dev: !production
-      }
+      },
+      preprocess: sveltePreprocess({
+        sourceMap: !production,
+        defaults: {
+          style: 'scss'
+        },
+        postcss: {
+          plugins: [require('autoprefixer')()]
+        }
+      }),
     }),
     // we'll extract any component CSS out into
     // a separate file - better for performance
-    css({ output: 'bundle.css' }),
-
+    css({ output: 'playground.css' }),
     // If you have external dependencies installed from
     // npm, you'll most likely need these plugins. In
     // some cases you'll need additional configuration -

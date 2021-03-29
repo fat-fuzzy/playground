@@ -1,0 +1,12 @@
+@import '../config/main.scss';
+
+.btn-emoji {
+  font: menu;
+  padding: getVar(padding-xs) getVar(padding-md);
+  margin: getVar(margin-xs);
+
+  @include min-width(md) {
+    font: unset;
+    padding: getVar(padding-xs) getVar(padding-sm);
+  }
+}

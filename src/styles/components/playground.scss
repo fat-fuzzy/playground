@@ -1,13 +1,19 @@
+@import '../config/main.scss';
+@import 'sidebar.scss';
+
+.playground {
+	@include cover();
+	@include layout-app();
+  position: relative;
+}
+
+main {
+	@include layout-main();
+}
+
 .output {
-  align-items: stretch;
-  display: flex;
-  flex-direction: column;
-  grid-column-start: 1;
-  grid-row-start: 1;
-  height: calc(100% - 1.5em);
-  justify-content: center;
-  overflow-y: auto;
-  width: 100%;
+	@include cover();
+  @include layout-output();
 }
 
 .output.active,
@@ -42,11 +48,9 @@ canvas {
   width: 100%;
 }
 
-@media (min-width: 768px) and (min-aspect-ratio: 3/5) {
-  .output {
-    grid-column-start: 1;
-    grid-row-start: 1;
-    height: 100%;
-    width: calc(100% - 2em);
-  }
+.emoji {
+  font-size: 5vw;
+  opacity: 0.6;
+  position: absolute;
+  z-index: -1;
 }

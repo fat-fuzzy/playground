@@ -1,0 +1,11 @@
+@import '../config/main.scss';
+
+.controls {
+  @include layout-footer();
+  display: flex;
+  justify-content: center;
+
+  @include phone-landscape() {
+    justify-content: flex-start;
+  }
+}

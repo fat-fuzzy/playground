@@ -8,10 +8,10 @@
   export let buttonLabel
   export let buttonClass
   export let dataCy
+  export let disabled
 
   // UI feedback
   let playgroundState
-  let customCursor
 
   // Event Handlers
   export let handleClick = () => {}
@@ -24,7 +24,6 @@
   onMount(() => {
     return () => {
       uiStateUnsub()
-      emojiFeedbackUnsub()
     }
   })
 </script>
@@ -35,13 +34,13 @@
   on:mouseover={handleFocus}
   on:mouseleave={handleBlur}
   on:click={handleClick}
-  bind:this={emojiButton}
   class={`btn-emoji ${buttonClass} ${playgroundState}`}
   aria-label={buttonLabel}
+  {disabled}
 >
   {buttonLabel}
 </button>
 
 <style lang="scss">
-  // @import '../styles/buttons.scss';
+  @import '../styles/components/buttons.scss';
 </style>

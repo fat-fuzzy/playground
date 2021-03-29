@@ -11,12 +11,10 @@
   let coordX = 0
   let coordY = 0
   let translation
-  const rectWidth = 100
-  const rectHeight = 30
 
   $: translation = [coordX, coordY]
-  $: maxX = width - rectWidth
-  $: maxY = height - rectHeight
+  $: maxX = width
+  $: maxY = height
 
   let webGlProps
 
@@ -48,16 +46,16 @@
 <canvas bind:this={canvas} {width} {height} />
 
 <style lang="scss">
-  canvas {
-    background-color: black;
-    margin-top: 1em;
-  }
-  label {
-    display: block;
-    width: 400px;
-  }
-  input {
-    display: block;
-    width: 400px;
-  }
+  // canvas {
+  //   background-color: black;
+  //   margin-top: 1em;
+  // }
+  // label {
+  //   display: block;
+  //   width: 400px;
+  // }
+  // input {
+  //   display: block;
+  //   width: 400px;
+  // }
 </style>

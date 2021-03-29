@@ -5,6 +5,9 @@
   const dispatch = createEventDispatcher()
   let menumItems = []
 
+  function getLabel(emoji, name) {
+    return `${emoji} ${name}`
+  }
   animations.subscribe((value) => {
     menumItems = value
   })
@@ -17,9 +20,9 @@
   }
 </script>
 
-<nav data-cy="animations-menu" class="animations-menu">
+<nav data-cy="nav" class="nav">
   <ul>
-    {#each menumItems as { name, id, type }}
+    {#each menumItems as { name, emoji, id, type }}
       <li
         class="btn-menu {type}"
         on:click={handleClick}
@@ -27,12 +30,13 @@
         data-cy={id}
       >
         <!--TODO: make routes for animations-->
-        {name}
+        {getLabel(emoji, name)}
       </li>
     {/each}
   </ul>
 </nav>
 
 <style lang="scss">
-  // @import '../styles/animations-menu.scss';
+  // this menu will be the app nav. TODO: routes
+  @import '../styles/components/nav.scss';
 </style>

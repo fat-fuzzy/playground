@@ -8,7 +8,7 @@
   export let value = 0
   export let min = 0
   export let max = 0
-  export let step = '0.01'
+  export let step = '1'
 
   const handleInput = () => {
     dispatch('input', {
@@ -32,8 +32,5 @@
 </label>
 
 <style lang="scss">
-  input {
-    display: block;
-    width: 100%;
-  }
+  @import '../styles/common/input.scss';
 </style>
