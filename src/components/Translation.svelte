@@ -11,12 +11,10 @@
   let coordX = 0
   let coordY = 0
   let translation
-  const rectWidth = 100
-  const rectHeight = 30
 
   $: translation = [coordX, coordY]
-  $: maxX = width - rectWidth
-  $: maxY = height - rectHeight
+  $: maxX = width
+  $: maxY = height
 
   let webGlProps
 

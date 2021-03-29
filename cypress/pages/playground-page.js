@@ -4,7 +4,7 @@ const BTN_STOP = '[data-cy="btn-stop"]'
 const BTN_HANDLES = '[data-cy="btn-handles"]'
 const DRUMROLL = '[data-cy="drumroll"]'
 const OUTPUT = '[data-cy="output"]'
-// const CANVAS = '[data-cy="canvas"]'
+const CANVAS = '[data-cy="canvas"]'
 
 // Animations menu
 const NAV = '[data-cy="nav"]'

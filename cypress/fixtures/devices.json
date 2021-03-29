@@ -1,57 +1,48 @@
 {
   "devices": [
     {
-      "device": "galaxy-s5-android-5.0",
-      "width": 360,
-      "height": 640,
+      "name": "Galaxy s5 - Android 5.0",
+      "dimensions": [360, 640],
       "layout": "phone"
     },
     {
-      "device": "galaxy-s9-android-7.0",
-      "width": 360,
-      "height": 740,
+      "name": "Galaxy s9 - Android 7.0",
+      "dimensions": [360, 740],
       "layout": "phone"
     },
     {
-      "device": "iPad-Pro-10.5",
-      "width": 834,
-      "height": 1112,
+      "name": "iPad Pro 10.5",
+      "dimensions": [834, 1112],
       "layout": "tablet"
     },
     {
-      "device": "iPad-Pro-12.9",
-      "width": 1024,
-      "height": 1366,
+      "name": "iPad Pro 12.9",
+      "dimensions": [1024, 1366],
       "layout": "tablet"
     },
     {
-      "device": "iPhone-6/7/8-iOS11",
-      "width": 375,
-      "height": 667,
+      "name": "iPhone 6/7/8 - iOS11",
+      "dimensions": [375, 667],
       "layout": "phone"
     },
     {
-      "device": "iPhone-6/7/8-iOS11+",
-      "width": 414,
-      "height": 736,
+      "name": "iPhone 6/7/8 - iOS11+",
+      "dimensions": [414, 736],
       "layout": "phone"
     },
     {
-      "device": "iPhone-X/XS-iOS12",
-      "width": 375,
-      "height": 812,
+      "name": "iPhone-X/XS - iOS12",
+      "dimensions": [375, 812],
       "layout": "phone-wide"
     },
     {
-      "device": "Kindle-Fire-HDX-Linux",
-      "width": 800,
-      "height": 1280,
+      "name": "Kindle Fire HDX Linux",
+      "dimensions": [800, 1280],
       "layout": "tablet"
     },
     {
-      "device":"square",
-      "width": 768,
-      "height": 768,
+      "name":"Square Matrix",
+      "dimensions": [768, 768],
       "layout": "square"
     }
   ]

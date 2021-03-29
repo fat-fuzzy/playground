@@ -1,14 +1,16 @@
 {
-  "layout": [
+  "layouts": [
      {
        "name": "phone",
        "config": [
           {
             "orientation": "portrait",
             "valuesX":[
+              "padding-md",
               "padding-md"
             ],
-            "valuesY":[
+            "valuesY": [
+              "padding-md",
               "padding-md",
               "header-height-sm",
               "footer-height-sm",
@@ -18,13 +20,13 @@
           {
             "orientation": "landscape",
             "valuesX":[
+              "padding-md",
               "padding-md"
             ],
-            "valuesY":[
+            "valuesY": [
               "padding-md",
-              "header-height-sm",
-              "footer-height-sm",
-              "sidebar-width-sm"
+              "padding-md",
+              "sidebar-width-xs"
             ]
           }
        ]
@@ -34,9 +36,11 @@
         {
           "orientation": "portrait",
           "valuesX":[
+            "padding-md",
             "padding-md"
           ],
           "valuesY":[
+            "padding-md",
             "padding-md",
             "header-height-sm",
             "footer-height-sm",
@@ -46,12 +50,12 @@
         {
           "orientation": "landscape",
           "valuesX":[
+            "padding-md",
             "padding-md"
           ],
           "valuesY":[
             "padding-md",
-            "header-height-sm",
-            "footer-height-sm",
+            "padding-md",
             "sidebar-width-md"
           ]
         }
@@ -66,20 +70,19 @@
           ],
           "valuesY":[
             "padding-md",
-            "header-height-md",
-            "footer-height-md",
+            "padding-md",
             "sidebar-height-md"
           ]
         },
         {
           "orientation": "landscape",
           "valuesX":[
+            "padding-md",
             "padding-md"
           ],
           "valuesY":[
             "padding-md",
-            "header-height-lg",
-            "footer-height-md",
+            "padding-md",
             "sidebar-width-lg"
           ]
         }
@@ -90,12 +93,12 @@
          {
            "orientation": "portrait",
            "valuesX":[
+            "padding-md",
              "padding-md"
            ],
            "valuesY":[
+            "padding-md",
              "padding-md",
-             "header-height-sm",
-             "footer-height-sm",
              "sidebar-height-sm"
            ]
          }
