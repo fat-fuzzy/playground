@@ -2,7 +2,7 @@ import {defineParameterType, And, Then, Before} from 'cypress-cucumber-preproces
 import * as PlaygroundPage from '../../../pages/playground-page'
 
 let devices 
-let cssLayouts 
+let layouts 
 
 defineParameterType({
   name: 'device',
@@ -11,8 +11,8 @@ defineParameterType({
 });
 
 Before(function () {
-  cy.fixture('css-layouts').then(function(c) {
-    cssLayouts = c.layouts
+  cy.fixture('layouts').then(function(l) {
+    layouts = l.layouts
   })
   cy.fixture('devices').then(function(d) {
     devices = d.devices
@@ -22,10 +22,9 @@ Before(function () {
 When(`I'm using a(n) {device}`, function(device) {
   const currentDevice = devices.find(({name})=> name === device)
   if(currentDevice) {
-    const selectedLayout = cssLayouts.find(({name}) => name === currentDevice.layout)
-    const width = currentDevice.dimensions[0]
-    const height = currentDevice.dimensions[1]
-    selectedLayout.config.forEach((orientation) => {
+    const currentLayout = layouts.find(({name}) => name === currentDevice.layout)
+    const [width, height] = currentDevice.dimensions
+    currentLayout.config.forEach((orientation) => {
       if(orientation === "portrait") {
         cy.viewport(width, height)
       }

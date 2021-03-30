@@ -1,4 +1,6 @@
-Feature: Playground
+Feature: Animation with Audio
+
+  # TODO
 
   Scenario: With drums
     Given I'm in the Playground

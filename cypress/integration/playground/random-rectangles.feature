@@ -1,4 +1,4 @@
-Feature: Playground
+Feature: Random Animation
 
   @e2e-test
   Scenario: 🎰 Random
