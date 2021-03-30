@@ -36,16 +36,16 @@ export function findAnimationsMenu() {
 }
 
 export function findBoundaries() {
-  cy.get(OUTPUT).then(($output)=>{
-    expect($output).to.have.length(1)
+  cy.get(CANVAS).then(($canvas)=>{
 
-    const width = $output[0].offsetWidth
-    const height = $output[0].offsetHeight
+    expect($canvas).to.have.length(1)
+    const width = $canvas[0].width
+    const height = $canvas[0].height
 
-    cy.get(POSITION_X).then(($position) => {
+    cy.get(POSITION).find(POSITION_X).then(($position) => {
       expect($position).to.have.attr('max', width)
     })
-    cy.get(POSITION_Y).then(($position) => {
+    cy.get(POSITION).find(POSITION_Y).then(($position) => {
       expect($position).to.have.attr('max', height)
     })
   })
