@@ -185,29 +185,43 @@
   justify-content: center;
   grid-column-start: 1;
   grid-row-start: 1;
-  max-width: 100%;
-  max-height: 100%;
+  width: 100%;
+  height: calc(100% - 0.5em);
+  margin: 0.5em auto 0;
   
   @include phone-landscape(){
     grid-column-start: 1;
     grid-row-start: 1;
     grid-row-end: 2;
+    width: calc(100% - 0.5em);
+    height: 100%;
+    margin: 0 0.5em 0 0;
   }
 
   @include phone-wide-landscape() {
     grid-column-start: 1;
-    height: 100%;
   }
 
   @include tablet-landscape() {
     grid-row-end: 3;
+  }
+
+  @include tablet-portrait() {
+    width: 100%;
+    height: calc(100% - 0.5em);
+    margin: 0.5em auto 0;
+  }
+
+  @include square() {
+    width: 100%;
+    height: calc(100% - 0.5em);
+    margin: 0.5em auto 0;
   }
 }
 
 @mixin layout-form() {
   display: flex;
   overflow-y: auto;
-  width: 100%;
   max-width: 100%;
 
   @include phone-landscape() {

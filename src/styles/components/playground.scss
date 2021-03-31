@@ -12,7 +12,6 @@ main {
 }
 
 .output {
-	@include cover();
   @include layout-output();
 }
 
@@ -38,7 +37,8 @@ main {
 }
 
 canvas {
-  display: none;
+  height: 0;
+  width: 0;
 }
 
 .active canvas,
