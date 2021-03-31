@@ -43,6 +43,8 @@
     "svelte-preprocess": "4.6.9"
   },
   "dependencies": {
+    "prettier": "2.2.1",
+    "prettier-plugin-svelte": "2.2.0",
     "sirv-cli": "1.0.11"
   }
 }
