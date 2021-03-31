@@ -2,8 +2,8 @@
 
 @mixin cover() {
   position: relative;
-	width: 100%;
-	height: 100%;
+  width: 100%;
+  height: 100%;
   overflow: hidden;
 }
 
@@ -26,7 +26,7 @@
 }
 
 @mixin tablet-portrait() {
- @include orientation-min-width(orientation-portrait, md) {
+  @include orientation-min-width(orientation-portrait, md) {
     @content;
   }
 }
@@ -50,18 +50,17 @@
   }
 }
 
-
 @mixin layout-app() {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   grid-template-rows: getVar(header-height-sm) minmax(0, 1fr);
 
-  @include phone-landscape(){
+  @include phone-landscape() {
     grid-template-columns: minmax(0, 1fr) getVar(sidebar-width-xs);
     grid-template-rows: minmax(0, 1fr);
   }
 
-  @include phone-wide-landscape(){
+  @include phone-wide-landscape() {
     grid-template-columns: minmax(0, 1fr) getVar(sidebar-width-sm);
   }
 
@@ -75,18 +74,22 @@
 
   @include square() {
     grid-template-columns: minmax(0, 1fr);
-    grid-template-rows: getVar(header-height-md) minmax(0, 1fr) getVar(footer-height-md);
+    grid-template-rows: getVar(header-height-md) minmax(0, 1fr) getVar(
+        footer-height-md
+      );
   }
 }
 
-@mixin layout-header() {  // grid item props
+@mixin layout-header() {
+  // grid item props
   grid-column-start: 1;
   grid-row-start: 1;
   position: relative;
   z-index: getVar(z-index-input);
   height: getVar(header-height-sm);
 
-  @include phone-landscape(){ // grid item props
+  @include phone-landscape() {
+    // grid item props
     grid-column-start: 2;
   }
 
@@ -99,13 +102,15 @@
 @mixin layout-main() {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
-  grid-template-rows: minmax(0, 1fr) getVar(sidebar-height-sm) getVar(footer-height-sm);
+  grid-template-rows: minmax(0, 1fr) getVar(sidebar-height-sm) getVar(
+      footer-height-sm
+    );
   grid-column-start: 1;
   grid-row-start: 2;
   width: 100%;
   height: 100%;
 
-  @include phone-landscape(){
+  @include phone-landscape() {
     grid-column-start: 1;
     grid-column-end: 3;
     grid-row-start: 1;
@@ -132,7 +137,9 @@
     grid-column-end: 3;
     grid-row-end: 4;
     grid-template-columns: minmax(0, 1fr);
-    grid-template-rows: minmax(0, 1fr) getVar(sidebar-height-sm) getVar(footer-height-sm);
+    grid-template-rows: minmax(0, 1fr) getVar(sidebar-height-sm) getVar(
+        footer-height-sm
+      );
   }
 }
 
@@ -143,7 +150,7 @@
   overflow: scroll;
   padding: getVar(padding-sm) 0;
 
-  @include phone-landscape(){
+  @include phone-landscape() {
     grid-column-start: 2;
     grid-row-start: 1;
     grid-row-end: 3;
@@ -169,7 +176,7 @@
   grid-row-start: 3;
   width: 100%;
 
-  @include phone-landscape(){
+  @include phone-landscape() {
     grid-column-start: 2;
     grid-row-start: 2;
   }
@@ -188,8 +195,8 @@
   width: 100%;
   height: calc(100% - 0.5em);
   margin: 0.5em auto 0;
-  
-  @include phone-landscape(){
+
+  @include phone-landscape() {
     grid-column-start: 1;
     grid-row-start: 1;
     grid-row-end: 2;
@@ -225,11 +232,11 @@
   max-width: 100%;
 
   @include phone-landscape() {
-    @include wrap-space-between()
+    @include wrap-space-between();
   }
 
   @include phone-wide-landscape() {
-    @include wrap-space-between()
+    @include wrap-space-between();
   }
 
   @include tablet-portrait() {
@@ -240,7 +247,7 @@
 
   @include tablet-landscape() {
     width: 100%;
-    @include wrap-space-between()
+    @include wrap-space-between();
   }
 
   @include square() {
@@ -269,10 +276,10 @@
   max-width: 100%;
 
   &:last-of-type {
-    margin-right: 0
+    margin-right: 0;
   }
   &:first-of-type {
-    margin-left: 0
+    margin-left: 0;
   }
 
   @include phone-landscape() {

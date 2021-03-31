@@ -1,23 +1,23 @@
 $_cssvars: null;
 $theme-prefix: ffp;
 $theme-colors: (
-  "color-white": rgba(256, 256, 256, 1),
-  "color-black": rgb(0, 0, 0),
-  "color-light": rgba(244, 244, 244, 1),
-  "color-dark": rgba(46, 46, 46, 1),
+  'color-white': rgba(256, 256, 256, 1),
+  'color-black': rgb(0, 0, 0),
+  'color-light': rgba(244, 244, 244, 1),
+  'color-dark': rgba(46, 46, 46, 1),
   'gray-1': #ccc,
   'gray-2': #ddd,
   'gray-3': #999,
   'gray-4': #666,
-  "play": rgba(118, 51, 250, 0.6),
-  "play-hover": rgb(231, 219, 255),
-  "play-focus": rgb(205, 180, 255),
-  "play-active":rgb(205, 180, 255),
-  "handles": rgb(2, 121, 119),
-  "handles-hover": rgb(217, 234, 252),
-  "handles-focus": rgb(217, 234, 252),
-  "danger": rgba(238, 9, 123, 0.6),
-  "danger-focus":rgb(255, 235, 245),
+  'play': rgba(118, 51, 250, 0.6),
+  'play-hover': rgb(231, 219, 255),
+  'play-focus': rgb(205, 180, 255),
+  'play-active': rgb(205, 180, 255),
+  'handles': rgb(2, 121, 119),
+  'handles-hover': rgb(217, 234, 252),
+  'handles-focus': rgb(217, 234, 252),
+  'danger': rgba(238, 9, 123, 0.6),
+  'danger-focus': rgb(255, 235, 245),
 );
 
 $theme-layout: (
@@ -25,30 +25,23 @@ $theme-layout: (
   aspect-ratio-1-2: 1/2,
   aspect-ratio-2-1: 2/1,
   aspect-ratio-16-9: 16/9,
-
   aspect-ratio-1-1dot35: 1/1.35,
   aspect-ratio-1dot35-1: 1.35/1,
-
   orientation-portrait: portrait,
   orientation-landscape: landscape,
-
   padding-xs: 2px,
   padding-sm: 4px,
   padding-md: 8px,
-
   margin-nul: 0,
   margin-xs: 1px,
   margin-sm: 4px,
   margin-md: 8px,
   margin-lg: 12px,
-
   header-height-sm: 80px,
   header-height-md: 100px,
   header-height-lg: 110px,
-
   footer-height-sm: 40px,
   footer-height-md: 40px,
-
   sidebar-height-sm: 140px,
   sidebar-height-md: 240px,
   sidebar-width-xs: 160px,
@@ -56,7 +49,6 @@ $theme-layout: (
   sidebar-width-md: 300px,
   sidebar-width-lg: 400px,
   sidebar-width-xl: 600px,
-
   z-index-input: 2,
 );
 
@@ -68,7 +60,6 @@ $theme-typography: (
   font-size-h3: 1.65em,
   font-size-h4: 1.35em,
   font-size-h5: 0.15em,
-  
   font-weight-light: 100,
   font-weight-medium: 300,
   font-weight-bold: 500,
@@ -79,4 +70,4 @@ $breakpoints: (
   sm: 768px,
   md: 992px,
   lg: 1200px,
-)
+);

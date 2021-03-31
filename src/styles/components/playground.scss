@@ -2,13 +2,13 @@
 @import 'sidebar.scss';
 
 .playground {
-	@include cover();
-	@include layout-app();
+  @include cover();
+  @include layout-app();
   position: relative;
 }
 
 main {
-	@include layout-main();
+  @include layout-main();
 }
 
 .output {
