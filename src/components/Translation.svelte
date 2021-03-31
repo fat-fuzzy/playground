@@ -1,5 +1,5 @@
 <script>
-  import { onMount } from 'svelte'
+  import {onMount} from 'svelte'
   import * as draw from '../libs/draw.js'
 
   let maxX

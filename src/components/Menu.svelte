@@ -1,6 +1,6 @@
 <script>
-  import { createEventDispatcher } from 'svelte'
-  import { animations } from '../stores.js'
+  import {createEventDispatcher} from 'svelte'
+  import {animations} from '../stores.js'
 
   const dispatch = createEventDispatcher()
   let menumItems = []
@@ -22,7 +22,7 @@
 
 <nav data-cy="nav" class="nav">
   <ul>
-    {#each menumItems as { name, emoji, id, type }}
+    {#each menumItems as {name, emoji, id, type}}
       <li
         class="btn-menu {type}"
         on:click={handleClick}

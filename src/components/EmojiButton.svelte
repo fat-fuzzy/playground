@@ -1,7 +1,7 @@
 <script>
-  import { onMount } from 'svelte'
+  import {onMount} from 'svelte'
 
-  import { uiState } from '../stores.js'
+  import {uiState} from '../stores.js'
 
   // Inputs
   let emojiButton

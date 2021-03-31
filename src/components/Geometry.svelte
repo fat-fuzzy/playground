@@ -1,6 +1,6 @@
 <script context="module">
-  import { onMount, createEventDispatcher } from 'svelte'
-  import { getGeometryDefaults } from '../libs/animations.js'
+  import {onMount, createEventDispatcher} from 'svelte'
+  import {getGeometryDefaults} from '../libs/animations.js'
   import Position from './Position.svelte'
   import Scale from './Scale.svelte'
   import Rotation from './Rotation.svelte'

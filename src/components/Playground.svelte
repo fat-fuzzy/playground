@@ -1,5 +1,5 @@
 <script context="module">
-  import { getGeometryDefaults } from '../libs/animations.js'
+  import {getGeometryDefaults} from '../libs/animations.js'
   import {
     uiState,
     emojiFeedback,
@@ -127,7 +127,7 @@
     }
     animationFrame = requestAnimationFrame(function (timestamp) {
       animationStartTime = timestamp || new Date().getTime()
-      let { duration, playbackRate } = animation
+      let {duration, playbackRate} = animation
       if (playbackRate) {
         runLoop(timestamp, duration / playbackRate)
       }
@@ -170,7 +170,7 @@
   }
 
   function updateGeometry(event) {
-    geometry = { ...geometry, ...event.detail.value }
+    geometry = {...geometry, ...event.detail.value}
   }
 </script>
 

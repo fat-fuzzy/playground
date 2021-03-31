@@ -1,9 +1,9 @@
 <script>
   import * as constants from '../types/constants.js'
 
-  import { onMount } from 'svelte'
+  import {onMount} from 'svelte'
 
-  import { uiState } from '../stores.js'
+  import {uiState} from '../stores.js'
   // UI feedback
   export let stacktrace = ''
 

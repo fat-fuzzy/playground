@@ -1,5 +1,5 @@
 <script>
-  import { createEventDispatcher } from 'svelte'
+  import {createEventDispatcher} from 'svelte'
   import InputRange from './InputRange.svelte'
 
   const dispatch = createEventDispatcher()
