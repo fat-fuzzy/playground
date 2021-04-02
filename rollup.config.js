@@ -4,7 +4,6 @@ import commonjs from '@rollup/plugin-commonjs';
 import resolve from '@rollup/plugin-node-resolve';
 import livereload from 'rollup-plugin-livereload';
 import { terser } from 'rollup-plugin-terser';
-import sass from "rollup-plugin-sass";
 import css from 'rollup-plugin-css-only';
 import pkg from './package.json'
 

@@ -1,3 +1,12 @@
+// Ordinarily, you'd generate this data from markdown files in your
+// repo, or fetch them from a database of some kind. But in order to
+// avoid unnecessary dependencies in the starter template, and in the
+// service of obviousness, we're just going to leave it here.
+
+// This file is called `_scenes.js` rather than `scenes.js`, because
+// we don't want to create an `/play/scenes` route — the leading
+// underscore tells Sapper not to do that.
+
 import * as draw from './draw.js'
 import * as utils from './utils.js'
 
@@ -9,7 +18,7 @@ import {frag} from './gl/fragment-shader-2d'
 import {vert} from './gl/vertex-shader-2d'
 import {vert as vert2d} from './gl/vertex-shader-scale-2d'
 
-export const animations = [
+const scenes = [
   {
     id: 'randomRect',
     slug: 'random-rect',
@@ -20,13 +29,13 @@ export const animations = [
     frag,
     scene: randomRect,
     init(canvas) {
-      this.webGlProps = draw.initScene(canvas, this.vert, this.frag)
+      this.webGlProps = scene.initScene(canvas, this.vert, this.frag)
     },
     run(canvas) {
       if (!this.webGlProps) {
         this.init(canvas)
       }
-      draw.rectanglesScene(this.webGlProps)
+      scene.rectanglesScene(this.webGlProps)
     },
     clear() {
       this.webGlProps = null
@@ -44,13 +53,13 @@ export const animations = [
     frag,
     scene: randomRect,
     init(canvas) {
-      this.webGlProps = draw.initScene(canvas, this.vert, this.frag)
+      this.webGlProps = scene.initScene(canvas, this.vert, this.frag)
     },
     run(canvas) {
       if (!this.webGlProps) {
         this.init(canvas)
       }
-      draw.rectanglesScene(this.webGlProps)
+      scene.rectanglesScene(this.webGlProps)
     },
     clear() {
       this.webGlProps = null
@@ -68,7 +77,7 @@ export const animations = [
     scene: geometry2d,
     color: null,
     init(canvas) {
-      this.webGlProps = draw.initScene(canvas, this.vert, this.frag)
+      this.webGlProps = scene.initScene(canvas, this.vert, this.frag)
     },
     run(canvas, geometry) {
       if (!this.webGlProps) {
@@ -83,7 +92,7 @@ export const animations = [
         scale,
         color,
       }
-      draw.translationSceneViaWebGL(drawOptions)
+      scene.translationScene(drawOptions)
     },
     update(geometry) {
       const {translation, rotation, scale} = geometry
@@ -94,7 +103,7 @@ export const animations = [
         scale,
         color: this.color,
       }
-      draw.drawSceneT2DGL(drawOptions)
+      ViaWebGL.drawScene(drawOptions)
     },
     clear() {
       this.webGlProps = null
@@ -125,3 +134,9 @@ export function getGeometryDefaults(canvasWidth, canvasHeight) {
     height: utils.round(canvasHeight / 5, 2), // of geometry
   }
 }
+
+// scenes.forEach((scene) => {
+//   scene.html = scene.html.replace(/^\t{3}/gm, '')
+// })
+
+export default scenes

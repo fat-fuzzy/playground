@@ -5,8 +5,8 @@
  ***********************
  */
 
-import * as utils from './utils.js'
-import * as utilsWebGl from './utilsWebGL.js'
+import * as utils from '../utils.js'
+import * as utilsWebGl from '../utilsWebGL.js'
 
 /**
  * @param {WebGLRenderingContext} gl
@@ -14,88 +14,6 @@ import * as utilsWebGl from './utilsWebGL.js'
  */
 function setGeometry(gl, coords) {
   gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(coords), gl.STATIC_DRAW)
-}
-
-/**
- * Write data to draw a rectangle into the last thing bound to gl.ARRAY_BUFFER (in this context positionBuffer)
- * @param {WebGLRenderingContext} gl
- * @param {number} x coordinate
- * @param {number} y coordinate
- * @param {number} width
- * @param {number} height
- */
-function setRectangle(gl, x, y, width, height) {
-  const x1 = x
-  const x2 = x + width
-  const y1 = y
-  const y2 = y + height
-  // prettier-ignore
-  const coords = [
-    x1, y1,
-    x2, y1,
-    x1, y2,
-    x1, y2,
-    x2, y1,
-    x2, y2,
-  ]
-  setGeometry(gl, coords)
-}
-
-/**
- * @param {WebGLRenderingContext} gl
- * @param {number} colorUniformLocation
- */
-function drawRectangle(gl, colorUniformLocation) {
-  // Setup a random rectangle
-  setRectangle(
-    gl,
-    utils.randomInt(300),
-    utils.randomInt(300),
-    utils.randomInt(300),
-    utils.randomInt(300),
-  )
-
-  // Set a random color.
-  gl.uniform4f(
-    colorUniformLocation,
-    Math.random(),
-    Math.random(),
-    Math.random(),
-    1,
-  )
-
-  // Draw the rectangle.
-  // WebGL has 3 types of primitives: points, lines, and triangles
-  // const primitiveType = gl.TRIANGLES // each iteration, WebGL will draw a triangle based on the values set in gl_Position
-  // const count = 6 // number of times the shader will execute: 3
-  // 1st Iteration: a_position.x & a_position.y of the vertex shader will be set to the first 2 values in the positionBuffer
-  // 2nd Iteration: a_position.x & a_position.y => next pair of values of positionBuffer
-  // 3rd Iteration: a_position.x & a_position.y => next (last) pair of values of positionBuffer
-  // offset = 0
-  // gl.drawArrays(primitiveType, offset, count)
-  gl.drawArrays(gl.TRIANGLES, 0, 6)
-}
-
-/**
- * TRANSLATIONS
- * @param {WebGLRenderingContext} gl
- */
-function renderTranslationRectangle(
-  gl,
-  colorUniformLocation,
-  translation,
-  color,
-  width,
-  height,
-) {
-  gl.uniform4fv(colorUniformLocation, color)
-  setRectangle(gl, translation[0], translation[1], width, height)
-
-  // Draw the rectangle.
-  const primitiveType = gl.TRIANGLES
-  const offset = 0
-  const count = 6
-  gl.drawArrays(primitiveType, offset, count)
 }
 
 /**
@@ -138,15 +56,6 @@ function renderTranslationGeometry(gl, colorUniformLocation, color) {
   const offset = 0
   const count = 18
   gl.drawArrays(primitiveType, offset, count)
-}
-/**
- * @param {WebGLRenderingContext} gl
- * @param {number} count number of rectangles to draw
- */
-function drawRectangles(gl, colorUniformLocation, count) {
-  for (let index = 0; index < count; ++index) {
-    drawRectangle(gl, colorUniformLocation)
-  }
 }
 
 /**
@@ -227,67 +136,8 @@ export function initScene(canvas, vert, frag) {
   }
 }
 
-/* **
- * @param  {
-    gl,
-    resolutionUniformLocation,
-    positionAttributeLocation,
-    positionBuffer,
-  } webGlProps
- */
-export function drawScene(webGlProps) {
-  const {
-    gl,
-    resolutionUniformLocation,
-    positionAttributeLocation,
-    positionBuffer,
-  } = webGlProps
-  /************************
-   * RENDERING CODE
-   * Code that gets executed every time we draw
-   ************************/
-  const canvas = /** @type {HTMLCanvasElement} */ (gl.canvas)
-  // 1. Setup canvas
-  // - resize canvas to fit screen display
-  utils.resize(canvas)
-  // - tell WebGL how to covert clip space values for gl_Position back into screen space (pixels)
-  // -> use gl.viewport
-  gl.viewport(0, 0, gl.canvas.width, gl.canvas.height)
-  // set the resolution
-  gl.uniform2f(resolutionUniformLocation, gl.canvas.width, gl.canvas.height)
-
-  // Clear the canvas
-  gl.clearColor(0.0, 0.0, 0.0, 1.0) // set color to use as default when clearing buffer
-  gl.clear(gl.COLOR_BUFFER_BIT)
-
-  // 2. Bind Position
-  // - Enable data supply into vertex shader a_position attribute
-  gl.enableVertexAttribArray(positionAttributeLocation)
-  // - Bind data retrieval to position buffer
-  gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer)
-  /**
-   *  Tell the a_position attribute how to get data out of positionBuffer (ARRAY_BUFFER)
-   * - vec4 a_position is a 4 float vector. We only need 2 values for 2D (points x,y)
-   * - default values are:  0, 0, 0, 1
-   * - we will set the first two (x, y), and the remaining two (z, w) will remain with default values (0,1)
-   */
-  const size = 2 // 2 components per iteration
-  const type = gl.FLOAT // the data is in 32bit floats
-  const normalize = false // don't normalize the data
-  const stride = 0 // 0: move forward (size * sizeof(type)) each iteration to get to the next position
-  const offset = 0 // start at the beginning of the buffer
-  gl.vertexAttribPointer(
-    positionAttributeLocation,
-    size,
-    type,
-    normalize,
-    stride,
-    offset,
-  )
-}
-
 // Draw the scene.
-export function drawSceneT2DGL(options) {
+export function drawScene(options) {
   const {webGlProps, translation, rotation, scale, color} = options
   const {
     gl,
@@ -356,40 +206,11 @@ export function drawSceneT2DGL(options) {
   gl.drawArrays(primitiveType, offset, count)
 }
 
-export function rectanglesScene(webGlProps) {
-  const {gl, colorUniformLocation} = webGlProps
-  drawScene(webGlProps)
-  // 3. Draw!!
-  // - Draw 3 random rectangles
-  drawRectangles(gl, colorUniformLocation, 1)
-}
-
-export function translationSceneViaDOM(
-  webGlProps,
-  translation,
-  color,
-  width,
-  height,
-) {
-  const {gl, colorUniformLocation} = webGlProps
-  drawScene(webGlProps)
-  // 3. Draw!!
-  // - Draw 3 random rectangles
-  renderTranslationRectangle(
-    gl,
-    colorUniformLocation,
-    translation,
-    color,
-    width,
-    height,
-  )
-}
-
-export function translationSceneViaWebGL(options) {
+export function translationScene(options) {
   const {webGlProps, color} = options
   const {gl, colorUniformLocation} = webGlProps
   renderTranslationGeometry(gl, colorUniformLocation, color) // Set the translation.
-  drawSceneT2DGL(options)
+  drawScene(options)
 }
 
 export function render() {}
